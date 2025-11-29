@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  route_service:
+    build: ./route-service
+    command: python3 main.py
+    volumes:
+      - ./route-service/:/app/
+    ports:
+      - 8001:8000
+    environment:
+      - JWT_SECRET=${JWT_SECRET}
+      - DATABASE_URL=postgresql://${DB_USER}:${POSTGRES_PASSWORD}@db/route_schedule
+    depends_on:
+      db:
+        condition: service_healthy
+
+  stop_service:
+    build: ./stop-service
+    command: python3 main.py
+    volumes:
+      - ./stop-service/:/app/
+    ports:
+      - 8002:8000
+    environment:
+      - JWT_SECRET=${JWT_SECRET}
+      - DATABASE_URL=postgresql://${DB_USER}:${POSTGRES_PASSWORD}@db/bus_stop
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data: 

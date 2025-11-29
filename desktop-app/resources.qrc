@@ -1,0 +1,51 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>icons/Vector.png</file>
+    <file>icons/trash.png</file>
+    <file>icons/arrow-down.png</file>
+    <file>icons/arrow-up.png</file>
+    <file>icons/circle.png</file>
+    <file>icons/filled-circle.png</file>
+    <file>icons/login.png</file>
+    <file>icons/calendar.png</file>
+    <file>icons/switch.png</file>
+    <file>icons/geo.png</file>
+    <file>icons/mail.png</file>
+    <file>icons/phone.png</file>
+    <file>icons/telegram-icon.png</file>
+    <file>icons/vk-icon.png</file>
+    <file>icons/logo.png</file>
+    <file>icons/cart.png</file>
+    <file>icons/cashier.png</file>
+    <file>icons/dispatcher.png</file>
+    <file>icons/employees.png</file>
+    <file>icons/expand.png</file>
+    <file>icons/profile.png</file>
+    <file>icons/quit.png</file>
+    <file>icons/schedule.png</file>
+  </qresource>
+  <qresource prefix="files">
+    <file>files/employees_photo/1.png</file>
+  </qresource>
+  <qresource prefix="fonts">
+    <file>fonts/Inter-Black.otf</file>
+    <file>fonts/Inter-BlackItalic.otf</file>
+    <file>fonts/Inter-Bold.otf</file>
+    <file>fonts/Inter-BoldItalic.otf</file>
+    <file>fonts/Inter-ExtraBold.otf</file>
+    <file>fonts/Inter-ExtraBoldItalic.otf</file>
+    <file>fonts/Inter-ExtraLight.otf</file>
+    <file>fonts/Inter-ExtraLightItalic.otf</file>
+    <file>fonts/Inter-Italic.otf</file>
+    <file>fonts/Inter-Light.otf</file>
+    <file>fonts/Inter-LightItalic.otf</file>
+    <file>fonts/Inter-Medium.otf</file>
+    <file>fonts/Inter-MediumItalic.otf</file>
+    <file>fonts/Inter-Regular.otf</file>
+    <file>fonts/Inter-SemiBold.otf</file>
+    <file>fonts/Inter-SemiBoldItalic.otf</file>
+    <file>fonts/Inter-Thin.otf</file>
+    <file>fonts/Inter-ThinItalic.otf</file>
+    <file>fonts/Inter-V.ttf</file>
+  </qresource>
+</RCC>
