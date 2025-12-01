@@ -1,4 +1,3 @@
-// ticket.h
 #pragma once
 
 #include <QString>

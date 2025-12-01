@@ -18,11 +18,9 @@ public:
           const QDate& birthDate, const QString& phoneNumber, const QString& email,
           const QString& adminId, const QString& accessLevel);
 
-    // Геттеры
     QString getAdminId() const;
     QString getAccessLevel() const;
 
-    // Сеттеры
     void setAdminId(const QString& adminId);
     void setAccessLevel(const QString& accessLevel);
 
