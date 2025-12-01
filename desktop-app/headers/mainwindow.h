@@ -7,6 +7,7 @@
 #include "schedule.h"
 #include "routewidget.h"
 #include "stopwidget.h"
+#include "pathwidget.h"
 #include "apiclient.h"
 #include "busstopapiclient.h"
 
@@ -47,6 +48,7 @@ private slots:
     void on_swapPlaces_btn_clicked();
 
     void on_addRoute_btn_clicked();
+    void on_addPath_btn_clicked();
     void on_addStop_btn_clicked();
 
     void keyPressEvent(QKeyEvent *event);

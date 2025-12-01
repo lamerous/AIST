@@ -2,18 +2,17 @@
 
 Ticket::Ticket()
     : route(Route()), passengerName(""), ticketNumber(""), seatNumber(""), 
-      purchaseDate(QDate::currentDate())
+      purchaseDate(QDate::currentDate()), actualPrice(0)
 {
 }
 
 Ticket::Ticket(const Route& route, const QString& passengerName, const QString& ticketNumber,
-               const QString& seatNumber, const QDate& purchaseDate, int actualPrice)
+               const QString& seatNumber, const QDate& purchaseDate, float actualPrice)
     : route(route), passengerName(passengerName), ticketNumber(ticketNumber),
-      seatNumber(seatNumber), purchaseDate(purchaseDate)
+      seatNumber(seatNumber), purchaseDate(purchaseDate), actualPrice(actualPrice)
 {
 }
 
-// Геттеры
 Route Ticket::getRoute() const {
     return route;
 }
@@ -30,13 +29,15 @@ QString Ticket::getSeatNumber() const {
     return seatNumber;
 }
 
-
-/
 QDate Ticket::getPurchaseDate() const {
     return purchaseDate;
 }
 
-// Сеттеры
+float Ticket::getActualPrice() const {
+    return actualPrice;
+}
+
+
 void Ticket::setRoute(const Route& route) {
     this->route = route;
 }
@@ -57,7 +58,10 @@ void Ticket::setPurchaseDate(const QDate& date) {
     purchaseDate = date;
 }
 
-// Методы
+void Ticket::setActualPrice(float price) {
+    actualPrice = price;
+}
+
 void Ticket::displayInfo() const {
     qDebug() << "Билет №" << ticketNumber
              << "\nПассажир:" << passengerName

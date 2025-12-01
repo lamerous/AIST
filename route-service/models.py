@@ -1,77 +1,35 @@
-from dataclasses import dataclass
-from datetime import datetime, date, time
-from typing import List, Optional
+from sqlalchemy import Column, Integer, String, Date, Time, JSON, ForeignKey, Numeric
+from sqlalchemy.orm import relationship
+from database import Base
 
-@dataclass
-class Route:
-    route_number: str
-    platform_number: str
-    departure_place: str
-    destination_place: str
-    departure_date: date
-    departure_time: time
-    destination_time: time
-    price: int
-    seats: int
-    
-    def to_dict(self) -> dict:
-        return {
-            'route_number': self.route_number,
-            'platform_number': self.platform_number,
-            'departure_place': self.departure_place,
-            'destination_place': self.destination_place,
-            'departure_date': self.departure_date.isoformat(),
-            'departure_time': self.departure_time.strftime('%H:%M'),
-            'destination_time': self.destination_time.strftime('%H:%M'),
-            'price': self.price,
-            'seats': self.seats
-        }
-    
-    @classmethod
-    def from_dict(cls, data: dict) -> 'Route':
-        return cls(
-            route_number=data['route_number'],
-            platform_number=data['platform_number'],
-            departure_place=data['departure_place'],
-            destination_place=data['destination_place'],
-            departure_date=datetime.strptime(data['departure_date'], '%Y-%m-%d').date(),
-            departure_time=datetime.strptime(data['departure_time'], '%H:%M').time(),
-            destination_time=datetime.strptime(data['destination_time'], '%H:%M').time(),
-            price=data['price'],
-            seats=data['seats']
-        )
+class Stop(Base):
+    __tablename__ = "stops"
+    id = Column(Integer, primary_key=True, index=True)
+    stop_name = Column(String(100))
+    stop_address = Column(String(200))
 
-@dataclass
-class Schedule:
-    routes: List[Route] = None
-    
-    def __post_init__(self):
-        if self.routes is None:
-            self.routes = []
-    
-    def add_route(self, route: Route):
-        self.routes.append(route)
-    
-    def remove_route(self, route_number: str) -> bool:
-        initial_count = len(self.routes)
-        self.routes = [r for r in self.routes if r.route_number != route_number]
-        return len(self.routes) < initial_count
-    
-    def find_routes_by_number(self, route_number: str) -> List[Route]:
-        return [r for r in self.routes if r.route_number == route_number]
-    
-    def find_routes_by_departure(self, departure_place: str) -> List[Route]:
-        return [r for r in self.routes if departure_place.lower() in r.departure_place.lower()]
-    
-    def find_routes_by_destination(self, destination_place: str) -> List[Route]:
-        return [r for r in self.routes if destination_place.lower() in r.destination_place.lower()]
-    
-    def find_routes_by_direction(self, departure_place: str, destination_place: str) -> List[Route]:
-        return [r for r in self.routes 
-                if departure_place.lower() in r.departure_place.lower() 
-                and destination_place.lower() in r.destination_place.lower()]
-    
-    def to_dict(self) -> dict:
-        return {
-            'routes': [route.to_dict() for route in self.routes]
-        }
+class Path(Base):
+    __tablename__ = "paths"
+    id = Column(Integer, primary_key=True, index=True)
+    route_number = Column(String(20))
+    stops_array = Column(JSON)
+
+class Route(Base):
+    __tablename__ = "routes"
+    id = Column(Integer, primary_key=True, index=True)
+    route_number = Column(String(20))
+    platform_number = Column(String(10))
+    price = Column(Integer)
+    available_seats = Column(Integer)
+    departure_date = Column(Date)
+    departure_time = Column(Time)
+    arrival_time = Column(Time)
+    path_id = Column(Integer, ForeignKey("paths.id"))
+
+class Ticket(Base):
+    __tablename__ = "tickets"
+    id = Column(Integer, primary_key=True, index=True)
+    ticket_number = Column(String(50))
+    purchase_date = Column(Date)
+    purchase_price = Column(Numeric(10, 2))
+    route_id = Column(Integer, ForeignKey("routes.id"))

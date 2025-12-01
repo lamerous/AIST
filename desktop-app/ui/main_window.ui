@@ -1126,7 +1126,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>9</number>
+          <number>8</number>
          </property>
          <widget class="QWidget" name="main_page">
           <layout class="QVBoxLayout" name="verticalLayout_73">
@@ -7475,8 +7475,8 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>1426</width>
-                <height>1004</height>
+                <width>1266</width>
+                <height>849</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_53">
@@ -8352,7 +8352,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
             <rect>
              <x>60</x>
              <y>40</y>
-             <width>507</width>
+             <width>520</width>
              <height>116</height>
             </rect>
            </property>
@@ -9615,7 +9615,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_49">
                   <property name="spacing">
-                   <number>32</number>
+                   <number>16</number>
                   </property>
                   <property name="leftMargin">
                    <number>56</number>
@@ -9649,533 +9649,196 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                   </item>
                   <item>
                    <layout class="QVBoxLayout" name="verticalLayout_48">
-                    <property name="rightMargin">
-                     <number>100</number>
-                    </property>
                     <item>
-                     <widget class="QWidget" name="borderWidget_28" native="true">
-                      <property name="maximumSize">
-                       <size>
-                        <width>16777215</width>
-                        <height>68</height>
-                       </size>
-                      </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_162">
-                       <property name="spacing">
-                        <number>0</number>
-                       </property>
-                       <property name="leftMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="topMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="rightMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="bottomMargin">
-                        <number>0</number>
-                       </property>
-                       <item>
-                        <widget class="QWidget" name="widget_34" native="true">
-                         <property name="minimumSize">
-                          <size>
-                           <width>250</width>
-                           <height>0</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>16777215</width>
-                           <height>16777215</height>
-                          </size>
-                         </property>
-                         <property name="cursor">
-                          <cursorShape>IBeamCursor</cursorShape>
-                         </property>
-                         <layout class="QVBoxLayout" name="verticalLayout_163">
-                          <property name="spacing">
-                           <number>10</number>
-                          </property>
-                          <property name="leftMargin">
-                           <number>25</number>
-                          </property>
-                          <property name="topMargin">
-                           <number>5</number>
-                          </property>
-                          <property name="rightMargin">
-                           <number>20</number>
-                          </property>
-                          <property name="bottomMargin">
-                           <number>15</number>
-                          </property>
-                          <item>
-                           <widget class="QLabel" name="label_128">
-                            <property name="minimumSize">
-                             <size>
-                              <width>0</width>
-                              <height>24</height>
-                             </size>
-                            </property>
-                            <property name="font">
-                             <font>
-                              <family>Inter</family>
-                              <pointsize>12</pointsize>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">color: #6D6D6D;</string>
-                            </property>
-                            <property name="text">
-                             <string>Номер маршрута</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLineEdit" name="addStop_routeNumber">
-                            <property name="minimumSize">
-                             <size>
-                              <width>0</width>
-                              <height>26</height>
-                             </size>
-                            </property>
-                            <property name="font">
-                             <font>
-                              <family>Inter</family>
-                              <pointsize>16</pointsize>
-                             </font>
-                            </property>
-                            <property name="inputMask">
-                             <string/>
-                            </property>
-                            <property name="text">
-                             <string/>
-                            </property>
-                            <property name="placeholderText">
-                             <string>328</string>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </widget>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QWidget" name="borderWidget_29" native="true">
-                      <property name="maximumSize">
-                       <size>
-                        <width>16777215</width>
-                        <height>68</height>
-                       </size>
-                      </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_164">
-                       <property name="spacing">
-                        <number>0</number>
-                       </property>
-                       <property name="leftMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="topMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="rightMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="bottomMargin">
-                        <number>0</number>
-                       </property>
-                       <item>
-                        <widget class="QWidget" name="widget_35" native="true">
-                         <property name="minimumSize">
-                          <size>
-                           <width>250</width>
-                           <height>0</height>
-                          </size>
-                         </property>
-                         <property name="cursor">
-                          <cursorShape>IBeamCursor</cursorShape>
-                         </property>
-                         <layout class="QVBoxLayout" name="verticalLayout_165">
-                          <property name="spacing">
-                           <number>10</number>
-                          </property>
-                          <property name="leftMargin">
-                           <number>25</number>
-                          </property>
-                          <property name="topMargin">
-                           <number>5</number>
-                          </property>
-                          <property name="rightMargin">
-                           <number>20</number>
-                          </property>
-                          <property name="bottomMargin">
-                           <number>15</number>
-                          </property>
-                          <item>
-                           <widget class="QLabel" name="label_129">
-                            <property name="minimumSize">
-                             <size>
-                              <width>0</width>
-                              <height>24</height>
-                             </size>
-                            </property>
-                            <property name="font">
-                             <font>
-                              <family>Inter</family>
-                              <pointsize>12</pointsize>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">color: #6D6D6D;</string>
-                            </property>
-                            <property name="text">
-                             <string>Остановка</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLineEdit" name="addStop_stop">
-                            <property name="minimumSize">
-                             <size>
-                              <width>0</width>
-                              <height>26</height>
-                             </size>
-                            </property>
-                            <property name="font">
-                             <font>
-                              <family>Inter</family>
-                              <pointsize>16</pointsize>
-                             </font>
-                            </property>
-                            <property name="inputMask">
-                             <string/>
-                            </property>
-                            <property name="text">
-                             <string/>
-                            </property>
-                            <property name="placeholderText">
-                             <string>Остановка</string>
-                            </property>
-                            <property name="cursorMoveStyle">
-                             <enum>Qt::LogicalMoveStyle</enum>
-                            </property>
-                            <property name="clearButtonEnabled">
-                             <bool>false</bool>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </widget>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QWidget" name="borderWidget_30" native="true">
-                      <property name="maximumSize">
-                       <size>
-                        <width>16777215</width>
-                        <height>68</height>
-                       </size>
-                      </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_166">
-                       <property name="spacing">
-                        <number>0</number>
-                       </property>
-                       <property name="leftMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="topMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="rightMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="bottomMargin">
-                        <number>0</number>
-                       </property>
-                       <item>
-                        <widget class="QWidget" name="widget_36" native="true">
-                         <property name="minimumSize">
-                          <size>
-                           <width>250</width>
-                           <height>0</height>
-                          </size>
-                         </property>
-                         <property name="cursor">
-                          <cursorShape>IBeamCursor</cursorShape>
-                         </property>
-                         <layout class="QVBoxLayout" name="verticalLayout_167">
-                          <property name="spacing">
-                           <number>10</number>
-                          </property>
-                          <property name="leftMargin">
-                           <number>25</number>
-                          </property>
-                          <property name="topMargin">
-                           <number>5</number>
-                          </property>
-                          <property name="rightMargin">
-                           <number>20</number>
-                          </property>
-                          <property name="bottomMargin">
-                           <number>15</number>
-                          </property>
-                          <item>
-                           <widget class="QLabel" name="label_130">
-                            <property name="minimumSize">
-                             <size>
-                              <width>0</width>
-                              <height>24</height>
-                             </size>
-                            </property>
-                            <property name="font">
-                             <font>
-                              <family>Inter</family>
-                              <pointsize>12</pointsize>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">color: #6D6D6D;</string>
-                            </property>
-                            <property name="text">
-                             <string>Прибытие</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLineEdit" name="addStop_departure">
-                            <property name="minimumSize">
-                             <size>
-                              <width>0</width>
-                              <height>26</height>
-                             </size>
-                            </property>
-                            <property name="font">
-                             <font>
-                              <family>Inter</family>
-                              <pointsize>16</pointsize>
-                             </font>
-                            </property>
-                            <property name="inputMask">
-                             <string/>
-                            </property>
-                            <property name="text">
-                             <string/>
-                            </property>
-                            <property name="placeholderText">
-                             <string>Прибытие</string>
-                            </property>
-                            <property name="cursorMoveStyle">
-                             <enum>Qt::LogicalMoveStyle</enum>
-                            </property>
-                            <property name="clearButtonEnabled">
-                             <bool>false</bool>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </widget>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="addPath_btn">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                        <horstretch>0</horstretch>
-                        <verstretch>67</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>250</width>
-                        <height>67</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>16777215</width>
-                        <height>67</height>
-                       </size>
-                      </property>
-                      <property name="cursor">
-                       <cursorShape>PointingHandCursor</cursorShape>
-                      </property>
-                      <property name="text">
-                       <string>Добавить остановку к маршруту</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <widget class="QScrollArea" name="scrollArea_5">
-                    <property name="styleSheet">
-                     <string notr="true">background-color: #ffffff; border: none;</string>
-                    </property>
-                    <property name="verticalScrollBarPolicy">
-                     <enum>Qt::ScrollBarAsNeeded</enum>
-                    </property>
-                    <property name="horizontalScrollBarPolicy">
-                     <enum>Qt::ScrollBarAlwaysOff</enum>
-                    </property>
-                    <property name="widgetResizable">
-                     <bool>true</bool>
-                    </property>
-                    <widget class="QWidget" name="scrollAreaWidgetContents_7">
-                     <property name="geometry">
-                      <rect>
-                       <x>0</x>
-                       <y>0</y>
-                       <width>712</width>
-                       <height>68</height>
-                      </rect>
-                     </property>
-                     <layout class="QVBoxLayout" name="verticalLayout_47">
+                     <layout class="QHBoxLayout" name="horizontalLayout_21">
                       <property name="spacing">
-                       <number>6</number>
+                       <number>32</number>
                       </property>
+                      <item>
+                       <widget class="QWidget" name="borderWidget_28" native="true">
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>68</height>
+                         </size>
+                        </property>
+                        <layout class="QVBoxLayout" name="verticalLayout_162">
+                         <property name="spacing">
+                          <number>0</number>
+                         </property>
+                         <property name="leftMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>0</number>
+                         </property>
+                         <item>
+                          <widget class="QWidget" name="widget_34" native="true">
+                           <property name="minimumSize">
+                            <size>
+                             <width>250</width>
+                             <height>0</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>16777215</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="cursor">
+                            <cursorShape>IBeamCursor</cursorShape>
+                           </property>
+                           <layout class="QVBoxLayout" name="verticalLayout_163">
+                            <property name="spacing">
+                             <number>10</number>
+                            </property>
+                            <property name="leftMargin">
+                             <number>25</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>5</number>
+                            </property>
+                            <property name="rightMargin">
+                             <number>20</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>15</number>
+                            </property>
+                            <item>
+                             <widget class="QLabel" name="label_128">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>24</height>
+                               </size>
+                              </property>
+                              <property name="font">
+                               <font>
+                                <family>Inter</family>
+                                <pointsize>12</pointsize>
+                               </font>
+                              </property>
+                              <property name="styleSheet">
+                               <string notr="true">color: #6D6D6D;</string>
+                              </property>
+                              <property name="text">
+                               <string>Номер маршрута</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QLineEdit" name="addPath_pathNumber">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>26</height>
+                               </size>
+                              </property>
+                              <property name="font">
+                               <font>
+                                <family>Inter</family>
+                                <pointsize>16</pointsize>
+                               </font>
+                              </property>
+                              <property name="inputMask">
+                               <string/>
+                              </property>
+                              <property name="text">
+                               <string/>
+                              </property>
+                              <property name="placeholderText">
+                               <string>328</string>
+                              </property>
+                             </widget>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="addPath_btn">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>67</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="minimumSize">
+                         <size>
+                          <width>200</width>
+                          <height>67</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>67</height>
+                         </size>
+                        </property>
+                        <property name="cursor">
+                         <cursorShape>PointingHandCursor</cursorShape>
+                        </property>
+                        <property name="text">
+                         <string>Создать</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_25">
                       <property name="leftMargin">
-                       <number>0</number>
-                      </property>
-                      <property name="topMargin">
-                       <number>0</number>
-                      </property>
-                      <property name="rightMargin">
-                       <number>0</number>
-                      </property>
-                      <property name="bottomMargin">
-                       <number>0</number>
+                       <number>20</number>
                       </property>
                       <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_23">
-                        <item>
-                         <widget class="QPushButton" name="pushButton_18">
-                          <property name="minimumSize">
-                           <size>
-                            <width>24</width>
-                            <height>24</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>24</width>
-                            <height>24</height>
-                           </size>
-                          </property>
-                          <property name="cursor">
-                           <cursorShape>PointingHandCursor</cursorShape>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">background-color: transparent;</string>
-                          </property>
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="icon">
-                           <iconset resource="../resources.qrc">
-                            <normaloff>:/icons/icons/trash.png</normaloff>:/icons/icons/trash.png</iconset>
-                          </property>
-                          <property name="iconSize">
-                           <size>
-                            <width>24</width>
-                            <height>24</height>
-                           </size>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_31">
-                          <property name="font">
-                           <font>
-                            <family>Inter</family>
-                            <pointsize>14</pointsize>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>Ошмяны (ул. Кальварийская 24)</string>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
+                       <widget class="QLabel" name="addPath_status">
+                        <property name="font">
+                         <font>
+                          <family>Inter</family>
+                          <pointsize>12</pointsize>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>TextLabel</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                        </property>
+                       </widget>
                       </item>
                       <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_24">
-                        <item>
-                         <widget class="QPushButton" name="pushButton_19">
-                          <property name="minimumSize">
-                           <size>
-                            <width>24</width>
-                            <height>24</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>24</width>
-                            <height>24</height>
-                           </size>
-                          </property>
-                          <property name="cursor">
-                           <cursorShape>PointingHandCursor</cursorShape>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">background-color: transparent;</string>
-                          </property>
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="icon">
-                           <iconset resource="../resources.qrc">
-                            <normaloff>:/icons/icons/trash.png</normaloff>:/icons/icons/trash.png</iconset>
-                          </property>
-                          <property name="iconSize">
-                           <size>
-                            <width>24</width>
-                            <height>24</height>
-                           </size>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_32">
-                          <property name="font">
-                           <font>
-                            <family>Inter</family>
-                            <pointsize>14</pointsize>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>Шарковщина (ул. Кальварийская 24)</string>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                      <item>
-                       <spacer name="verticalSpacer_15">
+                       <spacer name="horizontalSpacer_13">
                         <property name="orientation">
-                         <enum>Qt::Vertical</enum>
+                         <enum>Qt::Horizontal</enum>
                         </property>
                         <property name="sizeHint" stdset="0">
                          <size>
-                          <width>20</width>
-                          <height>1</height>
+                          <width>40</width>
+                          <height>20</height>
                          </size>
                         </property>
                        </spacer>
                       </item>
                      </layout>
-                    </widget>
-                   </widget>
+                    </item>
+                   </layout>
                   </item>
                   <item>
-                   <spacer name="verticalSpacer_16">
+                   <spacer name="verticalSpacer_15">
                     <property name="orientation">
                      <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Minimum</enum>
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
@@ -10187,6 +9850,248 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                   </item>
                  </layout>
                 </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_26">
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QWidget" name="roundedWidget_21" native="true">
+                   <layout class="QVBoxLayout" name="verticalLayout_47">
+                    <property name="spacing">
+                     <number>6</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>56</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>5</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>10</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>10</number>
+                    </property>
+                    <item>
+                     <widget class="QLabel" name="label_28">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>24</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Inter</family>
+                        <pointsize>12</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: #6D6D6D;</string>
+                      </property>
+                      <property name="text">
+                       <string>Найти маршрут</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="findPath">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>26</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Inter</family>
+                        <pointsize>16</pointsize>
+                       </font>
+                      </property>
+                      <property name="inputMask">
+                       <string/>
+                      </property>
+                      <property name="text">
+                       <string/>
+                      </property>
+                      <property name="placeholderText">
+                       <string>Найти маршрут</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="findPath_btn">
+                   <property name="minimumSize">
+                    <size>
+                     <width>200</width>
+                     <height>67</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>67</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Найти</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="pathsListLayout">
+                 <property name="spacing">
+                  <number>6</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QWidget" name="roundedWidget_17" native="true">
+                   <layout class="QHBoxLayout" name="horizontalLayout_24">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>56</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>20</number>
+                    </property>
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_23">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="person_position_2">
+                        <property name="font">
+                         <font>
+                          <family>Inter</family>
+                          <pointsize>14</pointsize>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>Марштрут №</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="pathNumber">
+                        <property name="font">
+                         <font>
+                          <family>Inter</family>
+                          <pointsize>14</pointsize>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>4</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <spacer name="horizontalSpacer_12">
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                     </layout>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="pushButton_16">
+                      <property name="maximumSize">
+                       <size>
+                        <width>32</width>
+                        <height>32</height>
+                       </size>
+                      </property>
+                      <property name="cursor">
+                       <cursorShape>PointingHandCursor</cursorShape>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: transparent;</string>
+                      </property>
+                      <property name="text">
+                       <string/>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="../resources.qrc">
+                        <normaloff>:/icons/icons/Vector.png</normaloff>:/icons/icons/Vector.png</iconset>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>64</width>
+                        <height>64</height>
+                       </size>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="pushButton_17">
+                      <property name="enabled">
+                       <bool>true</bool>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>32</width>
+                        <height>32</height>
+                       </size>
+                      </property>
+                      <property name="cursor">
+                       <cursorShape>PointingHandCursor</cursorShape>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: transparent</string>
+                      </property>
+                      <property name="text">
+                       <string/>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="../resources.qrc">
+                        <normaloff>:/icons/icons/trash.png</normaloff>:/icons/icons/trash.png</iconset>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>64</width>
+                        <height>64</height>
+                       </size>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_16">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
                </item>
                <item>
                 <spacer name="verticalSpacer_17">
@@ -11181,102 +11086,6 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    </hints>
   </connection>
   <connection>
-   <sender>addRoute_number</sender>
-   <signal>returnPressed()</signal>
-   <receiver>addRoute_platform</receiver>
-   <slot>setFocus()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>625</x>
-     <y>474</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>625</x>
-     <y>562</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>addRoute_price</sender>
-   <signal>returnPressed()</signal>
-   <receiver>addRoute_departureDate</receiver>
-   <slot>setFocus()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>625</x>
-     <y>826</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>996</x>
-     <y>474</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>addRoute_departureDate</sender>
-   <signal>returnPressed()</signal>
-   <receiver>addRoute_departureTime</receiver>
-   <slot>setFocus()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>996</x>
-     <y>474</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>996</x>
-     <y>562</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>addRoute_departureTime</sender>
-   <signal>returnPressed()</signal>
-   <receiver>addRoute_destinationTime</receiver>
-   <slot>setFocus()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>996</x>
-     <y>562</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>996</x>
-     <y>650</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>addRoute_destinationTime</sender>
-   <signal>returnPressed()</signal>
-   <receiver>addRoute_seats</receiver>
-   <slot>setFocus()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>996</x>
-     <y>650</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>996</x>
-     <y>738</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>addRoute_seats</sender>
-   <signal>returnPressed()</signal>
-   <receiver>addRoute_btn</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>996</x>
-     <y>738</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>600</x>
-     <y>921</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>addStop_name</sender>
    <signal>returnPressed()</signal>
    <receiver>addStop_address</receiver>
@@ -11289,54 +11098,6 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
     <hint type="destinationlabel">
      <x>996</x>
      <y>474</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>addStop_routeNumber</sender>
-   <signal>returnPressed()</signal>
-   <receiver>addStop_stop</receiver>
-   <slot>setFocus()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>624</x>
-     <y>473</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>624</x>
-     <y>547</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>addStop_stop</sender>
-   <signal>returnPressed()</signal>
-   <receiver>addStop_departure</receiver>
-   <slot>setFocus()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>624</x>
-     <y>547</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>624</x>
-     <y>621</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>addStop_departure</sender>
-   <signal>returnPressed()</signal>
-   <receiver>addPath_btn</receiver>
-   <slot>click()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>624</x>
-     <y>621</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>749</x>
-     <y>702</y>
     </hint>
    </hints>
   </connection>
@@ -11379,24 +11140,24 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>541</x>
-     <y>906</y>
+     <x>600</x>
+     <y>833</y>
     </hint>
     <hint type="destinationlabel">
-     <x>546</x>
-     <y>460</y>
+     <x>625</x>
+     <y>474</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>addPath_btn</sender>
    <signal>clicked()</signal>
-   <receiver>addStop_routeNumber</receiver>
+   <receiver>addPath_pathNumber</receiver>
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>575</x>
-     <y>692</y>
+     <x>1208</x>
+     <y>465</y>
     </hint>
     <hint type="destinationlabel">
      <x>583</x>
@@ -11405,66 +11166,130 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    </hints>
   </connection>
   <connection>
-   <sender>addRoute_number_2</sender>
+   <sender>addPath_pathNumber</sender>
    <signal>returnPressed()</signal>
-   <receiver>addRoute_departureDate_2</receiver>
+   <receiver>addPath_btn</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>799</x>
+     <y>436</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>931</x>
+     <y>421</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>addRoute_number</sender>
+   <signal>returnPressed()</signal>
+   <receiver>addRoute_platform</receiver>
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>646</x>
-     <y>403</y>
+     <x>584</x>
+     <y>458</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>589</x>
+     <y>552</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>addRoute_price</sender>
+   <signal>returnPressed()</signal>
+   <receiver>addRoute_departureDate</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>584</x>
+     <y>641</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>598</x>
+     <y>722</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>addRoute_departureDate</sender>
+   <signal>returnPressed()</signal>
+   <receiver>addRoute_departureTime</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>796</x>
+     <y>720</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>931</x>
+     <y>457</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>addRoute_departureTime</sender>
+   <signal>returnPressed()</signal>
+   <receiver>addRoute_destinationTime</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>983</x>
+     <y>467</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>994</x>
+     <y>556</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>addRoute_destinationTime</sender>
+   <signal>returnPressed()</signal>
+   <receiver>addRoute_seats</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>948</x>
+     <y>548</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>947</x>
+     <y>638</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>addRoute_seats</sender>
+   <signal>returnPressed()</signal>
+   <receiver>addRoute_btn</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>916</x>
+     <y>646</y>
     </hint>
     <hint type="destinationlabel">
      <x>783</x>
-     <y>410</y>
+     <y>805</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>addRoute_departureDate_2</sender>
+   <sender>addRoute_platform</sender>
    <signal>returnPressed()</signal>
-   <receiver>addRoute_platform_2</receiver>
+   <receiver>addRoute_price</receiver>
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>791</x>
-     <y>410</y>
+     <x>728</x>
+     <y>554</y>
     </hint>
     <hint type="destinationlabel">
-     <x>553</x>
-     <y>488</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>addRoute_platform_2</sender>
-   <signal>returnPressed()</signal>
-   <receiver>comboBox</receiver>
-   <slot>setFocus()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>664</x>
-     <y>499</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>815</x>
-     <y>495</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>addRoute_btn_2</sender>
-   <signal>clicked()</signal>
-   <receiver>addRoute_number_2</receiver>
-   <slot>setFocus()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>510</x>
-     <y>580</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>491</x>
-     <y>416</y>
+     <x>734</x>
+     <y>639</y>
     </hint>
    </hints>
   </connection>

@@ -1,6 +1,0 @@
-fastapi
-uvicorn
-asyncpg
-python-dotenv
-pydantic
-fastapi

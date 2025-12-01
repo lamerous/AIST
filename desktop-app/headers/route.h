@@ -25,8 +25,8 @@ public:
 
     QString getRouteNumber() const;
     QString getPlatformNumber() const;
-    QString getDeparturePlace() const;
-    QString getDestinationPlace() const;
+    BusStop getDeparturePlace() const;
+    BusStop getDestinationPlace() const;
     QDate getDepartureDate() const;
     QTime getDepartureTime() const;
     QTime getDestinationTime() const;

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>828</width>
+    <width>944</width>
     <height>150</height>
    </rect>
   </property>
@@ -221,7 +221,7 @@ QPushButton {
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap resource="resources.qrc">:/icons/icons/circle.png</pixmap>
+                   <pixmap resource="../resources.qrc">:/icons/icons/circle.png</pixmap>
                   </property>
                   <property name="scaledContents">
                    <bool>true</bool>
@@ -265,7 +265,7 @@ QPushButton {
                    <string/>
                   </property>
                   <property name="pixmap">
-                   <pixmap resource="resources.qrc">:/icons/icons/filled-circle.png</pixmap>
+                   <pixmap resource="../resources.qrc">:/icons/icons/filled-circle.png</pixmap>
                   </property>
                   <property name="scaledContents">
                    <bool>true</bool>
@@ -535,7 +535,8 @@ QPushButton {
   </layout>
  </widget>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>

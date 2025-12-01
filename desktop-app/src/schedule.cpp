@@ -39,7 +39,7 @@ QList<Route> Schedule::findRoutesByNumber(const QString& routeNumber) const {
 QList<Route> Schedule::findRoutesByDeparture(const QString& departurePlace) const {
     QList<Route> result;
     for (const auto& route : routes) {
-        if (route.getDeparturePlace().contains(departurePlace, Qt::CaseInsensitive)) {
+        if (route.getDeparturePlace().getStopName().contains(departurePlace, Qt::CaseInsensitive)) {
             result.append(route);
         }
     }
@@ -49,7 +49,7 @@ QList<Route> Schedule::findRoutesByDeparture(const QString& departurePlace) cons
 QList<Route> Schedule::findRoutesByDestination(const QString& destinationPlace) const {
     QList<Route> result;
     for (const auto& route : routes) {
-        if (route.getDestinationPlace().contains(destinationPlace, Qt::CaseInsensitive)) {
+        if (route.getDestinationPlace().getStopName().contains(destinationPlace, Qt::CaseInsensitive)) {
             result.append(route);
         }
     }
@@ -59,8 +59,8 @@ QList<Route> Schedule::findRoutesByDestination(const QString& destinationPlace) 
 QList<Route> Schedule::findRoutesByDirection(const QString& departurePlace, const QString& destinationPlace) const {
     QList<Route> result;
     for (const auto& route : routes) {
-        if (route.getDeparturePlace().contains(departurePlace, Qt::CaseInsensitive) &&
-            route.getDestinationPlace().contains(destinationPlace, Qt::CaseInsensitive)) {
+        if (route.getDeparturePlace().getStopName().contains(departurePlace, Qt::CaseInsensitive) &&
+            route.getDestinationPlace().getStopName().contains(destinationPlace, Qt::CaseInsensitive)) {
             result.append(route);
         }
     }
@@ -93,8 +93,8 @@ bool Schedule::saveToFile(const QString& filename) const {
     for (const auto& route : routes) {
         out << route.getRouteNumber() << ";"
             << route.getPlatformNumber() << ";"
-            << route.getDeparturePlace() << ";"
-            << route.getDestinationPlace() << ";"
+            << route.getDeparturePlace().getStopName() << ";"
+            << route.getDestinationPlace().getStopName() << ";"
             << route.getDepartureDate().toString("dd.MM.yyyy") << ";"
             << route.getDepartureTime().toString("hh:mm") << ";"
             << route.getDestinationTime().toString("hh:mm") << ";"
@@ -122,13 +122,12 @@ bool Schedule::loadFromFile(const QString& filename) {
             Route route(
                 parts[0],
                 parts[1],
-                parts[2],
-                parts[3],
-                QDate::fromString(parts[4], "dd.MM.yyyy"),
+                QDate::fromString(parts[3], "dd.MM.yyyy"),
+                QTime::fromString(parts[4], "hh:mm"),
                 QTime::fromString(parts[5], "hh:mm"),
-                QTime::fromString(parts[6], "hh:mm"),
+                parts[6].toInt(),
                 parts[7].toInt(),
-                parts[8].toInt()
+                Path()
             );
             routes.append(route);
         }

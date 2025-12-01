@@ -7,6 +7,7 @@
 #include "ui_main_window.h"
 
 #include "route.h"
+#include "path.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -134,8 +135,6 @@ MainWindow::~MainWindow() {
 void MainWindow::on_addRoute_btn_clicked(){
     QString number = ui->addRoute_number->text();
     QString platform = ui->addRoute_platform->text();
-    QString departure = ui->addRoute_departurePlace->text();
-    QString destination = ui->addRoute_destinationPlace->text();
     
     QDate date = QDate::fromString(ui->addRoute_departureDate->text(), "dd.MM.yyyy");
     QTime depTime = QTime::fromString(ui->addRoute_departureTime->text(), "hh:mm");
@@ -144,7 +143,7 @@ void MainWindow::on_addRoute_btn_clicked(){
     int price = ui->addRoute_price->text().toInt();
     int seats = ui->addRoute_seats->text().toInt();
     
-    if (number == "" || platform == "" || departure == "" || destination == "" || price == 0 || seats == 0) {
+    if (number == "" || platform == "" || price == 0 || seats == 0) {
         ui->addRoute_status->setStyleSheet("color: red;");
         ui->addRoute_status->setText("Заполните все поля");
 
@@ -190,7 +189,7 @@ void MainWindow::on_addRoute_btn_clicked(){
         return;
     }
     
-    Route route(number, platform, departure, destination, date, depTime, destTime, price, seats);
+    Route route(number, platform, date, depTime, destTime, price, seats, Path());
     qDebug() << "Создан маршрут:" << route.toString();
 
     ui->addRoute_status->setStyleSheet("color: black;");
@@ -272,7 +271,6 @@ void MainWindow::onBusStopsReceived(const QList<BusStop> &busStops) {
         StopWidget *stopWidget = new StopWidget(stop);
         ui->stopsListLayout->addWidget(stopWidget);
         connect(stopWidget, &StopWidget::delButtonClicked, this, &MainWindow::onStopDelete);
-        // schedule.addRoute(route);   CHANGE TO path.addStop(stop);
     }
 }
 
@@ -321,13 +319,26 @@ void MainWindow::on_swapPlaces_btn_clicked() {
 void MainWindow::clearRouteFields() {
     ui->addRoute_number->clear();
     ui->addRoute_platform->clear();
-    ui->addRoute_departurePlace->clear();
-    ui->addRoute_destinationPlace->clear();
     ui->addRoute_price->clear();
     ui->addRoute_departureDate->clear();
     ui->addRoute_departureTime->clear();
     ui->addRoute_destinationTime->clear();
     ui->addRoute_seats->clear();
+}
+
+void MainWindow::on_addPath_btn_clicked() {
+    // QLayoutItem* item;
+    // while ((item = ui->pathsListLayout->takeAt(0)) != nullptr) {
+    //     delete item->widget();
+    //     delete item;
+    // }
+
+    QString pathNumber = ui->addPath_pathNumber->text();
+
+    Path path(pathNumber);
+    PathWidget *pathWidget = new PathWidget(path);
+
+    ui->pathsListLayout->insertWidget(0, pathWidget);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event) {

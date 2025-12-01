@@ -4,3 +4,5 @@ asyncpg
 python-dotenv
 pydantic
 fastapi
+sqlalchemy
+psycopg2

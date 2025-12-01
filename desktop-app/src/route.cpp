@@ -24,11 +24,11 @@ QString Route::getPlatformNumber() const {
     return platformNumber;
 }
 
-QString Route::getDeparturePlace() const {
+BusStop Route::getDeparturePlace() const {
     return path.getFirstStop();
 }
 
-QString Route::getDestinationPlace() const {
+BusStop Route::getDestinationPlace() const {
     return path.getLastStop();
 }
 
@@ -67,14 +67,6 @@ void Route::setPlatformNumber(const QString& platform) {
     platformNumber = platform;
 }
 
-void Route::setDeparturePlace(const QString& departure) {
-    departurePlace = departure;
-}
-
-void Route::setDestinationPlace(const QString& destination) {
-    destinationPlace = destination;
-}
-
 void Route::setDepartureDate(const QDate& date) {
     departureDate = date;
 }
@@ -102,16 +94,17 @@ void Route::setPath(const Path& path) {
 void Route::displayInfo() const {
     qDebug() << "Маршрут №" << routeNumber
              << "\nПлатформа:" << platformNumber
-             << "\nОтправление:" << departurePlace << departureDate.toString("dd.MM.yyyy") << departureTime.toString("hh:mm")
-             << "\nПрибытие:" << destinationPlace << destinationTime.toString("hh:mm");
+             << "\nОтправление:" << path.getFirstStop().getStopName()
+            << departureDate.toString("dd.MM.yyyy") << departureTime.toString("hh:mm")
+             << "\nПрибытие:" << path.getLastStop().getStopName() << destinationTime.toString("hh:mm");
 }
 
 QString Route::toString() const {
     return QString("Маршрут №%1 | Платформа: %2 | %3 -> %4 | %5 %6 - %7 | %8 руб. | %9 мест")
         .arg(routeNumber)
         .arg(platformNumber)
-        .arg(departurePlace)
-        .arg(destinationPlace)
+        .arg(path.getFirstStop().getStopName())
+        .arg(path.getLastStop().getStopName())
         .arg(departureDate.toString("dd.MM.yyyy"))
         .arg(departureTime.toString("hh:mm"))
         .arg(destinationTime.toString("hh:mm"))
@@ -125,7 +118,8 @@ QDebug operator<<(QDebug debug, const Route& route) {
     debug.nospace() << "Route(" 
                     << "№" << route.routeNumber
                     << ", platform:" << route.platformNumber
-                    << ", " << route.departurePlace << "->" << route.destinationPlace
+                    << ", " << route.getDeparturePlace().getStopName()
+                    << "->" << route.getDestinationPlace().getStopName()
                     << ", " << route.departureDate.toString("dd.MM.yyyy")
                     << " " << route.departureTime.toString("hh:mm") << "-" << route.destinationTime.toString("hh:mm")
                     << " " << route.routePrice << " руб. " << route.routeSeats

@@ -28,8 +28,8 @@ void RouteWidget::updateRouteData(const Route& route) {
     ui->departureTime->setText(route.getDepartureTime().toString("hh:mm"));
     ui->arivingTime->setText(route.getDestinationTime().toString("hh:mm"));
     
-    ui->departurePlace->setText(route.getDeparturePlace());
-    ui->destinationPlace->setText(route.getDestinationPlace());
+    ui->departurePlace->setText(route.getDeparturePlace().getStopName());
+    ui->destinationPlace->setText(route.getDestinationPlace().getStopName());
     
     calculateTravelTime();
     
