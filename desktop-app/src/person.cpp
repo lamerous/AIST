@@ -8,7 +8,6 @@ Person::Person(const QString& firstName, const QString& lastName, const QString&
 {
 }
 
-// Геттеры
 QString Person::getFirstName() const {
     return firstName;
 }
@@ -37,7 +36,6 @@ QString Person::getEmail() const {
     return email;
 }
 
-// Сеттеры
 void Person::setFirstName(const QString& firstName) {
     this->firstName = firstName;
 }

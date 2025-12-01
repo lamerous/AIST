@@ -8,7 +8,6 @@ Admin::Admin(const QString& firstName, const QString& lastName, const QString& m
 {
 }
 
-// Геттеры
 QString Admin::getAdminId() const {
     return adminId;
 }
@@ -17,7 +16,6 @@ QString Admin::getAccessLevel() const {
     return accessLevel;
 }
 
-// Сеттеры
 void Admin::setAdminId(const QString& adminId) {
     this->adminId = adminId;
 }

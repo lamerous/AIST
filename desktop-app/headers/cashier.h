@@ -16,13 +16,11 @@ public:
             const QDate& birthDate, const QString& phoneNumber, const QString& email,
             const QString& employeeId, int workstationNumber);
 
-    // Геттеры
     QString getEmployeeId() const;
     int getWorkstationNumber() const;
     double getTotalSales() const;
     QList<Ticket> getSoldTickets() const;
 
-    // Сеттеры
     void setEmployeeId(const QString& employeeId);
     void setWorkstationNumber(int workstationNumber);
 

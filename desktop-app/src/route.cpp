@@ -1,6 +1,5 @@
 #include "route.h"
 
-// Конструкторы
 Route::Route()
     : routeNumber(""), platformNumber(""), departureDate(QDate::currentDate()), 
       departureTime(QTime::currentTime()), destinationTime(QTime::currentTime()), 
@@ -17,7 +16,6 @@ Route::Route(const QString& number, const QString& platform,
 {
 }
 
-// Геттеры
 QString Route::getRouteNumber() const {
     return routeNumber;
 }

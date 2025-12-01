@@ -18,7 +18,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->stackedWidget->setCurrentIndex(0);
     ui->route_label->setText("");
 
-    // Button groups
     dispatcherMenu_buttons_routes = new QButtonGroup(this);
     dispatcherMenu_buttons_paths = new QButtonGroup(this);
     dispatcherMenu_buttons_stops = new QButtonGroup(this);

@@ -3,6 +3,8 @@
 #include <QUrl>
 #include <QDebug>
 
+#define HOST "http://localhost:8002"
+
 BusStopApiClient::BusStopApiClient(QObject *parent)
     : QObject(parent)
     , networkManager(new QNetworkAccessManager(this))

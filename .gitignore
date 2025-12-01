@@ -1,5 +1,9 @@
 .env
 
+source-code.txt
+
+docs/
+
 build/
 bin/
 obj/

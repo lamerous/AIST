@@ -9,7 +9,6 @@ Cashier::Cashier(const QString& firstName, const QString& lastName, const QStrin
 {
 }
 
-// Геттеры
 QString Cashier::getEmployeeId() const {
     return employeeId;
 }
@@ -26,7 +25,6 @@ QList<Ticket> Cashier::getSoldTickets() const {
     return soldTickets;
 }
 
-// Сеттеры
 void Cashier::setEmployeeId(const QString& employeeId) {
     this->employeeId = employeeId;
 }

@@ -8,8 +8,7 @@
 #include <QJsonDocument>
 #include "route.h"
 
-class ApiClient : public QObject
-{
+class ApiClient : public QObject {
     Q_OBJECT
 
 public:

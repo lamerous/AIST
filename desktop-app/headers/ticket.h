@@ -20,25 +20,21 @@ public:
     Ticket(const Route& route, const QString& passengerName, const QString& ticketNumber, 
            const QString& seatNumber, const QDate& purchaseDate);
 
-    // Геттеры
     Route getRoute() const;
     QString getPassengerName() const;
     QString getTicketNumber() const;
     QString getSeatNumber() const;
     QDate getPurchaseDate() const;
 
-    // Сеттеры
     void setRoute(const Route& route);
     void setPassengerName(const QString& name);
     void setTicketNumber(const QString& number);
     void setSeatNumber(const QString& seat);
     void setPurchaseDate(const QDate& date);
 
-    // Методы
     void displayInfo() const;
     QString toString() const;
-    bool isValid() const; // Проверка валидности билета
+    bool isValid() const;
 
-    // Перегрузка оператора вывода
     friend QDebug operator<<(QDebug debug, const Ticket& ticket);
 };

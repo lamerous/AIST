@@ -15,12 +15,10 @@ public:
                const QDate& birthDate, const QString& phoneNumber, const QString& email,
                const QString& employeeId, const QString& department);
 
-    // Геттеры
     QString getEmployeeId() const;
     QString getDepartment() const;
     QList<Route> getManagedRoutes() const;
 
-    // Сеттеры
     void setEmployeeId(const QString& employeeId);
     void setDepartment(const QString& department);
 

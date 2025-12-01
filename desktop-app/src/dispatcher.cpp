@@ -8,7 +8,6 @@ Dispatcher::Dispatcher(const QString& firstName, const QString& lastName, const 
 {
 }
 
-// Геттеры
 QString Dispatcher::getEmployeeId() const {
     return employeeId;
 }
@@ -21,7 +20,6 @@ QList<Route> Dispatcher::getManagedRoutes() const {
     return managedRoutes;
 }
 
-// Сеттеры
 void Dispatcher::setEmployeeId(const QString& employeeId) {
     this->employeeId = employeeId;
 }

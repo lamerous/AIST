@@ -8,7 +8,6 @@ Passenger::Passenger(const QString& firstName, const QString& lastName, const QS
 {
 }
 
-// Геттеры
 QString Passenger::getPassportNumber() const {
     return passportNumber;
 }
@@ -17,7 +16,6 @@ QList<Ticket> Passenger::getTickets() const {
     return tickets;
 }
 
-// Сеттеры
 void Passenger::setPassportNumber(const QString& passportNumber) {
     this->passportNumber = passportNumber;
 }
