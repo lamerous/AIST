@@ -1,0 +1,106 @@
+@startuml
+
+' =============================================
+' ИНФОРМАЦИОННАЯ СИСТЕМА АВТОВОКЗАЛА
+' Базы данных PostgreSQL
+' =============================================
+
+' БАЗА ДАННЫХ 1: ROUTES_DB
+database "routes_db" as routes_db {
+  
+  entity "stops" {
+    +id : SERIAL (PK)
+    --
+    stop_name : VARCHAR(100)
+    stop_address : VARCHAR(200)
+    
+    note right
+      Таблица остановок
+      Содержит информацию о всех остановках
+    end note
+  }
+  
+  entity "paths" {
+    +id : SERIAL (PK)
+    --
+    route_number : VARCHAR(20)
+    stops_array : JSON
+    
+    note right
+      Таблица маршрутов следования
+      stops_array содержит массив ID остановок
+      stop_id ссылается на stops.id
+    end note
+  }
+  
+  entity "routes" {
+    +id : SERIAL (PK)
+    --
+    route_number : VARCHAR(20)
+    platform_number : VARCHAR(10)
+    price : INTEGER
+    available_seats : INTEGER
+    departure_date : DATE
+    departure_time : TIME
+    arrival_time : TIME
+    path_id : INTEGER (FK -> paths.id)
+    
+    note right
+      Таблица рейсов
+      Содержит расписание и информацию о рейсах
+    end note
+  }
+  
+  entity "tickets" {
+    +id : SERIAL (PK)
+    --
+    ticket_number : VARCHAR(50)
+    purchase_date : DATE
+    purchase_price : DECIMAL(10,2)
+    route_id : INTEGER (FK -> routes.id)
+    
+    note right
+      Таблица билетов
+      Хранит информацию о проданных билетах
+    end note
+  }
+}
+
+' БАЗА ДАННЫХ 2: USERS_DB
+database "users_db" as users_db {
+  
+  entity "users" {
+    +id : SERIAL (PK)
+    --
+    username : VARCHAR(50)
+    first_name : VARCHAR(50)
+    last_name : VARCHAR(50)
+    middle_name : VARCHAR(50)
+    role : VARCHAR(20)
+    password_hash : VARCHAR(255)
+    registration_date : DATE
+    email : VARCHAR(100)
+    phone_number : VARCHAR(20)
+    birth_date : DATE
+    
+    note right
+      Основная таблица пользователей
+      Роли: passenger, dispatcher, cashier, admin
+    end note
+  }
+  
+  entity "users_tickets" {
+    +id : SERIAL (PK)
+    --
+    user_id : INTEGER (FK -> users.id)
+    ticket_id : INTEGER
+    ticket_data : JSON
+    
+    note right
+      Связующая таблица пользователей и билетов
+      ticket_data может содержать детали билета
+    end note
+  }
+}
+
+@enduml

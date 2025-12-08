@@ -1,8 +1,10 @@
 .env
 
+todo
+
 source-code.txt
 
-docs/
+.obsidian/
 
 build/
 bin/

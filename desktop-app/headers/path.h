@@ -12,16 +12,19 @@ private:
 
 public:
     Path();
-    Path(QString pathNumber);
-    Path(QString pathNumber, const QVector<BusStop>& stops);
+    Path(const QString pathNumber);
+    Path(int pathid, const QString pathNumber);
+    Path(const QString pathNumber, const QVector<BusStop>& stops);
+    Path(int pathId, const QString pathNumber, const QVector<BusStop> &stops);
 
     void addStop(const BusStop& stop);
     void removeStop(int index);
+    void removeStopById(int stopId);
     void clearStops();
     
     void setNumber(const QString nubmer);
 
-    int getId() const;
+    int getPathId() const;
     QString getNumber() const;
     QVector<BusStop> getStops() const;
     BusStop getFirstStop() const;

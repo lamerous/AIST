@@ -92,5 +92,5 @@ QString RouteWidget::formatTravelTime() const {
 
 void RouteWidget::on_buyRoute_btn_clicked() {
     emit buyButtonClicked(currentRoute);
-    qDebug() << "Куплен билет на маршрут:" << currentRoute.getRouteNumber();
+    qDebug() << "Куплен билет на маршрут:" << currentRoute.getPathNumber();
 }

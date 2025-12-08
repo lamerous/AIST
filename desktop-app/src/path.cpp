@@ -2,14 +2,37 @@
 
 int Path::counter = 0;
 
-Path::Path() {}
+Path::Path() {
+    counter++;
+    pathId = counter;
+}
 
-Path::Path(QString pathNumber) : pathNumber(pathNumber) {}
+Path::Path(const QString pathNumber) : pathNumber(pathNumber) {
+    counter++;
+    pathId = counter;
+}
 
-Path::Path(QString pathNumber, const QVector<BusStop>& stops) : pathNumber(pathNumber), pathStops(stops) {}
+Path::Path(int pathId, const QString pathNumber) : pathId(pathId), pathNumber(pathNumber) {
+}
 
-void Path::addStop(const BusStop& stop) {
+Path::Path(const QString pathNumber, const QVector<BusStop> &stops) : pathNumber(pathNumber), pathStops(stops) {
+    counter++;
+    pathId = counter;
+}
+
+Path::Path(int pathId, const QString pathNumber, const QVector<BusStop> &stops) : pathId(pathId), pathNumber(pathNumber), pathStops(stops) {
+}
+
+void Path::addStop(const BusStop &stop) {
     pathStops.append(stop);
+}
+
+void Path::removeStopById(int stopId) {
+    for (int i = 0; i < pathStops.size(); i++){
+        if (pathStops[i].getStopId() == stopId) {
+            pathStops.remove(i);
+        }
+    }
 }
 
 void Path::removeStop(int index) {
@@ -26,7 +49,7 @@ void Path::setNumber(const QString number) {
     pathNumber = number;
 }
 
-int Path::getId() const{
+int Path::getPathId() const{
     return pathId;
 }
 

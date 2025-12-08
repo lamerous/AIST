@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 import models, schemas
 from database import get_db
 
@@ -14,8 +15,22 @@ def create_stop(stop: schemas.StopCreate, db: Session = Depends(get_db)):
     return db_stop
 
 @router.get("/", response_model=list[schemas.Stop])
-def read_stops(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    stops = db.query(models.Stop).offset(skip).limit(limit).all()
+def read_stops(skip: int = 0, limit: int = 100, search: str = None, db: Session = Depends(get_db)):
+    # stops = db.query(models.Stop).offset(skip).limit(limit).all()
+    query = db.query(models.Stop)
+    
+    if search:
+        query = query.filter(
+            or_(
+                models.Stop.stop_name.ilike(f"%{search}%"),
+                models.Stop.stop_address.ilike(f"%{search}%")
+            )
+        )
+    if search:
+        stops = query.order_by(models.Stop.id.desc()).offset(skip).limit(limit).all()
+    else:
+        stops = query.offset(skip).limit(limit).all()
+
     return stops
 
 @router.get("/{stop_id}", response_model=schemas.Stop)

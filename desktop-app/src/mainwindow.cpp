@@ -22,23 +22,22 @@ MainWindow::MainWindow(QWidget *parent) :
     dispatcherMenu_buttons_routes = new QButtonGroup(this);
     dispatcherMenu_buttons_paths = new QButtonGroup(this);
     dispatcherMenu_buttons_stops = new QButtonGroup(this);
-    dispatcherMenu_buttons_dispEdit = new QButtonGroup(this);
     swapPlaces_buttons = new QButtonGroup(this);
     
     dispatcherMenu_buttons_routes->addButton(ui->addRoute_textBtn);
     dispatcherMenu_buttons_routes->addButton(ui->addRoute2_textBtn);
     dispatcherMenu_buttons_routes->addButton(ui->addRoute3_textBtn);
-    // dispatcherMenu_buttons_routes->addButton(ui->addRoute4_textBtn);
+    dispatcherMenu_buttons_routes->addButton(ui->addRoute5_textBtn);
 
     dispatcherMenu_buttons_paths->addButton(ui->addPath_textBtn);
     dispatcherMenu_buttons_paths->addButton(ui->addPath2_textBtn);
     dispatcherMenu_buttons_paths->addButton(ui->addPath3_textBtn);
-    // dispatcherMenu_buttons_paths->addButton(ui->addPath4_textBtn);
+    dispatcherMenu_buttons_paths->addButton(ui->addPath5_textBtn);
 
     dispatcherMenu_buttons_stops->addButton(ui->addStop_textBtn);
     dispatcherMenu_buttons_stops->addButton(ui->addStop2_textBtn);
     dispatcherMenu_buttons_stops->addButton(ui->addStop3_textBtn);
-    // dispatcherMenu_buttons_routes->addButton(ui->addStop4_textBtn);
+    dispatcherMenu_buttons_stops->addButton(ui->addStop5_textBtn);
 
     swapPlaces_buttons->addButton(ui->swapPlaces_btn);
     swapPlaces_buttons->addButton(ui->swapPlaces2_btn);
@@ -90,9 +89,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(dispatcherMenu_buttons_stops, &QButtonGroup::idClicked, [this] {
         ui->stackedWidget->setCurrentIndex(ADD_STOP_PAGE);
     });
-    connect(dispatcherMenu_buttons_dispEdit, &QButtonGroup::idClicked, [this] {
-        ui->stackedWidget->setCurrentIndex(DISPATCHER_EDIT_PAGE);
-    });
 
     connect(swapPlaces_buttons, &QButtonGroup::idClicked, [this] {
         MainWindow::on_swapPlaces_btn_clicked();
@@ -103,8 +99,14 @@ MainWindow::MainWindow(QWidget *parent) :
         if (index == ADD_ROUTE_PAGE) {
             ui->addRoute_status->setText("");
         }
+        if (index == ADD_PATH_PAGE) {
+            ui->addPath_status->setText("");
+        }
         if (index == ADD_STOP_PAGE) {
             ui->addStop_status->setText("");
+        }
+        if (index == EDIT_PATH_PAGE) {
+            ui->editPath_status->setText("");
         }
         if (index == SCHEDULE_PAGE) {
             MainWindow::on_schedule1_menuButton_clicked();
@@ -112,26 +114,205 @@ MainWindow::MainWindow(QWidget *parent) :
     });
 
 
-    apiClient = new ApiClient(this);
-    busStopApiClient = new BusStopApiClient(this);
+    client = new ApiClient(this);
 
-    connect(apiClient, &ApiClient::routesReceived, this, &MainWindow::onRoutesReceived);
-    connect(apiClient, &ApiClient::routeAdded, this, &MainWindow::onRouteAdded);
-    connect(apiClient, &ApiClient::errorOccurred, this, &MainWindow::onErrorOccurred);
+    // connect(client->routes(), &RouteApiClient::routesReceived, this, &MainWindow::handleRoutes);
+    // connect(client->routes(), &RouteApiClient::routeReceived, this, &MainWindow::handleRoute);
+    // connect(client->routes(), &RouteApiClient::routeCreated, this, &MainWindow::handleRouteCreate);
+    // connect(client->routes(), &RouteApiClient::requestError, this, &MainWindow::handleRouteError);
 
-    connect(busStopApiClient, &BusStopApiClient::busStopsReceived, this, &MainWindow::onBusStopsReceived);
-    connect(busStopApiClient, &BusStopApiClient::busStopAdded, this, &MainWindow::onBusStopAdded);
-    connect(busStopApiClient, &BusStopApiClient::busStopDeleted, this, &MainWindow::onBusStopDeleted);
-    connect(busStopApiClient, &BusStopApiClient::errorOccurred, this, &MainWindow::onBusStopErrorOccurred);
+    connect(client->stops(), &StopApiClient::stopsReceived, this, &MainWindow::handleStops);
+    connect(client->stops(), &StopApiClient::stopCreated, this, &MainWindow::handleStopCreate);
+    connect(client->stops(), &StopApiClient::stopDeleted, this, &MainWindow::handleStopDelete);
+    connect(client->stops(), &StopApiClient::requestError, this, &MainWindow::handleStopError);
 
-    apiClient->getRoutes();
-    busStopApiClient->getBusStops();
+    connect(client->paths(), &PathApiClient::pathsReceived, this, &MainWindow::handlePaths);
+    connect(client->paths(), &PathApiClient::pathReceived, this, &MainWindow::handlePath);
+    connect(client->paths(), &PathApiClient::pathCreated, this, &MainWindow::handlePathCreate);
+    connect(client->paths(), &PathApiClient::pathUpdated, this, &MainWindow::handlePathUpdate);
+    connect(client->paths(), &PathApiClient::pathDeleted, this, &MainWindow::handlePathDelete);
+    connect(client->paths(), &PathApiClient::requestError, this, &MainWindow::handlePathError);
+
+    connect(client->routes(), &RouteApiClient::routesReceived, this, &MainWindow::handleRoutes);
+    connect(client->routes(), &RouteApiClient::routeCreated, this, &MainWindow::handleRouteCreate);
+    connect(client->routes(), &RouteApiClient::routeDeleted, this, &MainWindow::handleRouteDelete);
+    connect(client->routes(), &RouteApiClient::requestError, this, &MainWindow::handleRouteError);
+
+
+
+    connect(this, &MainWindow::stopsInPathsUpdated, this, &MainWindow::handleStopsInPathUpdate);
+
+    client->stops()->getAllStops();
+    client->paths()->getAllPaths();
+    client->routes()->getAllRoutes();
+
 }
 
 MainWindow::~MainWindow() {
     delete ui;
 }
 
+// ================= STOPS ==================
+void MainWindow::on_addStop_btn_clicked() {
+    QString stopName = ui->addStop_name->text();
+    QString stopAddress = ui->addStop_address->text();
+
+    ui->addStop_status->setStyleSheet("color: black;");
+    ui->addStop_status->setText("Отправка запроса");
+    BusStop stop(stopName, stopAddress);
+    client->stops()->createStop(stop);
+}
+
+void MainWindow::on_findStop_textChanged() {
+    QString search = ui->findStop->text();
+
+    client->stops()->getAllStops(0, 100, search);
+}
+
+void MainWindow::handleStopCreate(const BusStop &stop) {
+    client->stops()->getAllStops();
+    ui->addStop_status->setStyleSheet("color: green;");
+    ui->addStop_status->setText("Остановка добавлена");
+}
+
+void MainWindow::handleStops(const QList<BusStop> &stops) {
+    QLayoutItem* item;
+    while ((item = ui->stopsListLayout->takeAt(0)) != nullptr) {
+        delete item->widget();
+        delete item;
+    }
+    schedule.clear();
+    
+    for (const BusStop &stop : stops) {
+        StopWidget *stopWidget = new StopWidget(stop);
+        ui->stopsListLayout->insertWidget(0, stopWidget);
+        connect(stopWidget, &StopWidget::delButtonClicked, this, &MainWindow::onStopDelete);
+    }
+}
+
+void MainWindow::onStopDelete(const BusStop &stop) {
+    client->stops()->deleteStop(stop.getStopId());
+}
+
+void MainWindow::handleStopDelete(int stopId) {
+    client->stops()->getAllStops();
+}
+
+void MainWindow::handleStopError(const QString &error) {
+    qDebug() << "Ошибка при обащении к /api/stops:" << error;
+    ui->addStop_status->setStyleSheet("color: red;");
+    ui->addStop_status->setText("Ошибка отправки запроса\n"+error);
+}
+
+
+// =============== PATH ============
+void MainWindow::on_addPath_btn_clicked() {
+    QString pathNumber = ui->addPath_pathNumber->text();
+
+    ui->addStop_status->setStyleSheet("color: black;");
+    ui->addStop_status->setText("Отправка запроса");
+
+    Path path(pathNumber);
+
+    client->paths()->createPath(path);
+}
+
+void MainWindow::on_findPath_textChanged() {
+    QString search = ui->findPath->text();
+    client->paths()->getAllPaths(0, 100, search);
+}
+
+void MainWindow::handlePaths(const QList<Path> &paths) {
+    QLayoutItem* item;
+    while ((item = ui->pathsListLayout->takeAt(0)) != nullptr) {
+        delete item->widget();
+        delete item;
+    }
+    
+    for (const Path &path : paths) {
+        PathWidget *pathWidget = new PathWidget(path);
+        ui->pathsListLayout->insertWidget(0, pathWidget);
+        connect(pathWidget, &PathWidget::editButtonClicked, this, &MainWindow::onPathEdit);
+        connect(pathWidget, &PathWidget::delButtonClicked, this, &MainWindow::onPathDelete);
+    }
+}
+
+void MainWindow::handlePath(const Path &path) {
+
+}
+
+void MainWindow::handlePathCreate(const Path &path) {
+    client->paths()->getAllPaths();
+    ui->addStop_status->setStyleSheet("color: green;");
+    ui->addStop_status->setText("Остановка добавлена");
+}
+
+void MainWindow::handlePathUpdate(const Path &path) {
+    client->paths()->getAllPaths();
+    ui->editPath_status->setStyleSheet("color: green;");
+    ui->editPath_status->setText("Маршрут обновлен\n");
+}
+
+void MainWindow::handlePathDelete(int stopId) {
+    client->paths()->getAllPaths();
+}
+
+void MainWindow::handlePathError(const QString &error) {
+    qDebug() << "Ошибка при обащении к /api/paths:" << error;
+    ui->addPath_status->setStyleSheet("color: red;");
+    ui->addPath_status->setText("Ошибка отправки запроса\n"+error);
+}
+
+void MainWindow::onPathDelete(const Path &path) {
+    client->paths()->deletePath(path.getPathId());
+}
+
+
+void MainWindow::onPathEdit(Path &path) {
+    ui->stackedWidget->setCurrentIndex(EDIT_PATH_PAGE);
+    
+    currentEditingPath = path;
+    
+    ui->editPath_pathNumber->setText(currentEditingPath.getNumber());
+
+    handleStopsInPathUpdate();
+}
+
+void MainWindow::handleStopsInPathUpdate() {
+    QLayoutItem* item;
+    while ((item = ui->editStopsListLayout->takeAt(0)) != nullptr) {
+        delete item->widget();
+        delete item;
+    }
+
+    for (const BusStop &stop : currentEditingPath.getStops()) {
+        StopWidget *stopWidget = new StopWidget(stop);
+        ui->editStopsListLayout->insertWidget(0, stopWidget);
+        connect(stopWidget, &StopWidget::delButtonClicked, 
+            this, [this](const BusStop& busStop){
+                currentEditingPath.removeStopById(busStop.getStopId());
+                handleStopsInPathUpdate();
+            });
+    }
+}
+
+void MainWindow::on_addStopToPath_btn_clicked() {
+    QString stopName = ui->editPath_stopName->text();
+    currentEditingPath.addStop(BusStop(stopName, "testAddr"));
+    handleStopsInPathUpdate();
+}
+
+void MainWindow::on_unfilledPushButton_editPath_apply_clicked() {
+    client->paths()->updatePath(currentEditingPath.getPathId(), currentEditingPath);
+    ui->addStop_status->setStyleSheet("color: green;");
+    ui->addStop_status->setText("Маргрут обновлен");
+}
+
+void MainWindow::on_unfilledPushButton_editPath_back_clicked() {
+    ui->stackedWidget->setCurrentIndex(ADD_PATH_PAGE);
+}
+
+// ========== ROUTES =============
 void MainWindow::on_addRoute_btn_clicked(){
     QString number = ui->addRoute_number->text();
     QString platform = ui->addRoute_platform->text();
@@ -194,126 +375,14 @@ void MainWindow::on_addRoute_btn_clicked(){
 
     ui->addRoute_status->setStyleSheet("color: black;");
     ui->addRoute_status->setText("Отправка запроса");
-    apiClient->addRoute(route);
+
+    client->routes()->createRoute(route);
     qDebug() << "Маршрут добавлен в глобальное расписание";
 
     ui->addRoute_status->setStyleSheet("color: green;");
     ui->addRoute_status->setText("Маршрут добавлен в расписание");
 
     clearRouteFields();
-}
-
-void MainWindow::on_schedule1_menuButton_clicked() {
-    apiClient->getRoutes();
-    int offers = schedule.count();
-    QString offer_string = QString::number(offers);
-
-    if ((offers % 10) == 0 || (offers % 10) >= 5) offer_string += " предложений";
-    else if ((offers % 10) == 1) offer_string += " предложение";
-    else if ((offers % 10) >= 2 && (offers % 10) < 5) offer_string += " предложения"; 
-
-    ui->offerCount_label->setText(offer_string);
-    schedule.displayAll();
-}
-
-void MainWindow::onRoutesReceived(const QList<Route> &routes) {
-    QLayoutItem* item;
-    while ((item = ui->routes_layout->takeAt(0)) != nullptr) {
-        delete item->widget();
-        delete item;
-    }
-    schedule.clear();
-    
-    for (const Route &route : routes) {
-        RouteWidget *routeWidget = new RouteWidget(route);
-        ui->routes_layout->addWidget(routeWidget);
-        schedule.addRoute(route);
-        
-        // connect(routeWidget, &RouteWidget::buyButtonClicked,
-        //         this, &MainWindow::onBuyButtonClicked);
-    }
-}
-
-void MainWindow::onRouteAdded(bool success) {
-    if (success) {
-        qDebug() << "Маршрут успешно добавлен";
-        apiClient->getRoutes();
-    } else {
-        qDebug() << "Ошибка при добавлении маршрута";
-    }
-}
-
-void MainWindow::onErrorOccurred(const QString &errorMessage) {
-    qDebug() << "Ошибка route API:" << errorMessage;
-    QMessageBox::warning(this, "Ошибка route api", errorMessage);
-}
-
-void MainWindow::on_addStop_btn_clicked() {
-    QString stopName = ui->addStop_name->text();
-    QString stopAddress = ui->addStop_address->text();
-
-    BusStop busStop(stopName, stopAddress);
-
-    ui->addStop_status->setStyleSheet("color: black;");
-    ui->addStop_status->setText("Отправка запроса");
-    busStopApiClient->addBusStop(busStop);
-}
-
-void MainWindow::onBusStopsReceived(const QList<BusStop> &busStops) {
-    QLayoutItem* item;
-    while ((item = ui->stopsListLayout->takeAt(0)) != nullptr) {
-        delete item->widget();
-        delete item;
-    }
-    schedule.clear();
-    
-    for (const BusStop &stop : busStops) {
-        StopWidget *stopWidget = new StopWidget(stop);
-        ui->stopsListLayout->addWidget(stopWidget);
-        connect(stopWidget, &StopWidget::delButtonClicked, this, &MainWindow::onStopDelete);
-    }
-}
-
-void MainWindow::onBusStopAdded(bool success) {
-    busStopApiClient->getBusStops();
-    ui->addStop_status->setStyleSheet("color: green;");
-    ui->addStop_status->setText("Информация об остановке добавлена");
-}
-
-void MainWindow::onBusStopDeleted(bool success) {
-    busStopApiClient->getBusStops();
-}
-
-void MainWindow::onBusStopErrorOccurred(const QString &errorMessage) {
-    qDebug() << "Ошибка bus_stop API:" << errorMessage;
-    QMessageBox::warning(this, "Ошибка bus_stop_api", errorMessage);
-}
-
-void MainWindow::onStopDelete(const BusStop& busStop) {
-    int busId = busStop.getStopId();
-
-    qDebug() << "ID: " << busId << " Name: " << busStop.getStopName();
-
-    busStopApiClient->deleteBusStop(busId);
-
-    ui->addStop_status->setStyleSheet("color: black;");
-    ui->addStop_status->setText("Остановка " + busStop.getStopName() + " удалена");
-}
-
-void MainWindow::on_findRoute2_btn_clicked() {
-    ui->route_label->setText("");
-    QString tripDeparture2 = ui->tripDeparture2->text();
-    QString tripDestination2 = ui->tripDestination2->text();
-
-    if (ui->tripDeparture2->text() != "" && ui->tripDestination2->text() != "") {
-        ui->route_label->setText(tripDeparture2 + "—" + tripDestination2);
-    }
-}
-
-void MainWindow::on_swapPlaces_btn_clicked() {
-    QString temp = ui->tripDeparture2->text();
-    ui->tripDeparture2->setText(ui->tripDestination2->text());
-    ui->tripDestination2->setText(temp);
 }
 
 void MainWindow::clearRouteFields() {
@@ -326,19 +395,72 @@ void MainWindow::clearRouteFields() {
     ui->addRoute_seats->clear();
 }
 
-void MainWindow::on_addPath_btn_clicked() {
-    // QLayoutItem* item;
-    // while ((item = ui->pathsListLayout->takeAt(0)) != nullptr) {
-    //     delete item->widget();
-    //     delete item;
-    // }
+void MainWindow::handleRoutes(const QList <Route> &routes) {
+    QLayoutItem* item;
+    while ((item = ui->routesListLayout->takeAt(0)) != nullptr) {
+        delete item->widget();
+        delete item;
+    }
+    while ((item = ui->routes_layout->takeAt(0)) != nullptr) {
+        delete item->widget();
+        delete item;
+    }
 
-    QString pathNumber = ui->addPath_pathNumber->text();
+    for (const Route &route : routes) {
+        RouteWidget *routeWidget = new RouteWidget(route);
+        ui->routesListLayout->insertWidget(0, routeWidget);
+        ui->routes_layout->insertWidget(0, routeWidget);
+        // connect(routesWidget, &PathWidget::editButtonClicked, this, &MainWindow::onPathEdit);
+        // connect(pathWidget, &PathWidget::delButtonClicked, this, &MainWindow::onPathDelete);
+    }
 
-    Path path(pathNumber);
-    PathWidget *pathWidget = new PathWidget(path);
+    int offers = routes.size();
+    QString offer_string = QString::number(offers);
 
-    ui->pathsListLayout->insertWidget(0, pathWidget);
+    if ((offers % 10) == 0 || (offers % 10) >= 5) offer_string += " предложений";
+    else if ((offers % 10) == 1) offer_string += " предложение";
+    else if ((offers % 10) >= 2 && (offers % 10) < 5) offer_string += " предложения"; 
+
+    ui->offerCount_label->setText(offer_string);
+    schedule.displayAll();
+}
+
+void MainWindow::handleRouteCreate(const Route &route) {
+    client->routes()->getAllRoutes();
+    ui->addStop_status->setStyleSheet("color: green;");
+    ui->addStop_status->setText("Рейс добавлен");
+}
+
+void MainWindow::handleRouteDelete(int routeId) {
+
+}
+
+void MainWindow::handleRouteError(const QString &error) {
+    qDebug() << "Ошибка при обащении к /api/routes:" << error;
+    ui->addRoute_status->setStyleSheet("color: red;");
+    ui->addRoute_status->setText("Ошибка отправки запроса\n"+error);
+}
+
+void MainWindow::on_findRoute2_btn_clicked() {
+    ui->route_label->setText("");
+    QString tripDeparture2 = ui->tripDeparture2->text();
+    QString tripDestination2 = ui->tripDestination2->text();
+
+    if (ui->tripDeparture2->text() != "" && ui->tripDestination2->text() != "") {
+        ui->route_label->setText(tripDeparture2 + "—" + tripDestination2);
+    }
+}
+
+
+void MainWindow::on_schedule1_menuButton_clicked() {
+    
+}
+
+
+void MainWindow::on_swapPlaces_btn_clicked() {
+    QString temp = ui->tripDeparture2->text();
+    ui->tripDeparture2->setText(ui->tripDestination2->text());
+    ui->tripDestination2->setText(temp);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event) {

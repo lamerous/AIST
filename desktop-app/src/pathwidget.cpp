@@ -33,10 +33,10 @@ Path PathWidget::getPath() const {
 }
 
 void PathWidget::on_editButton_clicked() {
-    emit editBittonClicked(currentPath);
+    emit editButtonClicked(currentPath);
 }
 
 void PathWidget::on_delButton_clicked() {
     emit delButtonClicked(currentPath);
-    qDebug() << "Удалена остановка" << currentPath.getNumber();
+    qDebug() << "Удален маршрут" << currentPath.getNumber();
 }

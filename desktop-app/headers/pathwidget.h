@@ -19,7 +19,7 @@ public:
     Path getPath() const;
 
 signals:
-    void editBittonClicked(const Path& path);
+    void editButtonClicked(Path& path);
     void delButtonClicked(const Path& path);
 
 private slots:

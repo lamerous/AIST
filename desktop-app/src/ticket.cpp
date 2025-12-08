@@ -96,7 +96,7 @@ QDebug operator<<(QDebug debug, const Ticket& ticket) {
                     << ", seat:" << ticket.seatNumber
                     << ", purchased:" << ticket.purchaseDate.toString("dd.MM.yyyy")
                     << ", price:" << ticket.actualPrice << " руб."
-                    << ", route:" << ticket.route.getRouteNumber()
+                    << ", route:" << ticket.route.getPathNumber()
                     << ")";
     return debug;
 }

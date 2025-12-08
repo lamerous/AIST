@@ -1,7 +1,8 @@
 <RCC>
   <qresource prefix="icons">
-    <file>icons/Vector.png</file>
     <file>icons/trash.png</file>
+    <file>icons/search.png</file>
+    <file>icons/edit.png</file>
     <file>icons/arrow-down.png</file>
     <file>icons/arrow-up.png</file>
     <file>icons/circle.png</file>

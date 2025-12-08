@@ -14,13 +14,23 @@ def create_path(path: schemas.PathCreate, db: Session = Depends(get_db)):
     return db_path
 
 @router.get("/", response_model=list[schemas.Path])
-def read_paths(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    paths = db.query(models.Path).offset(skip).limit(limit).all()
+def read_paths(skip: int = 0, limit: int = 100, search: str = None, db: Session = Depends(get_db)):
+    # paths = db.query(models.Path).offset(skip).limit(limit).all()
+
+    query = db.query(models.Path)
+    
+    if search:
+        query = query.filter(
+            models.Path.route_number.ilike(f"%{search}%"),
+        )
+    
+    paths = query.offset(skip).limit(limit).all()
+
     return paths
 
 @router.get("/{path_id}", response_model=schemas.Path)
-def read_path(path_id: int, db: Session = Depends(get_db)):
-    path = db.query(models.Path).filter(models.Path.id == path_id).first()
+def read_path(pathNumber: str, db: Session = Depends(get_db)):
+    path = db.query(models.Path).filter(models.Path.route_number == pathNumber).first()
     if path is None:
         raise HTTPException(status_code=404, detail="Path not found")
     return path

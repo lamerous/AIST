@@ -1,4 +1,3 @@
-// apiclient.h
 #pragma once
 
 #include <QObject>
@@ -45,7 +44,7 @@ class RouteApiClient : public BaseApiClient {
 public:
     explicit RouteApiClient(QObject *parent = nullptr);
     
-    void getAllRoutes(int skip = 0, int limit = 100);
+    void getAllRoutes(int skip = 0, int limit = 100, const QString search = "");
     void getRoute(int routeId);
     void createRoute(const Route &route);
     void updateRoute(int routeId, const Route &route);
@@ -73,7 +72,7 @@ class StopApiClient : public BaseApiClient {
 public:
     explicit StopApiClient(QObject *parent = nullptr);
     
-    void getAllStops(int skip = 0, int limit = 100);
+    void getAllStops(int skip = 0, int limit = 100, const QString search = "");
     void getStop(int stopId);
     void createStop(const BusStop &stop);
     void updateStop(int stopId, const BusStop &stop);
@@ -101,8 +100,8 @@ class PathApiClient : public BaseApiClient {
 public:
     explicit PathApiClient(QObject *parent = nullptr);
     
-    void getAllPaths(int skip = 0, int limit = 100);
-    void getPath(int pathId);
+    void getAllPaths(int skip = 0, int limit = 100, const QString search = "");
+    void getPath(const QString pathNumber);
     void createPath(const Path &path);
     void updatePath(int pathId, const Path &path);
     void deletePath(int pathId);

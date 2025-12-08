@@ -1,4 +1,3 @@
-// apiclient.cpp
 #include "apiclient.h"
 #include <QNetworkRequest>
 #include <QUrl>
@@ -7,7 +6,7 @@
 #include <QJsonArray>
 #include <QUrlQuery>
 
-#define HOST "http://localhost:8000"
+#define HOST "http://localhost:8001"
 
 // ============== BaseApiClient ==============
 BaseApiClient::BaseApiClient(QObject *parent)
@@ -115,11 +114,14 @@ RouteApiClient::RouteApiClient(QObject *parent)
             this, &RouteApiClient::handleRoutesResponse);
 }
 
-void RouteApiClient::getAllRoutes(int skip, int limit) {
+void RouteApiClient::getAllRoutes(int skip, int limit, QString search) {
     QUrl url(baseUrl + "/api/routes/");
     QUrlQuery query;
     query.addQueryItem("skip", QString::number(skip));
     query.addQueryItem("limit", QString::number(limit));
+    if (!search.isEmpty()) {
+        query.addQueryItem("search", search);
+    }
     url.setQuery(query);
     
     QNetworkRequest request(url);
@@ -148,7 +150,7 @@ void RouteApiClient::deleteRoute(int routeId) {
 }
 
 Route RouteApiClient::jsonToRoute(const QJsonObject &json) {
-    QString routeNumber = json["route_number"].toString();
+    QString pathNumber = json["path_number"].toString();
     QString platformNumber = json["platform_number"].toString();
     
     QDate departureDate = QDate::fromString(json["departure_date"].toString(), "yyyy-MM-dd");
@@ -158,23 +160,56 @@ Route RouteApiClient::jsonToRoute(const QJsonObject &json) {
     int price = json["price"].toInt();
     int seats = json["available_seats"].toInt();
     
-    // Создаем путь с заглушками для остановок
-    Path path;
-    path.setNumber(routeNumber);
-    
-    // Внимание: в вашем Ticket.h есть проблема - опечатка в параметре конструктора
-    // "actialPrice" вместо "actualPrice", но я оставлю как есть
-    
+    QVector<BusStop> stops;
+
+    if (json.contains("path") && json["path"].isObject()) {
+        QJsonObject pathObj = json["path"].toObject();
+        
+        if (pathObj.contains("stops_array") && pathObj["stops_array"].isObject()) {
+            QJsonObject stopsArrayObj = pathObj["stops_array"].toObject();
+            
+            if (stopsArrayObj.contains("stops") && stopsArrayObj["stops"].isArray()) {
+                QJsonArray stopsArray = stopsArrayObj["stops"].toArray();
+                
+                for (const QJsonValue &stopValue : stopsArray) {
+                    if (stopValue.isObject()) {
+                        QJsonObject stopObj = stopValue.toObject();
+                        
+                        QString name = stopObj["name"].toString();
+                        QString address = stopObj["address"].toString();
+                                                
+                        BusStop stop(name, address);
+                        stops.append(stop);
+                    }
+                }
+            } else {
+                qDebug() << "No 'stops' array found in stops_array";
+            }
+        } else {
+            qDebug() << "No 'stops_array' found in path";
+            
+            if (pathObj.contains("stops") && pathObj["stops"].isArray()) {
+                QJsonArray stopsArray = pathObj["stops"].toArray();
+            }
+        }
+    } else {
+        qDebug() << "No 'path' object found in JSON";
+    }
+
     Route route(
-        routeNumber,
+        pathNumber,
         platformNumber,
         departureDate,
         departureTime,
-        arrivalTime,  // Используем arrival_time как destinationTime
+        arrivalTime,
         price,
         seats,
-        path
+        Path(pathNumber, stops)
     );
+    
+    if (json.contains("id")) {
+        route.setId(json["id"].toInt());
+    }
     
     return route;
 }
@@ -182,17 +217,26 @@ Route RouteApiClient::jsonToRoute(const QJsonObject &json) {
 QJsonObject RouteApiClient::routeToJson(const Route &route) {
     QJsonObject json;
     
-    json["route_number"] = route.getRouteNumber();
+    json["path_number"] = route.getPathNumber();
     json["platform_number"] = route.getPlatformNumber();
     json["price"] = route.getPrice();
     json["available_seats"] = route.getSeats();
     json["departure_date"] = route.getDepartureDate().toString("yyyy-MM-dd");
     json["departure_time"] = route.getDepartureTime().toString("hh:mm:ss");
     json["arrival_time"] = route.getDestinationTime().toString("hh:mm:ss");
-    json["path_id"] = 1; // Нужно передавать реальный path_id из базы данных
+    
+    if (route.getId() > 0) {
+        json["id"] = route.getId();
+    }
+    
+    Path path = route.getPath();
+    if (path.getPathId() > 0) {
+        json["path_id"] = path.getPathId();
+    }
     
     return json;
 }
+
 
 void RouteApiClient::handleRoutesResponse(QNetworkReply *reply) {
     QString action = reply->property("action").toString();
@@ -265,11 +309,12 @@ StopApiClient::StopApiClient(QObject *parent)
             this, &StopApiClient::handleStopsResponse);
 }
 
-void StopApiClient::getAllStops(int skip, int limit) {
+void StopApiClient::getAllStops(int skip, int limit, const QString search) {
     QUrl url(baseUrl + "/api/stops/");
     QUrlQuery query;
     query.addQueryItem("skip", QString::number(skip));
     query.addQueryItem("limit", QString::number(limit));
+    query.addQueryItem("search", search);
     url.setQuery(query);
     
     QNetworkRequest request(url);
@@ -298,11 +343,11 @@ void StopApiClient::deleteStop(int stopId) {
 }
 
 BusStop StopApiClient::jsonToStop(const QJsonObject &json) {
+    int id = json["id"].toInt();
     QString name = json["stop_name"].toString();
     QString address = json["stop_address"].toString();
-    
-    // Используем конструктор с двумя параметрами из вашего busstop.h
-    BusStop stop(name, address);
+
+    BusStop stop(id, name, address);
     
     return stop;
 }
@@ -385,19 +430,20 @@ PathApiClient::PathApiClient(QObject *parent)
             this, &PathApiClient::handlePathsResponse);
 }
 
-void PathApiClient::getAllPaths(int skip, int limit) {
+void PathApiClient::getAllPaths(int skip, int limit, const QString search) {
     QUrl url(baseUrl + "/api/paths/");
     QUrlQuery query;
     query.addQueryItem("skip", QString::number(skip));
     query.addQueryItem("limit", QString::number(limit));
+    query.addQueryItem("search", search);
     url.setQuery(query);
     
     QNetworkRequest request(url);
     networkManager->get(request)->setProperty("action", "getAll");
 }
 
-void PathApiClient::getPath(int pathId) {
-    QString endpoint = QString("/api/paths/%1").arg(pathId);
+void PathApiClient::getPath(const QString pathNumber) {
+    QString endpoint = QString("/api/paths/%1").arg(pathNumber);
     sendRequest(endpoint, "GET")->setProperty("action", "getOne");
 }
 
@@ -418,18 +464,31 @@ void PathApiClient::deletePath(int pathId) {
 }
 
 Path PathApiClient::jsonToPath(const QJsonObject &json) {
+    int pathId = json["id"].toInt();
     QString routeNumber = json["route_number"].toString();
+    QVector<BusStop> stops;
     
-    // Используем конструктор с одним параметром из вашего path.h
-    Path path(routeNumber);
-    
-    // Пытаемся парсить stops_array
     if (json.contains("stops_array") && json["stops_array"].isObject()) {
         QJsonObject stopsObj = json["stops_array"].toObject();
-        // Обработка структурированных данных об остановках
-        // (зависит от формата, который вы используете в базе данных)
+        
+        if (stopsObj.contains("stops") && stopsObj["stops"].isArray()) {
+            QJsonArray stopsArray = stopsObj["stops"].toArray();
+            
+            for (const QJsonValue &stopValue : stopsArray) {
+                if (stopValue.isObject()) {
+                    QJsonObject stopObj = stopValue.toObject();
+                    
+                    QString name = stopObj["name"].toString();
+                    QString address = stopObj["address"].toString();
+                    
+                    BusStop stop(name, address);
+                    stops.append(stop);
+                }
+            }
+        }
     }
     
+    Path path(pathId, routeNumber, stops);
     return path;
 }
 
@@ -437,17 +496,16 @@ QJsonObject PathApiClient::pathToJson(const Path &path) {
     QJsonObject json;
     json["route_number"] = path.getNumber();
     
-    // Создаем JSON массив остановок
     QJsonArray stopsArray;
     QVector<BusStop> stops = path.getStops();
     for (const auto& stop : stops) {
         QJsonObject stopObj;
+        qDebug() << stop.getStopName();
         stopObj["name"] = stop.getStopName();
         stopObj["address"] = stop.getStopAddress();
         stopsArray.append(stopObj);
     }
     
-    // В FastAPI ожидается объект JSON для stops_array
     QJsonObject stopsObject;
     stopsObject["stops"] = stopsArray;
     json["stops_array"] = stopsObject;
@@ -564,16 +622,14 @@ Ticket TicketApiClient::jsonToTicket(const QJsonObject &json) {
     double purchasePrice = json["purchase_price"].toDouble();
     int routeId = json["route_id"].toInt();
     
-    // Создаем маршрут-заглушку
     Route stubRoute;
+    stubRoute.setId(routeId);
     
-    // Используем конструктор из вашего ticket.h
-    // Внимание: есть опечатка в параметре - "actialPrice" вместо "actualPrice"
     Ticket ticket(
         stubRoute,
-        "Passenger",  // Заглушка для имени пассажира
+        "Passenger", 
         ticketNumber,
-        "A1",         // Заглушка для номера места
+        "A1",         
         purchaseDate,
         purchasePrice
     );

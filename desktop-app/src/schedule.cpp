@@ -13,10 +13,10 @@ void Schedule::addRoute(const Route& route) {
     routes.append(route);
 }
 
-bool Schedule::removeRoute(const QString& routeNumber) {
+bool Schedule::removeRoute(const QString& pathNumber) {
     auto it = std::remove_if(routes.begin(), routes.end(),
-        [&routeNumber](const Route& route) {
-            return route.getRouteNumber() == routeNumber;
+        [&pathNumber](const Route& route) {
+            return route.getPathNumber() == pathNumber;
         });
     
     if (it != routes.end()) {
@@ -26,10 +26,10 @@ bool Schedule::removeRoute(const QString& routeNumber) {
     return false;
 }
 
-QList<Route> Schedule::findRoutesByNumber(const QString& routeNumber) const {
+QList<Route> Schedule::findRoutesByNumber(const QString& pathNumber) const {
     QList<Route> result;
     for (const auto& route : routes) {
-        if (route.getRouteNumber() == routeNumber) {
+        if (route.getPathNumber() == pathNumber) {
             result.append(route);
         }
     }
@@ -91,7 +91,7 @@ bool Schedule::saveToFile(const QString& filename) const {
     
     QTextStream out(&file);
     for (const auto& route : routes) {
-        out << route.getRouteNumber() << ";"
+        out << route.getPathNumber() << ";"
             << route.getPlatformNumber() << ";"
             << route.getDeparturePlace().getStopName() << ";"
             << route.getDestinationPlace().getStopName() << ";"

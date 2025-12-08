@@ -34,5 +34,5 @@ BusStop StopWidget::getStop() const {
 
 void StopWidget::on_delButton_clicked() {
     emit delButtonClicked(currentStop);
-    qDebug() << "Удалена остановка" << currentStop.getStopName();
+    qDebug() << "Удалена остановка" << currentStop.getStopName() << " ID: " << currentStop.getStopId();
 }

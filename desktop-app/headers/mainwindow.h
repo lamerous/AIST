@@ -9,7 +9,6 @@
 #include "stopwidget.h"
 #include "pathwidget.h"
 #include "apiclient.h"
-#include "busstopapiclient.h"
 
 namespace Ui {
 class MainWindow;
@@ -35,46 +34,73 @@ public:
         ADD_ROUTE_PAGE = 8,
         ADD_PATH_PAGE = 9,
         ADD_STOP_PAGE = 10,
-        DISPATCHER_EDIT_PAGE = 11
+        EDIT_ROUTE_PAGE = 11,
+        EDIT_PATH_PAGE = 12
     };
 
+signals:
+    void stopsInPathsUpdated();
+
 private slots:
-    void clearRouteFields();
-    void switchPage(int pageIndex);
-
     void on_schedule1_menuButton_clicked();
-
     void on_findRoute2_btn_clicked();
     void on_swapPlaces_btn_clicked();
 
-    void on_addRoute_btn_clicked();
-    void on_addPath_btn_clicked();
     void on_addStop_btn_clicked();
+    void on_addPath_btn_clicked();
+    void on_addRoute_btn_clicked();
+    
+    void on_findStop_textChanged();
+    void on_findPath_textChanged();
 
+    void on_addStopToPath_btn_clicked();
+    void on_unfilledPushButton_editPath_apply_clicked();
+    void on_unfilledPushButton_editPath_back_clicked();
+
+    void handleStops(const QList<BusStop> &stops);
+    void handleStopCreate(const BusStop &stop);
+    void handleStopDelete(int stopid);
+    void handleStopError(const QString &error);
+
+    void handlePaths(const QList<Path> &paths);
+    void handlePath(const Path &path);
+    void handlePathCreate(const Path &path);
+    void handlePathUpdate(const Path &path);
+    void handlePathDelete(int stopId);
+    void handlePathError(const QString &error);
+    void handleStopsInPathUpdate();
+
+    void handleRoutes(const QList <Route> &routes);
+    void handleRouteCreate(const Route &route);
+    void handleRouteDelete(int routeId);
+    void handleRouteError(const QString &error);
+
+    // void handleRoutes(const QList<Route> &routes);
+    // void handleRoute(const Route &route);
+    // void handleRouteCreate(const Route &route);
+    // void handleRouteError(const QString &error);
+
+
+    void onStopDelete(const BusStop& stop);
+    void onPathDelete(const Path& path);
+    void onPathEdit(Path& path);
+
+
+    void clearRouteFields();
+    void switchPage(int pageIndex);
     void keyPressEvent(QKeyEvent *event);
-
-    void onRoutesReceived(const QList<Route> &routes);
-    void onRouteAdded(bool success);
-    void onErrorOccurred(const QString &errorMessage);
-
-    void onBusStopsReceived(const QList<BusStop> &busStops);
-    void onBusStopAdded(bool success);
-    void onBusStopDeleted(bool success);
-    void onBusStopErrorOccurred(const QString &errorMessage);
-
-    void onStopDelete(const BusStop& busStop);
 
 private:
     Ui::MainWindow *ui;
     QVector<RouteWidget*> routeWidgets;
     Schedule schedule;
-    ApiClient* apiClient;
-    BusStopApiClient* busStopApiClient;
+    Path currentEditingPath;
+
+    ApiClient* client;
 
     QButtonGroup *dispatcherMenu_buttons_routes;
     QButtonGroup *dispatcherMenu_buttons_paths;
     QButtonGroup *dispatcherMenu_buttons_stops;
-    QButtonGroup *dispatcherMenu_buttons_dispEdit;
     QButtonGroup *swapPlaces_buttons;
 };
 

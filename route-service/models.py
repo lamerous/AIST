@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Date, Time, JSON, ForeignKey, Numeric
+from sqlalchemy import Column, Integer, String, Date, Time, JSON, ForeignKey, Numeric, ARRAY
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -17,14 +17,13 @@ class Path(Base):
 class Route(Base):
     __tablename__ = "routes"
     id = Column(Integer, primary_key=True, index=True)
-    route_number = Column(String(20))
+    path_number = Column(String(20))
     platform_number = Column(String(10))
     price = Column(Integer)
     available_seats = Column(Integer)
     departure_date = Column(Date)
     departure_time = Column(Time)
     arrival_time = Column(Time)
-    path_id = Column(Integer, ForeignKey("paths.id"))
 
 class Ticket(Base):
     __tablename__ = "tickets"
@@ -32,4 +31,4 @@ class Ticket(Base):
     ticket_number = Column(String(50))
     purchase_date = Column(Date)
     purchase_price = Column(Numeric(10, 2))
-    route_id = Column(Integer, ForeignKey("routes.id"))
+    route_id = Column(Integer)

@@ -34,7 +34,7 @@ void Dispatcher::addRoute(const Route& route) {
 
 bool Dispatcher::removeRoute(const QString& routeNumber) {
     for (int i = 0; i < managedRoutes.size(); ++i) {
-        if (managedRoutes[i].getRouteNumber() == routeNumber) {
+        if (managedRoutes[i].getPathNumber() == routeNumber) {
             managedRoutes.removeAt(i);
             return true;
         }
@@ -44,7 +44,7 @@ bool Dispatcher::removeRoute(const QString& routeNumber) {
 
 Route Dispatcher::findRoute(const QString& routeNumber) const {
     for (const Route& route : managedRoutes) {
-        if (route.getRouteNumber() == routeNumber) {
+        if (route.getPathNumber() == routeNumber) {
             return route;
         }
     }
@@ -53,7 +53,7 @@ Route Dispatcher::findRoute(const QString& routeNumber) const {
 
 void Dispatcher::updateRouteSeats(const QString& routeNumber, int seats) {
     for (Route& route : managedRoutes) {
-        if (route.getRouteNumber() == routeNumber) {
+        if (route.getPathNumber() == routeNumber) {
             route.setSeats(seats);
             break;
         }

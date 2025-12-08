@@ -8,7 +8,8 @@
 
 class Route {
 private:
-    QString routeNumber;
+    int routeId;
+    QString pathNumber;
     QString platformNumber;
     QDate departureDate;
     QTime departureTime;
@@ -21,9 +22,12 @@ public:
     Route();
     Route(const QString& number, const QString& platform, 
           const QDate& date, const QTime& depTime, const QTime& destTime, 
+          const int price, const int seats);
+    Route(const QString& number, const QString& platform, 
+          const QDate& date, const QTime& depTime, const QTime& destTime, 
           const int price, const int seats, const Path& path);
 
-    QString getRouteNumber() const;
+    QString getPathNumber() const;
     QString getPlatformNumber() const;
     BusStop getDeparturePlace() const;
     BusStop getDestinationPlace() const;
@@ -33,8 +37,10 @@ public:
     int getPrice() const;
     int getSeats() const;
     Path getPath() const;
+    int getId() const;
+    bool hasPath() const;
 
-    void setRouteNumber(const QString& number);
+    void setPathNumber(const QString& pathNumber);
     void setPlatformNumber(const QString& platform);
     void setDepartureDate(const QDate& date);
     void setDepartureTime(const QTime& time);
@@ -42,6 +48,7 @@ public:
     void setPrice(const int price);
     void setSeats(const int seats);
     void setPath(const Path& path);
+    void setId(int id);
 
     void displayInfo() const;
     QString toString() const;

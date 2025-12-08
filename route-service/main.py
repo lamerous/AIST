@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 from routes import stops, paths, routes, tickets
+from database import engine, Base
 import uvicorn
 
 app = FastAPI(title="Routes DB Microservice")
+Base.metadata.create_all(bind=engine)
 
 app.include_router(stops.router, prefix="/api/stops", tags=["stops"])
 app.include_router(paths.router, prefix="/api/paths", tags=["paths"])

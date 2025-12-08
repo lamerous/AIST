@@ -1,7 +1,7 @@
 #include "route.h"
 
 Route::Route()
-    : routeNumber(""), platformNumber(""), departureDate(QDate::currentDate()), 
+    : pathNumber(""), platformNumber(""), departureDate(QDate::currentDate()), 
       departureTime(QTime::currentTime()), destinationTime(QTime::currentTime()), 
       routePrice(0), routeSeats(0), path(Path())
 {
@@ -9,15 +9,24 @@ Route::Route()
 
 Route::Route(const QString& number, const QString& platform, 
              const QDate& date, const QTime& depTime, const QTime& destTime,
+             const int price, const int seats)
+    : pathNumber(number), platformNumber(platform),
+      departureDate(date), departureTime(depTime), destinationTime(destTime),
+      routePrice(price), routeSeats(seats), path(Path())
+{
+}
+
+Route::Route(const QString& number, const QString& platform, 
+             const QDate& date, const QTime& depTime, const QTime& destTime,
              const int price, const int seats, const Path& path)
-    : routeNumber(number), platformNumber(platform),
+    : pathNumber(number), platformNumber(platform),
       departureDate(date), departureTime(depTime), destinationTime(destTime),
       routePrice(price), routeSeats(seats), path(path)
 {
 }
 
-QString Route::getRouteNumber() const {
-    return routeNumber;
+QString Route::getPathNumber() const {
+    return pathNumber;
 }
 
 QString Route::getPlatformNumber() const {
@@ -57,10 +66,18 @@ Path Route::getPath() const {
     return path;
 }
 
+int Route::getId() const { 
+    return routeId;
+}
+
+bool Route::hasPath() const {
+    return path.getStopCount() > 0;
+}
+
 
 // Сеттеры
-void Route::setRouteNumber(const QString& number) {
-    routeNumber = number;
+void Route::setPathNumber(const QString& pathNum) {
+    pathNumber = pathNum;
 }
 
 void Route::setPlatformNumber(const QString& platform) {
@@ -91,8 +108,12 @@ void Route::setPath(const Path& path) {
     this->path = path;
 }
 
+void Route::setId(int id) {
+    this->routeId = id; 
+}
+
 void Route::displayInfo() const {
-    qDebug() << "Маршрут №" << routeNumber
+    qDebug() << "Маршрут №" << pathNumber
              << "\nПлатформа:" << platformNumber
              << "\nОтправление:" << path.getFirstStop().getStopName()
             << departureDate.toString("dd.MM.yyyy") << departureTime.toString("hh:mm")
@@ -101,7 +122,7 @@ void Route::displayInfo() const {
 
 QString Route::toString() const {
     return QString("Маршрут №%1 | Платформа: %2 | %3 -> %4 | %5 %6 - %7 | %8 руб. | %9 мест")
-        .arg(routeNumber)
+        .arg(pathNumber)
         .arg(platformNumber)
         .arg(path.getFirstStop().getStopName())
         .arg(path.getLastStop().getStopName())
@@ -116,7 +137,7 @@ QString Route::toString() const {
 QDebug operator<<(QDebug debug, const Route& route) {
     QDebugStateSaver saver(debug);
     debug.nospace() << "Route(" 
-                    << "№" << route.routeNumber
+                    << "№" << route.pathNumber
                     << ", platform:" << route.platformNumber
                     << ", " << route.getDeparturePlace().getStopName()
                     << "->" << route.getDestinationPlace().getStopName()

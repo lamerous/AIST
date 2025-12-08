@@ -1,0 +1,300 @@
+@startuml
+
+' =============================================
+' ИНФОРМАЦИОННАЯ СИСТЕМА АВТОВОКЗАЛА
+' Базы данных PostgreSQL
+' =============================================
+
+' БАЗА ДАННЫХ 1: ROUTES_DB
+database "routes_db" as routes_db {
+  
+  entity "stops" {
+    +id : SERIAL (PK)
+    --
+    stop_name : VARCHAR(100)
+    stop_address : VARCHAR(200)
+    
+    note right
+      Таблица остановок
+      Содержит информацию о всех остановках
+    end note
+  }
+  
+  entity "paths" {
+    +id : SERIAL (PK)
+    --
+    route_number : VARCHAR(20)
+    stops_array : JSON
+    
+    note right
+      Таблица маршрутов следования
+      stops_array содержит массив ID остановок
+    end note
+  }
+  
+  entity "routes" {
+    +id : SERIAL (PK)
+    --
+    route_number : VARCHAR(20)
+    platform_number : VARCHAR(10)
+    price : INTEGER
+    available_seats : INTEGER
+    departure_date : DATE
+    departure_time : TIME
+    arrival_time : TIME
+    path_id : INTEGER (FK -> paths.id)
+    
+    note right
+      Таблица рейсов
+      Содержит расписание и информацию о рейсах
+    end note
+  }
+  
+  entity "tickets" {
+    +id : SERIAL (PK)
+    --
+    ticket_number : VARCHAR(50)
+    purchase_date : DATE
+    purchase_price : DECIMAL(10,2)
+    route_id : INTEGER (FK -> routes.id)
+    
+    note right
+      Таблица билетов
+      Хранит информацию о проданных билетах
+    end note
+  }
+  
+  ' Связи между таблицами routes_db
+  paths ||..o{ routes : "содержит"
+  routes }o..|| tickets : "имеет билеты"
+}
+
+' БАЗА ДАННЫХ 2: USERS_DB
+database "users_db" as users_db {
+  
+  entity "users" {
+    +id : SERIAL (PK)
+    --
+    username : VARCHAR(50)
+    first_name : VARCHAR(50)
+    last_name : VARCHAR(50)
+    middle_name : VARCHAR(50)
+    role : VARCHAR(20)
+    password_hash : VARCHAR(255)
+    registration_date : DATE
+    email : VARCHAR(100)
+    phone_number : VARCHAR(20)
+    birth_date : DATE
+    
+    note right
+      Основная таблица пользователей
+      Роли: passenger, dispatcher, cashier, admin
+    end note
+  }
+  
+  entity "users_tickets" {
+    +id : SERIAL (PK)
+    --
+    user_id : INTEGER (FK -> users.id)
+    ticket_id : INTEGER
+    ticket_data : JSON
+    
+    note right
+      Связующая таблица пользователей и билетов
+      ticket_data может содержать детали билета
+    end note
+  }
+  
+  ' Связи между таблицами users_db
+  users ||..o{ users_tickets : "имеет билеты"
+}
+
+' =============================================
+' СВЯЗИ МЕЖДУ БАЗАМИ ДАННЫХ
+' =============================================
+
+' Классы из header файлов
+class "Person" {
+  +firstName : QString
+  +lastName : QString
+  +middleName : QString
+  +birthDate : QDate
+  +phoneNumber : QString
+  +email : QString
+  --
+  +getFullName()
+  +getAge()
+  +getRole()
+}
+
+class "Passenger" {
+  +passportNumber : QString
+  +tickets : QList<Ticket>
+  --
+  +addTicket()
+  +removeTicket()
+  +getTotalSpent()
+}
+
+class "Dispatcher" {
+  +employeeId : QString
+  +department : QString
+  +managedRoutes : QList<Route>
+  --
+  +addRoute()
+  +removeRoute()
+  +updateRouteSeats()
+}
+
+class "Cashier" {
+  +employeeId : QString
+  +workstationNumber : int
+  +totalSales : double
+  +soldTickets : QList<Ticket>
+  --
+  +sellTicket()
+  +refundTicket()
+  +getAverageTicketPrice()
+}
+
+class "Admin" {
+  +adminId : QString
+  +accessLevel : QString
+  +allPassengers : QList<Passenger>
+  +allDispatchers : QList<Dispatcher>
+  +allCashiers : QList<Cashier>
+  --
+  +addPassenger()
+  +removePassenger()
+  +generateReport()
+}
+
+class "BusStop" {
+  +stopId : int
+  +stopName : QString
+  +stopAddress : QString
+}
+
+class "Path" {
+  +stops : QVector<BusStop>
+  --
+  +addStop()
+  +removeStop()
+  +getStopCount()
+}
+
+class "Route" {
+  +routeNumber : QString
+  +platformNumber : QString
+  +departureDate : QDate
+  +departureTime : QTime
+  +destinationTime : QTime
+  +routePrice : int
+  +routeSeats : int
+  +path : Path
+}
+
+class "Ticket" {
+  +route : Route
+  +passengerName : QString
+  +ticketNumber : QString
+  +seatNumber : QString
+  +purchaseDate : QDate
+  --
+  +isValid()
+  +displayInfo()
+}
+
+class "Schedule" {
+  +routes : QList<Route>
+  --
+  +findRoutesByNumber()
+  +findRoutesByDirection()
+  +saveToFile()
+}
+
+' Наследование
+Person <|-- Passenger
+Person <|-- Dispatcher
+Person <|-- Cashier
+Person <|-- Admin
+
+' Связи между классами
+Passenger "1" -- "*" Ticket : "имеет"
+Dispatcher "1" -- "*" Route : "управляет"
+Cashier "1" -- "*" Ticket : "продает"
+Route "1" -- "1" Path : "следует по"
+Path "1" -- "*" BusStop : "включает"
+Schedule "1" -- "*" Route : "содержит"
+
+' Связи классов с базами данных
+Passenger ..> users_db.users : "сохраняется в"
+Dispatcher ..> users_db.users : "сохраняется в"
+Cashier ..> users_db.users : "сохраняется в"
+Admin ..> users_db.users : "сохраняется в"
+
+BusStop ..> routes_db.stops : "сохраняется в"
+Route ..> routes_db.routes : "сохраняется в"
+Ticket ..> routes_db.tickets : "сохраняется в"
+Ticket ..> users_db.users_tickets : "связывается через"
+
+' =============================================
+' API КЛИЕНТЫ
+' =============================================
+
+class "ApiClient" {
+  +networkManager : QNetworkAccessManager
+  +baseUrl : QString
+  --
+  +addRoute()
+  +getRoutes()
+  +jsonToRoute()
+}
+
+class "BusStopApiClient" {
+  +networkManager : QNetworkAccessManager
+  +baseUrl : QString
+  --
+  +addBusStop()
+  +getBusStops()
+  +findBusStopsByName()
+}
+
+' Взаимодействие API клиентов с базами данных
+ApiClient ..> routes_db.routes : "работает с"
+BusStopApiClient ..> routes_db.stops : "работает с"
+
+' =============================================
+' ВИДЖЕТЫ И ИНТЕРФЕЙС
+' =============================================
+
+class "MainWindow" {
+  +schedule : Schedule
+  +apiClient : ApiClient*
+  +busStopApiClient : BusStopApiClient*
+  --
+  +switchPage()
+  +onRoutesReceived()
+  +onBusStopsReceived()
+}
+
+class "RouteWidget" {
+  +currentRoute : Route
+  --
+  +updateRouteData()
+  +calculateTravelTime()
+}
+
+class "StopWidget" {
+  +currentStop : BusStop
+  --
+  +updateStopData()
+}
+
+' Связи виджетов
+MainWindow "1" -- "*" RouteWidget : "отображает"
+MainWindow "1" -- "*" StopWidget : "отображает"
+RouteWidget "1" -- "1" Route : "представляет"
+StopWidget "1" -- "1" BusStop : "представляет"
+
+@enduml
