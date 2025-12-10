@@ -28,5 +28,19 @@ services:
       db:
         condition: service_healthy
 
+  user_service:
+    build: ./user-service
+    command: python3 main.py
+    volumes:
+      - ./user-service/:/app/
+    ports:
+      - 8002:8000
+    environment:
+      - JWT_SECRET=${JWT_SECRET}
+      - DATABASE_URL=postgresql://${DB_USER}:${USERDB_PASSWORD}@db/users_db
+    depends_on:
+      db:
+        condition: service_healthy   
+
 volumes:
   postgres_data: 
