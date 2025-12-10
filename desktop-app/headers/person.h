@@ -33,9 +33,9 @@ public:
     void setPhoneNumber(const QString& phoneNumber);
     void setEmail(const QString& email);
 
-    virtual QString getRole() const = 0;
-    virtual void displayInfo() const = 0;
-    virtual QString toString() const = 0;
+    virtual QString getRole() const;
+    virtual void displayInfo() const;
+    virtual QString toString() const;
 
     int getAge() const;
     bool isValid() const;

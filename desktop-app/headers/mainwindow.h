@@ -24,18 +24,20 @@ public:
 
     enum Page {
         HOME_PAGE = 0,
-        PROFILE_PAGE = 1,
-        SCHEDULE_PAGE = 2,
-        ORDERS1_PAGE = 3,
-        ORDERS2_PAGE = 4,
-        EMPLOYEES1_PAGE = 5,
-        EMPLOYEES2_PAGE = 6,
-        CASHIER_PAGE = 7,
-        ADD_ROUTE_PAGE = 8,
-        ADD_PATH_PAGE = 9,
-        ADD_STOP_PAGE = 10,
-        EDIT_ROUTE_PAGE = 11,
-        EDIT_PATH_PAGE = 12
+        LOGIN_PAGE = 1,
+        REGISTER_PAGE = 2,
+        PROFILE_PAGE = 3,
+        SCHEDULE_PAGE = 4,
+        ORDERS1_PAGE = 5,
+        ORDERS2_PAGE = 6,
+        EMPLOYEES1_PAGE = 7,
+        EMPLOYEES2_PAGE = 8,
+        CASHIER_PAGE = 9,
+        ADD_ROUTE_PAGE = 10,
+        ADD_PATH_PAGE = 11,
+        ADD_STOP_PAGE = 12,
+        EDIT_ROUTE_PAGE = 13,
+        EDIT_PATH_PAGE = 14
     };
 
 signals:
@@ -46,12 +48,15 @@ private slots:
     void on_findRoute2_btn_clicked();
     void on_swapPlaces_btn_clicked();
 
+    void on_findStop_textChanged();
+    void on_findPath_textChanged();
+
     void on_addStop_btn_clicked();
     void on_addPath_btn_clicked();
     void on_addRoute_btn_clicked();
-    
-    void on_findStop_textChanged();
-    void on_findPath_textChanged();
+
+    void on_login_btn_clicked();
+    void on_register_btn_clicked();
 
     void on_addStopToPath_btn_clicked();
     void on_unfilledPushButton_editPath_apply_clicked();
@@ -74,6 +79,11 @@ private slots:
     void handleRouteCreate(const Route &route);
     void handleRouteDelete(int routeId);
     void handleRouteError(const QString &error);
+    
+    void handleRegister(const QString &message);
+    void handleLogin(const QString &cookie);
+    void handleAuthError(const QString &error);
+    void handleRouteSell(const Route &route);
 
     // void handleRoutes(const QList<Route> &routes);
     // void handleRoute(const Route &route);
@@ -102,6 +112,8 @@ private:
     QButtonGroup *dispatcherMenu_buttons_paths;
     QButtonGroup *dispatcherMenu_buttons_stops;
     QButtonGroup *swapPlaces_buttons;
+    QButtonGroup *loginMenu_buttons;
+    QButtonGroup *registerMenu_buttons;
 };
 
 #endif

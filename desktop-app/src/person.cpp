@@ -80,12 +80,21 @@ bool Person::isValid() const {
            !phoneNumber.isEmpty();
 }
 
+void Person::displayInfo() const {
+    qDebug() << getFullName() << ", возраст:" << getAge() 
+             << ", тел:" << phoneNumber << ", email:" << email;
+}
+
+QString Person::toString() const {
+    return QString("%1 %2 лет, тел: %3, email: %4")
+        .arg(getFullName())
+        .arg(getAge())
+        .arg(phoneNumber)
+        .arg(email);
+}
+
 QDebug operator<<(QDebug debug, const Person& person) {
     QDebugStateSaver saver(debug);
-    debug.nospace() << "Person(" 
-                    << person.getFullName()
-                    << ", " << person.getAge() << " years"
-                    << ", Role: " << person.getRole()
-                    << ")";
+    debug.nospace() << person.toString();
     return debug;
 }

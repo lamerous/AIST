@@ -12,11 +12,27 @@
 BaseApiClient::BaseApiClient(QObject *parent)
     : QObject(parent)
     , networkManager(new QNetworkAccessManager(this))
-    , baseUrl(HOST) 
+    , baseUrl(HOST)
 {
 }
 
 BaseApiClient::~BaseApiClient() {
+}
+
+void BaseApiClient::setAccessToken(const QString &token) {
+    accessToken = token;
+}
+
+QString BaseApiClient::getAccessToken() const {
+    return accessToken;
+}
+
+void BaseApiClient::clearAccessToken() {
+    accessToken.clear();
+}
+
+bool BaseApiClient::hasAccessToken() const {
+    return !accessToken.isEmpty();
 }
 
 void BaseApiClient::setBaseUrl(const QString &url) {
@@ -27,12 +43,23 @@ QString BaseApiClient::getBaseUrl() const {
     return baseUrl;
 }
 
+QNetworkRequest BaseApiClient::createAuthorizedRequest(const QUrl &url) {
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    
+    if (hasAccessToken()) {
+        QString authHeader = QString("Bearer %1").arg(accessToken);
+        request.setRawHeader("Authorization", authHeader.toUtf8());
+    }
+    
+    return request;
+}
+
 QNetworkReply* BaseApiClient::sendRequest(const QString &endpoint, 
                                          const QString &method, 
                                          const QJsonObject &data) {
     QUrl url(baseUrl + endpoint);
-    QNetworkRequest request(url);
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    QNetworkRequest request = createAuthorizedRequest(url);
     
     QNetworkReply *reply = nullptr;
     
@@ -61,6 +88,12 @@ QJsonObject BaseApiClient::parseJsonResponse(QNetworkReply *reply, bool &success
     
     if (reply->error() != QNetworkReply::NoError) {
         error = QString("Network error: %1").arg(reply->errorString());
+        
+        if (reply->error() == QNetworkReply::AuthenticationRequiredError ||
+            reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 401) {
+            emit tokenExpired();
+        }
+        
         return QJsonObject();
     }
     
@@ -77,6 +110,13 @@ QJsonObject BaseApiClient::parseJsonResponse(QNetworkReply *reply, bool &success
         return QJsonObject();
     }
     
+    int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    if (statusCode == 401) {
+        emit tokenExpired();
+        error = "Unauthorized: Invalid or expired token";
+        return QJsonObject();
+    }
+    
     success = true;
     return doc.object();
 }
@@ -86,6 +126,12 @@ QJsonArray BaseApiClient::parseJsonArrayResponse(QNetworkReply *reply, bool &suc
     
     if (reply->error() != QNetworkReply::NoError) {
         error = QString("Network error: %1").arg(reply->errorString());
+        
+        if (reply->error() == QNetworkReply::AuthenticationRequiredError ||
+            reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 401) {
+            emit tokenExpired();
+        }
+        
         return QJsonArray();
     }
     
@@ -99,6 +145,13 @@ QJsonArray BaseApiClient::parseJsonArrayResponse(QNetworkReply *reply, bool &suc
     
     if (!doc.isArray()) {
         error = "Expected JSON array";
+        return QJsonArray();
+    }
+    
+    int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    if (statusCode == 401) {
+        emit tokenExpired();
+        error = "Unauthorized: Invalid or expired token";
         return QJsonArray();
     }
     
@@ -710,6 +763,92 @@ void TicketApiClient::handleTicketsResponse(QNetworkReply *reply) {
     reply->deleteLater();
 }
 
+// ============== AuthApiClient ==============
+AuthApiClient::AuthApiClient(QObject *parent)
+    : BaseApiClient(parent) 
+{
+    connect(networkManager, &QNetworkAccessManager::finished,
+            this, &AuthApiClient::handleAuthResponse);
+}
+
+void AuthApiClient::regist(const QString &username, const QString &last_name, const QString &first_name,
+                const QString &middle_name, const QString &phone_number, const QString &email,
+                const QDate &birth_date, const QString &password)
+{
+    QJsonObject json;
+    json["username"] = username;
+    json["email"] = email;
+    json["first_name"] = first_name;
+    json["last_name"] = last_name;
+    json["middle_name"] = middle_name;
+    json["phone_number"] = phone_number;
+    json["birth_date"] = birth_date.toString("yyyy-MM-dd");
+    json["password"] = password;
+    
+    sendRequest("/api/auth/register", "POST", json)->setProperty("action", "registration");
+}
+
+void AuthApiClient::login(const QString &username, const QString &password) {
+    QUrl url(baseUrl + "/api/auth/login");
+    QNetworkRequest request(url);
+    
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
+    
+    QUrlQuery params;
+    params.addQueryItem("username", username);
+    params.addQueryItem("password", password);
+    // params.addQueryItem("grant_type", "password");
+    // params.addQueryItem("client_id", clientId);
+    // params.addQueryItem("client_secret", clientSecret);
+    // params.addQueryItem("scope", scope);
+    
+    QByteArray postData = params.query().toUtf8();
+    networkManager->post(request, postData)->setProperty("action", "login");
+}
+
+void AuthApiClient::get_user() {
+
+}
+
+void AuthApiClient::change_password(const QString &current_password, const QString &new_password) {
+
+}
+
+Person AuthApiClient::jsonToPerson(const QJsonObject& json) {
+    
+}
+
+QJsonObject AuthApiClient::personToJson(const Person& person) {
+}
+
+void AuthApiClient::handleAuthResponse(QNetworkReply *reply) {
+    QString action = reply->property("action").toString();
+    bool success = false;
+    QString error;
+    
+    if (action == "registration") {
+        QJsonArray array = parseJsonArrayResponse(reply, success, error);
+        
+        if (success) {
+            emit userRegistred("User registred");
+        } 
+        else {
+            emit requestError(error);
+        }
+    }
+
+    else if (action == "login") {
+        QJsonObject json = parseJsonResponse(reply, success, error);
+        
+        if (success) {
+            emit userLogedIn(json["access_token"].toString());
+        }
+        else {
+            emit requestError(error);
+        }
+    }
+}
+
 // ============== ApiClient (Main) ==============
 ApiClient::ApiClient(QObject *parent)
     : QObject(parent)
@@ -717,6 +856,7 @@ ApiClient::ApiClient(QObject *parent)
     , stopClient(new StopApiClient(this))
     , pathClient(new PathApiClient(this))
     , ticketClient(new TicketApiClient(this))
+    , authClient(new AuthApiClient(this))
 {
 }
 
@@ -725,4 +865,25 @@ void ApiClient::setBaseUrl(const QString &url) {
     stopClient->setBaseUrl(url);
     pathClient->setBaseUrl(url);
     ticketClient->setBaseUrl(url);
+    authClient->setBaseUrl(url);
+}
+
+void ApiClient::setAccessToken(const QString &token) {
+    routeClient->setAccessToken(token);
+    stopClient->setAccessToken(token);
+    pathClient->setAccessToken(token);
+    ticketClient->setAccessToken(token);
+    authClient->setAccessToken(token);
+}
+
+QString ApiClient::getAccessToken() const {
+    return authClient->getAccessToken();
+}
+
+void ApiClient::clearAccessToken() {
+    routeClient->clearAccessToken();
+    stopClient->clearAccessToken();
+    pathClient->clearAccessToken();
+    ticketClient->clearAccessToken();
+    authClient->clearAccessToken();
 }

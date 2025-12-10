@@ -74,7 +74,9 @@ QFrame[frameShape=&quot;4&quot;]{
 #roundedWidget_dispatcherMenu QPushButton:hover,
 #roundedWidget_dispatcherMenu_2 QPushButton:hover,
 #roundedWidget_dispatcherMenu_3 QPushButton:hover,
-#roundedWidget_dispatcherMenu_4 QPushButton:hover {
+#roundedWidget_dispatcherMenu_4 QPushButton:hover,
+#roundedWidget_loginMenu QPushButton:hover, 
+#roundedWidget_loginMenu_2 QPushButton:hover {
 	color: #5E72E6;
 	text-decoration: underline;
 }
@@ -159,6 +161,865 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
     <property name="spacing">
      <number>0</number>
     </property>
+    <item row="0" column="1" rowspan="2">
+     <widget class="QWidget" name="menu_layout_2" native="true">
+      <property name="maximumSize">
+       <size>
+        <width>290</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="widget_4" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>280</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>280</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_14">
+          <property name="spacing">
+           <number>72</number>
+          </property>
+          <property name="leftMargin">
+           <number>22</number>
+          </property>
+          <property name="topMargin">
+           <number>45</number>
+          </property>
+          <property name="rightMargin">
+           <number>22</number>
+          </property>
+          <property name="bottomMargin">
+           <number>45</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_16">
+            <item>
+             <widget class="QPushButton" name="expand2_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/expand.png</normaloff>:/icons/icons/expand.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_9">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_15">
+            <property name="spacing">
+             <number>48</number>
+            </property>
+            <item>
+             <widget class="QPushButton" name="profile2_menuButton">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>230</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>230</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Inter Medium</family>
+                <pointsize>-1</pointsize>
+               </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string>  Профиль</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/profile.png</normaloff>:/icons/icons/profile.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="schedule2_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>230</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>230</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Inter Medium</family>
+                <pointsize>-1</pointsize>
+               </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string>  Расписание</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/schedule.png</normaloff>:/icons/icons/schedule.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="cart2_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>230</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>230</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Inter Medium</family>
+                <pointsize>-1</pointsize>
+               </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string>   Заказы</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/cart.png</normaloff>:/icons/icons/cart.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="employees2_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>230</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>230</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Inter Medium</family>
+                <pointsize>-1</pointsize>
+               </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string>  Персонал</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/employees.png</normaloff>:/icons/icons/employees.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="cashier2_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>230</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>230</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Inter Medium</family>
+                <pointsize>-1</pointsize>
+               </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string>  Кассирам</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/cashier.png</normaloff>:/icons/icons/cashier.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="dispatcher2_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>230</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>230</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Inter Medium</family>
+                <pointsize>-1</pointsize>
+               </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string>  Диспетчерам</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/dispatcher.png</normaloff>:/icons/icons/dispatcher.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_18">
+              <property name="text">
+               <string>Аналитика</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="quit2_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>230</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>230</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Inter Medium</family>
+                <pointsize>-1</pointsize>
+               </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string>  Выход</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/quit.png</normaloff>:/icons/icons/quit.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="0" rowspan="2">
+     <widget class="QWidget" name="menu_layout_1" native="true">
+      <property name="maximumSize">
+       <size>
+        <width>85</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="widget_2" native="true">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <property name="spacing">
+           <number>72</number>
+          </property>
+          <property name="leftMargin">
+           <number>22</number>
+          </property>
+          <property name="topMargin">
+           <number>45</number>
+          </property>
+          <property name="rightMargin">
+           <number>22</number>
+          </property>
+          <property name="bottomMargin">
+           <number>45</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="expand1_menuButton">
+            <property name="minimumSize">
+             <size>
+              <width>40</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>40</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../resources.qrc">
+              <normaloff>:/icons/icons/expand.png</normaloff>:/icons/icons/expand.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>40</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <property name="spacing">
+             <number>48</number>
+            </property>
+            <item>
+             <widget class="QPushButton" name="profile1_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/profile.png</normaloff>:/icons/icons/profile.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="schedule1_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/schedule.png</normaloff>:/icons/icons/schedule.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="cart1_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/cart.png</normaloff>:/icons/icons/cart.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="employees1_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/employees.png</normaloff>:/icons/icons/employees.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="cashier1_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/cashier.png</normaloff>:/icons/icons/cashier.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="dispatcher1_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/dispatcher.png</normaloff>:/icons/icons/dispatcher.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="analytics1_menuButton">
+              <property name="text">
+               <string>PushButton</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="quit1_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/quit.png</normaloff>:/icons/icons/quit.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
     <item row="0" column="2">
      <widget class="QWidget" name="main_layout" native="true">
       <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -232,7 +1093,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="login_textBtn">
+           <widget class="QPushButton" name="cabinet_textBtn">
             <property name="minimumSize">
              <size>
               <width>200</width>
@@ -281,7 +1142,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>10</number>
+          <number>5</number>
          </property>
          <widget class="QWidget" name="main_page">
           <layout class="QVBoxLayout" name="verticalLayout_73">
@@ -1257,6 +2118,1544 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
               </item>
              </layout>
             </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="login_page">
+          <layout class="QVBoxLayout" name="verticalLayout_113">
+           <property name="spacing">
+            <number>32</number>
+           </property>
+           <property name="leftMargin">
+            <number>68</number>
+           </property>
+           <property name="topMargin">
+            <number>48</number>
+           </property>
+           <property name="rightMargin">
+            <number>548</number>
+           </property>
+           <property name="bottomMargin">
+            <number>68</number>
+           </property>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_51">
+             <property name="spacing">
+              <number>20</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_32">
+               <property name="font">
+                <font>
+                 <family>Inter</family>
+                 <pointsize>28</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: #010E59;</string>
+               </property>
+               <property name="text">
+                <string>Личный кабинет</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="roundedWidget_loginMenu" native="true">
+               <layout class="QHBoxLayout" name="horizontalLayout_107">
+                <property name="spacing">
+                 <number>100</number>
+                </property>
+                <property name="leftMargin">
+                 <number>56</number>
+                </property>
+                <property name="topMargin">
+                 <number>16</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>16</number>
+                </property>
+                <item>
+                 <widget class="QPushButton" name="login_textBtn">
+                  <property name="font">
+                   <font>
+                    <family>Inter Medium</family>
+                    <pointsize>-1</pointsize>
+                    <underline>true</underline>
+                   </font>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: #5E72E6; text-decoration: underline</string>
+                  </property>
+                  <property name="text">
+                   <string>Войти</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="register_textBtn">
+                  <property name="font">
+                   <font>
+                    <family>Inter Medium</family>
+                    <pointsize>-1</pointsize>
+                   </font>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="text">
+                   <string>Регистрация</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_28">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>331</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="roundedWidget_27" native="true">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_59">
+                <property name="spacing">
+                 <number>32</number>
+                </property>
+                <property name="leftMargin">
+                 <number>56</number>
+                </property>
+                <property name="topMargin">
+                 <number>40</number>
+                </property>
+                <property name="rightMargin">
+                 <number>56</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>20</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="label_34">
+                  <property name="font">
+                   <font>
+                    <family>Inter</family>
+                    <pointsize>24</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: #010E59;</string>
+                  </property>
+                  <property name="text">
+                   <string>Войти</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_106">
+                  <property name="spacing">
+                   <number>64</number>
+                  </property>
+                  <item>
+                   <layout class="QVBoxLayout" name="verticalLayout_109">
+                    <property name="spacing">
+                     <number>20</number>
+                    </property>
+                    <item>
+                     <widget class="QWidget" name="borderWidget_6" native="true">
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>68</height>
+                       </size>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_110">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QWidget" name="widget_8" native="true">
+                         <property name="minimumSize">
+                          <size>
+                           <width>250</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="cursor">
+                          <cursorShape>IBeamCursor</cursorShape>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_111">
+                          <property name="spacing">
+                           <number>10</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>25</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>5</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>20</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>15</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="label_35">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>24</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: #6D6D6D;</string>
+                            </property>
+                            <property name="text">
+                             <string>Логин</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="login_username">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>26</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>16</pointsize>
+                             </font>
+                            </property>
+                            <property name="inputMask">
+                             <string/>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="placeholderText">
+                             <string>Логин</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <layout class="QVBoxLayout" name="verticalLayout_112">
+                      <property name="spacing">
+                       <number>45</number>
+                      </property>
+                      <item>
+                       <widget class="QPushButton" name="login_btn">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>67</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>67</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>67</height>
+                         </size>
+                        </property>
+                        <property name="cursor">
+                         <cursorShape>PointingHandCursor</cursorShape>
+                        </property>
+                        <property name="text">
+                         <string>Войти</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <layout class="QVBoxLayout" name="verticalLayout_115">
+                    <property name="spacing">
+                     <number>20</number>
+                    </property>
+                    <item>
+                     <widget class="QWidget" name="borderWidget_8" native="true">
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>68</height>
+                       </size>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_116">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QWidget" name="widget_14" native="true">
+                         <property name="minimumSize">
+                          <size>
+                           <width>250</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="cursor">
+                          <cursorShape>IBeamCursor</cursorShape>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_117">
+                          <property name="spacing">
+                           <number>10</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>25</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>5</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>20</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>15</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="label_37">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>24</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: #6D6D6D;</string>
+                            </property>
+                            <property name="text">
+                             <string>Пароль</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="login_password">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>26</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>16</pointsize>
+                             </font>
+                            </property>
+                            <property name="inputMethodHints">
+                             <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
+                            </property>
+                            <property name="inputMask">
+                             <string/>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="echoMode">
+                             <enum>QLineEdit::Password</enum>
+                            </property>
+                            <property name="dragEnabled">
+                             <bool>false</bool>
+                            </property>
+                            <property name="placeholderText">
+                             <string>Пароль</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="verticalSpacer_15">
+                      <property name="orientation">
+                       <enum>Qt::Vertical</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>20</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_19">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>419</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="register_page">
+          <layout class="QVBoxLayout" name="verticalLayout_149">
+           <property name="spacing">
+            <number>32</number>
+           </property>
+           <property name="leftMargin">
+            <number>68</number>
+           </property>
+           <property name="topMargin">
+            <number>48</number>
+           </property>
+           <property name="rightMargin">
+            <number>548</number>
+           </property>
+           <property name="bottomMargin">
+            <number>68</number>
+           </property>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_114">
+             <property name="spacing">
+              <number>20</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_33">
+               <property name="font">
+                <font>
+                 <family>Inter</family>
+                 <pointsize>28</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: #010E59;</string>
+               </property>
+               <property name="text">
+                <string>Личный кабинет</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="roundedWidget_loginMenu_2" native="true">
+               <layout class="QHBoxLayout" name="horizontalLayout_108">
+                <property name="spacing">
+                 <number>100</number>
+                </property>
+                <property name="leftMargin">
+                 <number>56</number>
+                </property>
+                <property name="topMargin">
+                 <number>16</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>16</number>
+                </property>
+                <item>
+                 <widget class="QPushButton" name="login2_textBtn">
+                  <property name="font">
+                   <font>
+                    <family>Inter Medium</family>
+                    <pointsize>-1</pointsize>
+                    <underline>false</underline>
+                   </font>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true"/>
+                  </property>
+                  <property name="text">
+                   <string>Войти</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="register2_textBtn">
+                  <property name="font">
+                   <font>
+                    <family>Inter Medium</family>
+                    <pointsize>-1</pointsize>
+                    <underline>true</underline>
+                   </font>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: #5E72E6; text-decoration: underline</string>
+                  </property>
+                  <property name="text">
+                   <string>Регистрация</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_62">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>331</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="roundedWidget_28" native="true">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_118">
+                <property name="spacing">
+                 <number>32</number>
+                </property>
+                <property name="leftMargin">
+                 <number>56</number>
+                </property>
+                <property name="topMargin">
+                 <number>40</number>
+                </property>
+                <property name="rightMargin">
+                 <number>56</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>20</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="label_36">
+                  <property name="font">
+                   <font>
+                    <family>Inter</family>
+                    <pointsize>24</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: #010E59;</string>
+                  </property>
+                  <property name="text">
+                   <string>Регистрация</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_109">
+                  <property name="spacing">
+                   <number>64</number>
+                  </property>
+                  <item>
+                   <layout class="QVBoxLayout" name="verticalLayout_119">
+                    <property name="spacing">
+                     <number>20</number>
+                    </property>
+                    <item>
+                     <widget class="QWidget" name="borderWidget_7" native="true">
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>68</height>
+                       </size>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_120">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QWidget" name="widget_13" native="true">
+                         <property name="minimumSize">
+                          <size>
+                           <width>250</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="cursor">
+                          <cursorShape>IBeamCursor</cursorShape>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_121">
+                          <property name="spacing">
+                           <number>10</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>25</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>5</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>20</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>15</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="label_38">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>24</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: #6D6D6D;</string>
+                            </property>
+                            <property name="text">
+                             <string>Логин</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="register_username">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>26</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>16</pointsize>
+                             </font>
+                            </property>
+                            <property name="inputMask">
+                             <string/>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="placeholderText">
+                             <string>Логин</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QWidget" name="borderWidget_12" native="true">
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>68</height>
+                       </size>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_147">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QWidget" name="widget_18" native="true">
+                         <property name="minimumSize">
+                          <size>
+                           <width>250</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="cursor">
+                          <cursorShape>IBeamCursor</cursorShape>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_148">
+                          <property name="spacing">
+                           <number>10</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>25</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>5</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>20</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>15</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="label_40">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>24</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: #6D6D6D;</string>
+                            </property>
+                            <property name="text">
+                             <string>Фамилия</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="register_lastname">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>26</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>16</pointsize>
+                             </font>
+                            </property>
+                            <property name="inputMask">
+                             <string/>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="placeholderText">
+                             <string>Иванов</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QWidget" name="borderWidget_13" native="true">
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>68</height>
+                       </size>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_158">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QWidget" name="widget_28" native="true">
+                         <property name="minimumSize">
+                          <size>
+                           <width>250</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="cursor">
+                          <cursorShape>IBeamCursor</cursorShape>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_159">
+                          <property name="spacing">
+                           <number>10</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>25</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>5</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>20</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>15</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="label_99">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>24</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: #6D6D6D;</string>
+                            </property>
+                            <property name="text">
+                             <string>Имя</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="register_firstname">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>26</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>16</pointsize>
+                             </font>
+                            </property>
+                            <property name="inputMask">
+                             <string/>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="placeholderText">
+                             <string>Иван</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QWidget" name="borderWidget_21" native="true">
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>68</height>
+                       </size>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_160">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QWidget" name="widget_29" native="true">
+                         <property name="minimumSize">
+                          <size>
+                           <width>250</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="cursor">
+                          <cursorShape>IBeamCursor</cursorShape>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_161">
+                          <property name="spacing">
+                           <number>10</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>25</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>5</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>20</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>15</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="label_100">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>24</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: #6D6D6D;</string>
+                            </property>
+                            <property name="text">
+                             <string>Отчество</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="register_middlename">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>26</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>16</pointsize>
+                             </font>
+                            </property>
+                            <property name="inputMask">
+                             <string/>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="placeholderText">
+                             <string>Иванович</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <layout class="QVBoxLayout" name="verticalLayout_129">
+                      <property name="spacing">
+                       <number>45</number>
+                      </property>
+                      <item>
+                       <widget class="QPushButton" name="register_btn">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>67</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>67</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>67</height>
+                         </size>
+                        </property>
+                        <property name="cursor">
+                         <cursorShape>PointingHandCursor</cursorShape>
+                        </property>
+                        <property name="text">
+                         <string>Регистрация</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <layout class="QVBoxLayout" name="verticalLayout_130">
+                    <property name="spacing">
+                     <number>20</number>
+                    </property>
+                    <item>
+                     <widget class="QWidget" name="borderWidget_9" native="true">
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>68</height>
+                       </size>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_131">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QWidget" name="widget_15" native="true">
+                         <property name="minimumSize">
+                          <size>
+                           <width>250</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="cursor">
+                          <cursorShape>IBeamCursor</cursorShape>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_132">
+                          <property name="spacing">
+                           <number>10</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>25</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>5</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>20</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>15</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="label_39">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>24</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: #6D6D6D;</string>
+                            </property>
+                            <property name="text">
+                             <string>Мобильный телефон</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="register_phone">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>26</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>16</pointsize>
+                             </font>
+                            </property>
+                            <property name="inputMask">
+                             <string/>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="placeholderText">
+                             <string>+375291234567</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QWidget" name="borderWidget_22" native="true">
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>68</height>
+                       </size>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_164">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QWidget" name="widget_32" native="true">
+                         <property name="minimumSize">
+                          <size>
+                           <width>250</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="cursor">
+                          <cursorShape>IBeamCursor</cursorShape>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_165">
+                          <property name="spacing">
+                           <number>10</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>25</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>5</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>20</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>15</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="label_101">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>24</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: #6D6D6D;</string>
+                            </property>
+                            <property name="text">
+                             <string>E-Mail</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="register_email">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>26</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>16</pointsize>
+                             </font>
+                            </property>
+                            <property name="inputMask">
+                             <string/>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="placeholderText">
+                             <string>i.ivanov@mail.ru</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QWidget" name="borderWidget_23" native="true">
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>68</height>
+                       </size>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_166">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QWidget" name="widget_33" native="true">
+                         <property name="minimumSize">
+                          <size>
+                           <width>250</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="cursor">
+                          <cursorShape>IBeamCursor</cursorShape>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_167">
+                          <property name="spacing">
+                           <number>10</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>25</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>5</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>20</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>15</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="label_102">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>24</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: #6D6D6D;</string>
+                            </property>
+                            <property name="text">
+                             <string>Дата рождения</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="register_birthdate">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>26</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>16</pointsize>
+                             </font>
+                            </property>
+                            <property name="inputMask">
+                             <string/>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="placeholderText">
+                             <string>01.01.2007</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QWidget" name="borderWidget_26" native="true">
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>68</height>
+                       </size>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_174">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QWidget" name="widget_35" native="true">
+                         <property name="minimumSize">
+                          <size>
+                           <width>250</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="cursor">
+                          <cursorShape>IBeamCursor</cursorShape>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_175">
+                          <property name="spacing">
+                           <number>10</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>25</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>5</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>20</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>15</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="label_103">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>24</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>12</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: #6D6D6D;</string>
+                            </property>
+                            <property name="text">
+                             <string>Пароль</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="register_password">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>26</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <family>Inter</family>
+                              <pointsize>16</pointsize>
+                             </font>
+                            </property>
+                            <property name="inputMask">
+                             <string/>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="echoMode">
+                             <enum>QLineEdit::Password</enum>
+                            </property>
+                            <property name="placeholderText">
+                             <string>Пароль</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="verticalSpacer_20">
+                      <property name="orientation">
+                       <enum>Qt::Vertical</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>20</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_21">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>155</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </widget>
@@ -2508,22 +4907,6 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                     </property>
                     <property name="text">
                      <string>Текущие</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="oldOrders_textBtn">
-                    <property name="font">
-                     <font>
-                      <family>Inter Medium</family>
-                      <pointsize>-1</pointsize>
-                     </font>
-                    </property>
-                    <property name="cursor">
-                     <cursorShape>PointingHandCursor</cursorShape>
-                    </property>
-                    <property name="text">
-                     <string>История покупок</string>
                     </property>
                    </widget>
                   </item>
@@ -8649,8 +11032,8 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>1440</width>
-                <height>1004</height>
+                <width>1214</width>
+                <height>705</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_47">
@@ -9270,8 +11653,8 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>1440</width>
-                <height>1004</height>
+                <width>1266</width>
+                <height>710</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_54">
@@ -10393,870 +12776,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
       </layout>
      </widget>
     </item>
-    <item row="0" column="0" rowspan="2">
-     <widget class="QWidget" name="menu_layout_1" native="true">
-      <property name="maximumSize">
-       <size>
-        <width>85</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <property name="spacing">
-        <number>0</number>
-       </property>
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QWidget" name="widget_2" native="true">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <property name="spacing">
-           <number>72</number>
-          </property>
-          <property name="leftMargin">
-           <number>22</number>
-          </property>
-          <property name="topMargin">
-           <number>45</number>
-          </property>
-          <property name="rightMargin">
-           <number>22</number>
-          </property>
-          <property name="bottomMargin">
-           <number>45</number>
-          </property>
-          <item>
-           <widget class="QPushButton" name="expand1_menuButton">
-            <property name="minimumSize">
-             <size>
-              <width>40</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>40</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="../resources.qrc">
-              <normaloff>:/icons/icons/expand.png</normaloff>:/icons/icons/expand.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>40</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <property name="autoExclusive">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout">
-            <property name="spacing">
-             <number>48</number>
-            </property>
-            <item>
-             <widget class="QPushButton" name="profile1_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/profile.png</normaloff>:/icons/icons/profile.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="schedule1_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/schedule.png</normaloff>:/icons/icons/schedule.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="cart1_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/cart.png</normaloff>:/icons/icons/cart.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="employees1_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/employees.png</normaloff>:/icons/icons/employees.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="cashier1_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/cashier.png</normaloff>:/icons/icons/cashier.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="dispatcher1_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/dispatcher.png</normaloff>:/icons/icons/dispatcher.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="analytics1_menuButton">
-              <property name="text">
-               <string>PushButton</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="quit1_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/quit.png</normaloff>:/icons/icons/quit.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="0" column="1" rowspan="2">
-     <widget class="QWidget" name="menu_layout_2" native="true">
-      <property name="maximumSize">
-       <size>
-        <width>290</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <property name="spacing">
-        <number>0</number>
-       </property>
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QWidget" name="widget_4" native="true">
-         <property name="minimumSize">
-          <size>
-           <width>280</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>280</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_14">
-          <property name="spacing">
-           <number>72</number>
-          </property>
-          <property name="leftMargin">
-           <number>22</number>
-          </property>
-          <property name="topMargin">
-           <number>45</number>
-          </property>
-          <property name="rightMargin">
-           <number>22</number>
-          </property>
-          <property name="bottomMargin">
-           <number>45</number>
-          </property>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_16">
-            <item>
-             <widget class="QPushButton" name="expand2_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/expand.png</normaloff>:/icons/icons/expand.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_9">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_15">
-            <property name="spacing">
-             <number>48</number>
-            </property>
-            <item>
-             <widget class="QPushButton" name="profile2_menuButton">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>230</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>230</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Inter Medium</family>
-                <pointsize>-1</pointsize>
-               </font>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>  Профиль</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/profile.png</normaloff>:/icons/icons/profile.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="schedule2_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>230</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>230</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Inter Medium</family>
-                <pointsize>-1</pointsize>
-               </font>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>  Расписание</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/schedule.png</normaloff>:/icons/icons/schedule.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="cart2_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>230</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>230</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Inter Medium</family>
-                <pointsize>-1</pointsize>
-               </font>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>   Заказы</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/cart.png</normaloff>:/icons/icons/cart.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="employees2_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>230</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>230</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Inter Medium</family>
-                <pointsize>-1</pointsize>
-               </font>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>  Персонал</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/employees.png</normaloff>:/icons/icons/employees.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="cashier2_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>230</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>230</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Inter Medium</family>
-                <pointsize>-1</pointsize>
-               </font>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>  Кассирам</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/cashier.png</normaloff>:/icons/icons/cashier.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="dispatcher2_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>230</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>230</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Inter Medium</family>
-                <pointsize>-1</pointsize>
-               </font>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>  Диспетчерам</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/dispatcher.png</normaloff>:/icons/icons/dispatcher.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton_18">
-              <property name="text">
-               <string>Аналитика</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="quit2_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>230</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>230</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <family>Inter Medium</family>
-                <pointsize>-1</pointsize>
-               </font>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>  Выход</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/quit.png</normaloff>:/icons/icons/quit.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <spacer name="verticalSpacer_5">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
    </layout>
   </widget>
  </widget>
  <resources>
   <include location="../resources.qrc"/>
+  <include location="../../../../../.designer/resources.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -11266,12 +12791,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1312</x>
-     <y>524</y>
+     <x>474</x>
+     <y>129</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1716</x>
-     <y>533</y>
+     <x>704</x>
+     <y>169</y>
     </hint>
    </hints>
   </connection>
@@ -11378,11 +12903,11 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>806</x>
+     <x>626</x>
      <y>442</y>
     </hint>
     <hint type="destinationlabel">
-     <x>805</x>
+     <x>627</x>
      <y>531</y>
     </hint>
    </hints>
@@ -11394,11 +12919,11 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>805</x>
+     <x>627</x>
      <y>531</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1197</x>
+     <x>1017</x>
      <y>442</y>
     </hint>
    </hints>
@@ -11410,11 +12935,11 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1197</x>
+     <x>1017</x>
      <y>442</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1197</x>
+     <x>1017</x>
      <y>530</y>
     </hint>
    </hints>
@@ -11426,11 +12951,11 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1197</x>
+     <x>1017</x>
      <y>530</y>
     </hint>
     <hint type="destinationlabel">
-     <x>825</x>
+     <x>602</x>
      <y>651</y>
     </hint>
    </hints>
@@ -11442,12 +12967,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>854</x>
-     <y>524</y>
+     <x>474</x>
+     <y>129</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1312</x>
-     <y>524</y>
+     <x>474</x>
+     <y>129</y>
     </hint>
    </hints>
   </connection>
@@ -11458,12 +12983,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>862</x>
-     <y>233</y>
+     <x>546</x>
+     <y>201</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1353</x>
-     <y>233</y>
+     <x>546</x>
+     <y>201</y>
     </hint>
    </hints>
   </connection>
@@ -11474,12 +12999,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1353</x>
-     <y>233</y>
+     <x>546</x>
+     <y>201</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1727</x>
-     <y>242</y>
+     <x>746</x>
+     <y>241</y>
     </hint>
    </hints>
   </connection>
@@ -11730,12 +13255,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>830</x>
-     <y>767</y>
+     <x>542</x>
+     <y>368</y>
     </hint>
     <hint type="destinationlabel">
-     <x>810</x>
-     <y>449</y>
+     <x>542</x>
+     <y>331</y>
     </hint>
    </hints>
   </connection>
@@ -11778,12 +13303,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>810</x>
-     <y>449</y>
+     <x>542</x>
+     <y>331</y>
     </hint>
     <hint type="destinationlabel">
-     <x>810</x>
-     <y>537</y>
+     <x>542</x>
+     <y>331</y>
     </hint>
    </hints>
   </connection>
@@ -11794,12 +13319,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>810</x>
-     <y>625</y>
+     <x>542</x>
+     <y>331</y>
     </hint>
     <hint type="destinationlabel">
-     <x>810</x>
-     <y>713</y>
+     <x>542</x>
+     <y>331</y>
     </hint>
    </hints>
   </connection>
@@ -11810,12 +13335,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>810</x>
-     <y>713</y>
+     <x>542</x>
+     <y>331</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1174</x>
-     <y>449</y>
+     <x>542</x>
+     <y>331</y>
     </hint>
    </hints>
   </connection>
@@ -11826,12 +13351,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1174</x>
-     <y>449</y>
+     <x>542</x>
+     <y>331</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1174</x>
-     <y>537</y>
+     <x>542</x>
+     <y>331</y>
     </hint>
    </hints>
   </connection>
@@ -11842,12 +13367,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1174</x>
-     <y>537</y>
+     <x>542</x>
+     <y>331</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1174</x>
-     <y>625</y>
+     <x>542</x>
+     <y>331</y>
     </hint>
    </hints>
   </connection>
@@ -11858,12 +13383,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1174</x>
-     <y>625</y>
+     <x>542</x>
+     <y>331</y>
     </hint>
     <hint type="destinationlabel">
-     <x>830</x>
-     <y>767</y>
+     <x>542</x>
+     <y>368</y>
     </hint>
    </hints>
   </connection>
@@ -11874,12 +13399,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>810</x>
-     <y>537</y>
+     <x>542</x>
+     <y>331</y>
     </hint>
     <hint type="destinationlabel">
-     <x>810</x>
-     <y>625</y>
+     <x>542</x>
+     <y>331</y>
     </hint>
    </hints>
   </connection>
@@ -11912,6 +13437,166 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
     <hint type="destinationlabel">
      <x>542</x>
      <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>register_username</sender>
+   <signal>returnPressed()</signal>
+   <receiver>register_lastname</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>598</x>
+     <y>454</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>578</x>
+     <y>546</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>register_lastname</sender>
+   <signal>returnPressed()</signal>
+   <receiver>register_firstname</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>655</x>
+     <y>542</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>648</x>
+     <y>631</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>register_firstname</sender>
+   <signal>returnPressed()</signal>
+   <receiver>register_middlename</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>574</x>
+     <y>630</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>571</x>
+     <y>713</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>register_middlename</sender>
+   <signal>returnPressed()</signal>
+   <receiver>register_phone</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>739</x>
+     <y>712</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>936</x>
+     <y>449</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>register_phone</sender>
+   <signal>returnPressed()</signal>
+   <receiver>register_email</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1012</x>
+     <y>454</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1025</x>
+     <y>535</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>register_email</sender>
+   <signal>returnPressed()</signal>
+   <receiver>register_birthdate</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>532</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>968</x>
+     <y>631</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>register_birthdate</sender>
+   <signal>returnPressed()</signal>
+   <receiver>register_password</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1014</x>
+     <y>621</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1019</x>
+     <y>712</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>register_password</sender>
+   <signal>returnPressed()</signal>
+   <receiver>register_btn</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>961</x>
+     <y>710</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>798</x>
+     <y>792</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>login_username</sender>
+   <signal>returnPressed()</signal>
+   <receiver>login_password</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>748</x>
+     <y>443</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1052</x>
+     <y>451</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>login_password</sender>
+   <signal>returnPressed()</signal>
+   <receiver>login_btn</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1067</x>
+     <y>442</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>799</x>
+     <y>524</y>
     </hint>
    </hints>
   </connection>

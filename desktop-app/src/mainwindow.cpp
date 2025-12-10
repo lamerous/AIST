@@ -23,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent) :
     dispatcherMenu_buttons_paths = new QButtonGroup(this);
     dispatcherMenu_buttons_stops = new QButtonGroup(this);
     swapPlaces_buttons = new QButtonGroup(this);
+    loginMenu_buttons = new QButtonGroup(this);
+    registerMenu_buttons = new QButtonGroup(this);
     
     dispatcherMenu_buttons_routes->addButton(ui->addRoute_textBtn);
     dispatcherMenu_buttons_routes->addButton(ui->addRoute2_textBtn);
@@ -42,6 +44,11 @@ MainWindow::MainWindow(QWidget *parent) :
     swapPlaces_buttons->addButton(ui->swapPlaces_btn);
     swapPlaces_buttons->addButton(ui->swapPlaces2_btn);
 
+    loginMenu_buttons->addButton(ui->login_textBtn);
+    loginMenu_buttons->addButton(ui->login2_textBtn);
+
+    registerMenu_buttons->addButton(ui->register_textBtn);
+    registerMenu_buttons->addButton(ui->register2_textBtn);
 
     connect(ui->logo_textBtn, &QPushButton::pressed, [this]() {
         ui->stackedWidget->setCurrentIndex(HOME_PAGE);
@@ -49,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->profile1_menuButton, &QPushButton::toggled, [this](bool checked) {
         if (checked) ui->stackedWidget->setCurrentIndex(PROFILE_PAGE);
     });
-    connect(ui->login_textBtn, &QPushButton::pressed, [this]() {
+    connect(ui->cabinet_textBtn, &QPushButton::pressed, [this]() {
         ui->stackedWidget->setCurrentIndex(PROFILE_PAGE);
     });
     connect(ui->schedule1_menuButton, &QPushButton::toggled, [this](bool checked) {
@@ -88,6 +95,12 @@ MainWindow::MainWindow(QWidget *parent) :
     });
     connect(dispatcherMenu_buttons_stops, &QButtonGroup::idClicked, [this] {
         ui->stackedWidget->setCurrentIndex(ADD_STOP_PAGE);
+    });
+    connect(loginMenu_buttons, &QButtonGroup::idClicked, [this] {
+        ui->stackedWidget->setCurrentIndex(LOGIN_PAGE);
+    });
+    connect(registerMenu_buttons, &QButtonGroup::idClicked, [this] {
+        ui->stackedWidget->setCurrentIndex(REGISTER_PAGE);
     });
 
     connect(swapPlaces_buttons, &QButtonGroup::idClicked, [this] {
@@ -138,14 +151,17 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(client->routes(), &RouteApiClient::routeDeleted, this, &MainWindow::handleRouteDelete);
     connect(client->routes(), &RouteApiClient::requestError, this, &MainWindow::handleRouteError);
 
-
+    connect(client->auths(), &AuthApiClient::userRegistred, this, &MainWindow::handleRegister);
+    connect(client->auths(), &AuthApiClient::userLogedIn, this, &MainWindow::handleLogin);
+    connect(client->auths(), &AuthApiClient::requestError, this, &MainWindow::handleAuthError);
 
     connect(this, &MainWindow::stopsInPathsUpdated, this, &MainWindow::handleStopsInPathUpdate);
+
+    client->auths()->setBaseUrl("http://localhost:8002");
 
     client->stops()->getAllStops();
     client->paths()->getAllPaths();
     client->routes()->getAllRoutes();
-
 }
 
 MainWindow::~MainWindow() {
@@ -382,6 +398,8 @@ void MainWindow::on_addRoute_btn_clicked(){
     ui->addRoute_status->setStyleSheet("color: green;");
     ui->addRoute_status->setText("Маршрут добавлен в расписание");
 
+    schedule.add(Route);
+    client->routes()->getAllRoutes();
     clearRouteFields();
 }
 
@@ -406,12 +424,11 @@ void MainWindow::handleRoutes(const QList <Route> &routes) {
         delete item;
     }
 
-    for (const Route &route : routes) {
+    for (const Route &route : schedule.getAllRoutes()) {
         RouteWidget *routeWidget = new RouteWidget(route);
         ui->routesListLayout->insertWidget(0, routeWidget);
         ui->routes_layout->insertWidget(0, routeWidget);
-        // connect(routesWidget, &PathWidget::editButtonClicked, this, &MainWindow::onPathEdit);
-        // connect(pathWidget, &PathWidget::delButtonClicked, this, &MainWindow::onPathDelete);
+        connect(routesWidget, &RouteWidget::buyButtonClicked, this, &MainWindow::handleRouteSell);
     }
 
     int offers = routes.size();
@@ -423,6 +440,16 @@ void MainWindow::handleRoutes(const QList <Route> &routes) {
 
     ui->offerCount_label->setText(offer_string);
     schedule.displayAll();
+}
+
+void MainWindow::onRouteSell(const Route &route) {
+    QLayoutItem* item;
+    while ((item = ui->ordersListLayout->takeAt(0)) != nullptr) {
+        delete item->widget();
+        delete item;
+    }
+
+    
 }
 
 void MainWindow::handleRouteCreate(const Route &route) {
@@ -449,6 +476,52 @@ void MainWindow::on_findRoute2_btn_clicked() {
     if (ui->tripDeparture2->text() != "" && ui->tripDestination2->text() != "") {
         ui->route_label->setText(tripDeparture2 + "—" + tripDestination2);
     }
+}
+
+// ================= AUTH ===================
+void MainWindow::on_login_btn_clicked() {
+    QString username = ui->login_username->text();
+    QString password = ui->login_password->text();
+
+    client->auths()->login(username, password);
+}
+
+void MainWindow::on_register_btn_clicked() {
+    QString username = ui->register_username->text();
+    QString last_name = ui->register_lastname->text();
+    QString first_name = ui->register_firstname->text();
+    QString middle_name = ui->register_middlename->text();
+    QString phone = ui->register_phone->text();
+    QString email = ui->register_email->text();
+    QDate birth_date = QDate::fromString(ui->register_birthdate->text(), "dd.MM.yyyy");
+    QString password = ui->register_password->text();
+
+    client->auths()->regist(username, last_name, first_name, middle_name, phone,
+                            email, birth_date, password);
+}
+
+void MainWindow::handleRegister(const QString &message) {
+    qDebug() << "USER REGISTREED :DD" << message;
+}
+
+void MainWindow::handleLogin(const QString &cookie) {
+    qDebug() << "USER LOGGED IN :DD " << cookie;
+    client->setAccessToken(cookie);
+
+    QFile file;
+
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        return;
+    }
+
+    QTextStream out("cookie");
+    out << cookie;
+    
+    file.close();
+}
+
+void MainWindow::handleAuthError(const QString &error) {
+    qDebug() << error;
 }
 
 

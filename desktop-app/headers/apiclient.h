@@ -6,10 +6,14 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QNetworkCookieJar>
+#include <QNetworkCookie>
+
 #include "route.h"
 #include "path.h"
 #include "busstop.h"
 #include "ticket.h"
+#include "person.h"
 
 // Базовый класс для работы с API
 class BaseApiClient : public QObject {
@@ -22,6 +26,11 @@ public:
     void setBaseUrl(const QString &url);
     QString getBaseUrl() const;
 
+    void setAccessToken(const QString &token);
+    QString getAccessToken() const;
+    void clearAccessToken();
+    bool hasAccessToken() const;
+
 protected:
     QNetworkReply* sendRequest(const QString &endpoint, 
                               const QString &method, 
@@ -30,11 +39,15 @@ protected:
     QJsonObject parseJsonResponse(QNetworkReply *reply, bool &success, QString &error);
     QJsonArray parseJsonArrayResponse(QNetworkReply *reply, bool &success, QString &error);
     
+    QNetworkRequest createAuthorizedRequest(const QUrl &url);
+
     QNetworkAccessManager *networkManager;
     QString baseUrl;
+    QString accessToken;
 
 signals:
     void requestError(const QString &errorMessage);
+    void tokenExpired();
 };
 
 // Клиент для работы с маршрутами
@@ -149,6 +162,31 @@ private:
     QJsonObject ticketToJson(const Ticket &ticket);
 };
 
+class AuthApiClient : public BaseApiClient {
+    Q_OBJECT
+
+public:
+    explicit AuthApiClient(QObject *parent = nullptr);
+
+    void regist(const QString &username, const QString &last_name, const QString &first_name,
+                const QString &middle_name, const QString &phone_number, const QString &email,
+                const QDate &birth_date, const QString &password);
+    void login(const QString &username, const QString &password);
+    void get_user();
+    void change_password(const QString &current_password, const QString &new_password);
+
+signals:
+    void userRegistred(const QString &message);
+    void userLogedIn(const QString &cookie);
+
+private slots:
+    void handleAuthResponse(QNetworkReply *reply);
+
+private:
+    Person jsonToPerson(const QJsonObject &json);
+    QJsonObject personToJson(const Person &person);
+};
+
 // Главный клиент, объединяющий все API
 class ApiClient : public QObject {
     Q_OBJECT
@@ -161,12 +199,18 @@ public:
     StopApiClient* stops() const { return stopClient; }
     PathApiClient* paths() const { return pathClient; }
     TicketApiClient* tickets() const { return ticketClient; }
+    AuthApiClient* auths() const { return authClient; }
     
     void setBaseUrl(const QString &url);
+
+    void setAccessToken(const QString &token);
+    QString getAccessToken() const;
+    void clearAccessToken();
 
 private:
     RouteApiClient *routeClient;
     StopApiClient *stopClient;
     PathApiClient *pathClient;
     TicketApiClient *ticketClient;
+    AuthApiClient *authClient;
 };
