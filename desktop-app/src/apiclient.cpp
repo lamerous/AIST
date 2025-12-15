@@ -86,39 +86,46 @@ QNetworkReply* BaseApiClient::sendRequest(const QString &endpoint,
 QJsonObject BaseApiClient::parseJsonResponse(QNetworkReply *reply, bool &success, QString &error) {
     success = false;
     
-    if (reply->error() != QNetworkReply::NoError) {
-        error = QString("Network error: %1").arg(reply->errorString());
-        
-        if (reply->error() == QNetworkReply::AuthenticationRequiredError ||
-            reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 401) {
-            emit tokenExpired();
-        }
-        
-        return QJsonObject();
-    }
-    
     QByteArray response = reply->readAll();
     QJsonDocument doc = QJsonDocument::fromJson(response);
     
-    if (doc.isNull()) {
+    if (doc.isNull() || !doc.isObject()) {
         error = "Invalid JSON response";
         return QJsonObject();
     }
     
-    if (!doc.isObject()) {
-        error = "Expected JSON object";
-        return QJsonObject();
+    QJsonObject json = doc.object();
+    
+    if (reply->error() != QNetworkReply::NoError) {
+        error = QString("Network: %1").arg(reply->errorString());
+        if (reply->error() == QNetworkReply::AuthenticationRequiredError) {
+            emit tokenExpired();
+        }
+        return json;
     }
     
-    int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-    if (statusCode == 401) {
+    int status = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    
+    if (status == 401) {
         emit tokenExpired();
-        error = "Unauthorized: Invalid or expired token";
-        return QJsonObject();
+        error = "Unauthorized";
+        if (json.contains("detail")) {
+            error = json["detail"].toString();
+        }
+        return json;
+    }
+    
+    if (status >= 400) {
+        if (json.contains("detail")) {
+            error = json["detail"].toString();
+        } else {
+            error = QString("HTTP Error %1").arg(status);
+        }
+        return json;
     }
     
     success = true;
-    return doc.object();
+    return json;
 }
 
 QJsonArray BaseApiClient::parseJsonArrayResponse(QNetworkReply *reply, bool &success, QString &error) {
@@ -644,7 +651,7 @@ void TicketApiClient::getAllTickets(int skip, int limit) {
     query.addQueryItem("limit", QString::number(limit));
     url.setQuery(query);
     
-    QNetworkRequest request(url);
+    QNetworkRequest request = createAuthorizedRequest(url);
     networkManager->get(request)->setProperty("action", "getAll");
 }
 
@@ -653,49 +660,78 @@ void TicketApiClient::getTicket(int ticketId) {
     sendRequest(endpoint, "GET")->setProperty("action", "getOne");
 }
 
-void TicketApiClient::createTicket(const Ticket &ticket) {
-    QJsonObject json = ticketToJson(ticket);
+void TicketApiClient::createTicket(int routeId) {
+    QJsonObject json;
+    json["route_id"] = routeId;
     sendRequest("/api/tickets/", "POST", json)->setProperty("action", "create");
 }
 
-void TicketApiClient::updateTicket(int ticketId, const Ticket &ticket) {
-    QString endpoint = QString("/api/tickets/%1").arg(ticketId);
-    QJsonObject json = ticketToJson(ticket);
-    sendRequest(endpoint, "PUT", json)->setProperty("action", "update");
-}
-
-void TicketApiClient::deleteTicket(int ticketId) {
-    QString endpoint = QString("/api/tickets/%1").arg(ticketId);
-    sendRequest(endpoint, "DELETE")->setProperty("action", "delete");
-}
-
 Ticket TicketApiClient::jsonToTicket(const QJsonObject &json) {
+    int id = json["id"].toInt();
     QString ticketNumber = json["ticket_number"].toString();
+    
     QDate purchaseDate = QDate::fromString(json["purchase_date"].toString(), "yyyy-MM-dd");
     double purchasePrice = json["purchase_price"].toDouble();
     int routeId = json["route_id"].toInt();
+    int userId = json["user_id"].toInt();
+    
+    QTime departureTime, arrivalTime;
+    QString startStop, endStop;
+    
+    if (json.contains("departure_time") && !json["departure_time"].isNull()) {
+        departureTime = QTime::fromString(json["departure_time"].toString(), "hh:mm:ss");
+    }
+    
+    if (json.contains("arrival_time") && !json["arrival_time"].isNull()) {
+        arrivalTime = QTime::fromString(json["arrival_time"].toString(), "hh:mm:ss");
+    }
+    
+    if (json.contains("start_stop") && !json["start_stop"].isNull()) {
+        startStop = json["start_stop"].toString();
+    }
+    
+    if (json.contains("end_stop") && !json["end_stop"].isNull()) {
+        endStop = json["end_stop"].toString();
+    }
     
     Route stubRoute;
     stubRoute.setId(routeId);
     
     Ticket ticket(
         stubRoute,
-        "Passenger", 
+        "Passenger",
         ticketNumber,
-        "A1",         
+        "A1",
         purchaseDate,
         purchasePrice
     );
+    
+    ticket.setId(id);
+    ticket.setUserId(userId);
+    
+    if (!departureTime.isNull()) {
+        ticket.setDepartureTime(departureTime);
+    }
+    
+    if (!arrivalTime.isNull()) {
+        ticket.setArrivalTime(arrivalTime);
+    }
+    
+    if (!startStop.isEmpty() || !endStop.isEmpty()) {
+        ticket.setStartStop(startStop);
+        ticket.setEndStop(endStop);
+    }
     
     return ticket;
 }
 
 QJsonObject TicketApiClient::ticketToJson(const Ticket &ticket) {
     QJsonObject json;
+    
     json["ticket_number"] = ticket.getTicketNumber();
     json["purchase_date"] = ticket.getPurchaseDate().toString("yyyy-MM-dd");
     json["purchase_price"] = static_cast<double>(ticket.getActualPrice());
-    json["route_id"] = 1; // Заглушка - нужно передавать реальный route_id
+    json["route_id"] = ticket.getRoute().getId();
     
     return json;
 }
@@ -735,28 +771,12 @@ void TicketApiClient::handleTicketsResponse(QNetworkReply *reply) {
         if (success) {
             emit ticketCreated(jsonToTicket(obj));
         } else {
-            emit requestError(error);
-        }
-    }
-    else if (action == "update") {
-        QJsonObject obj = parseJsonResponse(reply, success, error);
-        
-        if (success) {
-            emit ticketUpdated(jsonToTicket(obj));
-        } else {
-            emit requestError(error);
-        }
-    }
-    else if (action == "delete") {
-        if (reply->error() == QNetworkReply::NoError) {
-            QString endpoint = reply->property("endpoint").toString();
-            QStringList parts = endpoint.split('/');
-            if (parts.size() > 0) {
-                int ticketId = parts.last().toInt();
-                emit ticketDeleted(ticketId);
+            if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 404) {
+                error = "Маршрут не найден";
+            } else if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 400) {
+                error = "Нет свободных мест";
             }
-        } else {
-            emit requestError(reply->errorString());
+            emit requestError(error);
         }
     }
     
@@ -776,6 +796,7 @@ void AuthApiClient::regist(const QString &username, const QString &last_name, co
                 const QDate &birth_date, const QString &password)
 {
     QJsonObject json;
+
     json["username"] = username;
     json["email"] = email;
     json["first_name"] = first_name;
@@ -807,18 +828,89 @@ void AuthApiClient::login(const QString &username, const QString &password) {
 }
 
 void AuthApiClient::get_user() {
-
+    QUrl url(baseUrl + "/api/auth/me");
+    QNetworkRequest request = createAuthorizedRequest(url);
+    networkManager->get(request)->setProperty("action", "getUser");
 }
 
 void AuthApiClient::change_password(const QString &current_password, const QString &new_password) {
 
 }
 
-Person AuthApiClient::jsonToPerson(const QJsonObject& json) {
+User AuthApiClient::jsonToUser(const QJsonObject& json) {
+    Person person;
     
+    QJsonObject userObj;
+    if (json.contains("user") && json["user"].isObject()) {
+        userObj = json["user"].toObject();
+    } else {
+        userObj = json;
+    }
+    
+    if (userObj.contains("first_name")) {
+        person.setFirstName(userObj["first_name"].toString());
+    }
+    
+    if (userObj.contains("last_name")) {
+        person.setLastName(userObj["last_name"].toString());
+    }
+    
+    if (userObj.contains("middle_name")) {
+        person.setMiddleName(userObj["middle_name"].toString());
+    }
+    
+    if (userObj.contains("email")) {
+        person.setEmail(userObj["email"].toString());
+    }
+    
+    if (userObj.contains("phone_number")) {
+        person.setPhoneNumber(userObj["phone_number"].toString());
+    }
+    
+    if (userObj.contains("birth_date")) {
+        QString birthDateStr = userObj["birth_date"].toString();
+        if (!birthDateStr.isEmpty()) {
+            QDate birthDate = QDate::fromString(birthDateStr, "yyyy-MM-dd");
+            person.setBirthDate(birthDate);
+        }
+    }
+    
+    User user;
+    user.setPerson(person);
+    
+    if (userObj.contains("username")) {
+        user.setUsername(userObj["username"].toString());
+    }
+    
+    if (userObj.contains("id")) {
+        user.setUserId(userObj["id"].toInt());
+    }
+    
+    user.setRole("passenger"); 
+    
+    return user;
 }
 
-QJsonObject AuthApiClient::personToJson(const Person& person) {
+QJsonObject AuthApiClient::userToJson(const User& user) {
+    QJsonObject json;
+    
+    Person person = user.getPerson();
+    
+    json["first_name"] = person.getFirstName();
+    json["last_name"] = person.getLastName();
+    json["middle_name"] = person.getMiddleName();
+    json["email"] = person.getEmail();
+    json["phone_number"] = person.getPhoneNumber();
+    
+    json["username"] = user.getUsername();
+    json["user_id"] = user.getUserId();
+    json["role"] = user.getRole();
+    
+    if (person.getBirthDate().isValid()) {
+        json["birth_date"] = person.getBirthDate().toString("yyyy-MM-dd");
+    }
+    
+    return json;
 }
 
 void AuthApiClient::handleAuthResponse(QNetworkReply *reply) {
@@ -827,13 +919,37 @@ void AuthApiClient::handleAuthResponse(QNetworkReply *reply) {
     QString error;
     
     if (action == "registration") {
-        QJsonArray array = parseJsonArrayResponse(reply, success, error);
+        QJsonObject json = parseJsonResponse(reply, success, error);
         
         if (success) {
             emit userRegistred("User registred");
         } 
         else {
-            emit requestError(error);
+            QString errorMessage = error; 
+            
+            if (json.contains("detail")) {
+                QJsonValue detail = json["detail"];
+                
+                if (detail.isString()) {
+                    errorMessage = detail.toString();
+                }
+                else if (detail.isArray()) {
+                    QJsonArray errors = detail.toArray();
+                    QStringList messages;
+                    
+                    for (const QJsonValue &err : errors) {
+                        if (err.isObject() && err.toObject().contains("msg")) {
+                            messages.append(err.toObject()["msg"].toString());
+                        }
+                    }
+                    
+                    if (!messages.isEmpty()) {
+                        errorMessage = messages.join("; ");
+                    }
+                }
+            }
+            
+            emit registerError(errorMessage);
         }
     }
 
@@ -841,10 +957,22 @@ void AuthApiClient::handleAuthResponse(QNetworkReply *reply) {
         QJsonObject json = parseJsonResponse(reply, success, error);
         
         if (success) {
-            emit userLogedIn(json["access_token"].toString());
+            emit userLogedIn(jsonToUser(json), json["access_token"].toString());
         }
         else {
-            emit requestError(error);
+            emit loginError(json["detail"].toString());
+        }
+    }
+
+    else if (action == "getUser") {
+        QJsonObject json = parseJsonResponse(reply, success, error);
+
+        if (success) {
+            qDebug() << json;
+            emit getUser(jsonToUser(json));
+        }
+        else {
+            emit getUserError(json["detail"].toString());
         }
     }
 }

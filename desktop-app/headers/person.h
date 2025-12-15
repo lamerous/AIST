@@ -14,9 +14,10 @@ protected:
     QString email;
 
 public:
+    Person();
     Person(const QString& firstName, const QString& lastName, const QString& middleName,
            const QDate& birthDate, const QString& phoneNumber, const QString& email);
-    virtual ~Person() = default;
+    virtual ~Person();
 
     QString getFirstName() const;
     QString getLastName() const;

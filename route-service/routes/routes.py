@@ -2,11 +2,16 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 import models, schemas
 from database import get_db
+from dependencies import get_current_user, require_dispatcher_role
 
 router = APIRouter()
 
 @router.post("/", response_model=schemas.Route)
-def create_route(route: schemas.RouteCreate, db: Session = Depends(get_db)):
+def create_route(
+    route: schemas.RouteCreate,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(require_dispatcher_role)
+):
     db_route = models.Route(**route.dict())
     db.add(db_route)
     db.commit()
@@ -14,7 +19,11 @@ def create_route(route: schemas.RouteCreate, db: Session = Depends(get_db)):
     return db_route
 
 @router.get("/", response_model=list[schemas.Route])
-def read_routes(skip: int = 0, limit: int = 100, search: str = None, db: Session = Depends(get_db)):
+def read_routes(
+    skip: int = 0, 
+    limit: int = 100, 
+    db: Session = Depends(get_db)
+):
     routes_with_paths = (
         db.query(models.Route, models.Path)
         .join(
@@ -26,8 +35,6 @@ def read_routes(skip: int = 0, limit: int = 100, search: str = None, db: Session
         .limit(limit)
         .all()
     )
-
-    print(routes_with_paths)
     
     result = []
     for route, path in routes_with_paths:
@@ -47,7 +54,10 @@ def read_routes(skip: int = 0, limit: int = 100, search: str = None, db: Session
     return result
 
 @router.get("/{route_id}", response_model=schemas.Route)
-def read_route(route_id: int, db: Session = Depends(get_db)):
+def read_route(
+    route_id: int, 
+    db: Session = Depends(get_db)
+):
     route_with_path = (
         db.query(models.Route, models.Path)
         .join(
@@ -78,7 +88,12 @@ def read_route(route_id: int, db: Session = Depends(get_db)):
     return route_data
 
 @router.put("/{route_id}", response_model=schemas.Route)
-def update_route(route_id: int, route: schemas.RouteCreate, db: Session = Depends(get_db)):
+def update_route(
+    route_id: int, 
+    route: schemas.RouteCreate, 
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(require_dispatcher_role)
+):
     db_route = db.query(models.Route).filter(models.Route.id == route_id).first()
     if db_route is None:
         raise HTTPException(status_code=404, detail="Route not found")
@@ -89,7 +104,11 @@ def update_route(route_id: int, route: schemas.RouteCreate, db: Session = Depend
     return db_route
 
 @router.delete("/{route_id}")
-def delete_route(route_id: int, db: Session = Depends(get_db)):
+def delete_route(
+    route_id: int, 
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(require_dispatcher_role)
+):
     db_route = db.query(models.Route).filter(models.Route.id == route_id).first()
     if db_route is None:
         raise HTTPException(status_code=404, detail="Route not found")

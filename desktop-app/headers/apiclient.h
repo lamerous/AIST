@@ -14,6 +14,7 @@
 #include "busstop.h"
 #include "ticket.h"
 #include "person.h"
+#include "user.h"
 
 // Базовый класс для работы с API
 class BaseApiClient : public QObject {
@@ -143,7 +144,7 @@ public:
     
     void getAllTickets(int skip = 0, int limit = 100);
     void getTicket(int ticketId);
-    void createTicket(const Ticket &ticket);
+    void createTicket(int routeId);
     void updateTicket(int ticketId, const Ticket &ticket);
     void deleteTicket(int ticketId);
 
@@ -177,14 +178,18 @@ public:
 
 signals:
     void userRegistred(const QString &message);
-    void userLogedIn(const QString &cookie);
+    void userLogedIn(const User &user, const QString &cookie);
+    void getUser(const User &user);
+    void registerError(const QString &error);
+    void loginError(const QString &error);
+    void getUserError(const QString &error);
 
 private slots:
     void handleAuthResponse(QNetworkReply *reply);
 
 private:
-    Person jsonToPerson(const QJsonObject &json);
-    QJsonObject personToJson(const Person &person);
+    User jsonToUser(const QJsonObject &json);
+    QJsonObject userToJson(const User &user);
 };
 
 // Главный клиент, объединяющий все API

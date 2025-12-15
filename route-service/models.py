@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Date, Time, JSON, ForeignKey, Numeric, ARRAY
+from sqlalchemy import Column, Integer, String, Date, Time, JSON, ForeignKey, Numeric
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -31,4 +31,7 @@ class Ticket(Base):
     ticket_number = Column(String(50))
     purchase_date = Column(Date)
     purchase_price = Column(Numeric(10, 2))
-    route_id = Column(Integer)
+    route_id = Column(Integer, ForeignKey("routes.id", ondelete="CASCADE"))
+    user_id = Column(Integer)
+    
+    route = relationship("Route")

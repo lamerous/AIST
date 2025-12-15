@@ -1,10 +1,19 @@
 #include "person.h"
 #include <QDate>
 
+Person::Person() : firstName(""), lastName(""), middleName(""),
+                birthDate(1970, 01, 01), phoneNumber(""), email("")
+{
+}
+
 Person::Person(const QString& firstName, const QString& lastName, const QString& middleName,
                const QDate& birthDate, const QString& phoneNumber, const QString& email)
     : firstName(firstName), lastName(lastName), middleName(middleName),
       birthDate(birthDate), phoneNumber(phoneNumber), email(email)
+{
+}
+
+Person::~Person()
 {
 }
 
@@ -72,25 +81,31 @@ int Person::getAge() const {
     return age;
 }
 
+QString Person::getRole() const {
+    return "Person";
+}
+
+void Person::displayInfo() const {
+    qDebug() << "Person:" << getFullName() 
+             << ", возраст:" << getAge() 
+             << ", тел:" << phoneNumber 
+             << ", email:" << email;
+}
+
+QString Person::toString() const {
+    return QString("Person: %1, возраст: %2 лет, тел: %3, email: %4")
+        .arg(getFullName())
+        .arg(getAge())
+        .arg(phoneNumber)
+        .arg(email);
+}
+
 bool Person::isValid() const {
     return !firstName.isEmpty() && 
            !lastName.isEmpty() && 
            birthDate.isValid() && 
            birthDate < QDate::currentDate() &&
            !phoneNumber.isEmpty();
-}
-
-void Person::displayInfo() const {
-    qDebug() << getFullName() << ", возраст:" << getAge() 
-             << ", тел:" << phoneNumber << ", email:" << email;
-}
-
-QString Person::toString() const {
-    return QString("%1 %2 лет, тел: %3, email: %4")
-        .arg(getFullName())
-        .arg(getAge())
-        .arg(phoneNumber)
-        .arg(email);
 }
 
 QDebug operator<<(QDebug debug, const Person& person) {

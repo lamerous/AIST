@@ -2,6 +2,7 @@
 #include <QMessageBox>
 #include <QKeyEvent>
 #include <QButtonGroup>
+#include <QFileDialog>
 
 #include "mainwindow.h"
 #include "ui_main_window.h"
@@ -25,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
     swapPlaces_buttons = new QButtonGroup(this);
     loginMenu_buttons = new QButtonGroup(this);
     registerMenu_buttons = new QButtonGroup(this);
+
+    client = new ApiClient(this);
     
     dispatcherMenu_buttons_routes->addButton(ui->addRoute_textBtn);
     dispatcherMenu_buttons_routes->addButton(ui->addRoute2_textBtn);
@@ -54,10 +57,22 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->stackedWidget->setCurrentIndex(HOME_PAGE);
     });
     connect(ui->profile1_menuButton, &QPushButton::toggled, [this](bool checked) {
-        if (checked) ui->stackedWidget->setCurrentIndex(PROFILE_PAGE);
+        if (checked){
+            if (currentUser.isAuthorized()){
+                ui->stackedWidget->setCurrentIndex(PROFILE_PAGE);
+            }
+            else {
+                ui->stackedWidget->setCurrentIndex(LOGIN_PAGE);
+            }
+        }
     });
     connect(ui->cabinet_textBtn, &QPushButton::pressed, [this]() {
-        ui->stackedWidget->setCurrentIndex(PROFILE_PAGE);
+        if (currentUser.isAuthorized()){
+            ui->stackedWidget->setCurrentIndex(PROFILE_PAGE);
+        }
+        else {
+            ui->stackedWidget->setCurrentIndex(LOGIN_PAGE);
+        }
     });
     connect(ui->schedule1_menuButton, &QPushButton::toggled, [this](bool checked) {
         if (checked) ui->stackedWidget->setCurrentIndex(SCHEDULE_PAGE);
@@ -71,17 +86,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->currentOrders2_textBtn, &QPushButton::pressed, [this]() {
         ui->stackedWidget->setCurrentIndex(ORDERS1_PAGE);
     });
-    connect(ui->oldOrders_textBtn, &QPushButton::pressed, [this]() {
-        ui->stackedWidget->setCurrentIndex(ORDERS2_PAGE);
-    });
-    connect(ui->cashier1_menuButton, &QPushButton::toggled, [this](bool checked) {
-        if (checked) ui->stackedWidget->setCurrentIndex(CASHIER_PAGE);
-    });
+    // connect(ui->cashier1_menuButton, &QPushButton::toggled, [this](bool checked) {
+    //     if (checked) ui->stackedWidget->setCurrentIndex(CASHIER_PAGE);
+    // });
     connect(ui->currentOrders2_textBtn, &QPushButton::pressed, [this]() {
         ui->stackedWidget->setCurrentIndex(ORDERS1_PAGE);
-    });
-    connect(ui->oldOrders_textBtn, &QPushButton::pressed, [this]() {
-        ui->stackedWidget->setCurrentIndex(ORDERS2_PAGE);
     });
     connect(ui->dispatcher1_menuButton, &QPushButton::toggled, [this](bool checked) {
         if (checked) ui->stackedWidget->setCurrentIndex(ADD_ROUTE_PAGE);
@@ -107,27 +116,29 @@ MainWindow::MainWindow(QWidget *parent) :
         MainWindow::on_swapPlaces_btn_clicked();
     });
 
-    // Если открыта страница с диспетчерским меню
     connect(ui->stackedWidget, &QStackedWidget::currentChanged, this, [this](int index){
-        if (index == ADD_ROUTE_PAGE) {
+        if (index == LOGIN_PAGE) {
+            ui->login_status->setText("");
+        }
+        else if (index == REGISTER_PAGE) {
+            ui->register_status->setText("");
+        }
+        else if (index == ADD_ROUTE_PAGE) {
             ui->addRoute_status->setText("");
         }
-        if (index == ADD_PATH_PAGE) {
+        else if (index == ADD_PATH_PAGE) {
             ui->addPath_status->setText("");
         }
-        if (index == ADD_STOP_PAGE) {
+        else if (index == ADD_STOP_PAGE) {
             ui->addStop_status->setText("");
         }
-        if (index == EDIT_PATH_PAGE) {
+        else if (index == EDIT_PATH_PAGE) {
             ui->editPath_status->setText("");
         }
-        if (index == SCHEDULE_PAGE) {
+        else if (index == SCHEDULE_PAGE) {
             MainWindow::on_schedule1_menuButton_clicked();
         }
     });
-
-
-    client = new ApiClient(this);
 
     // connect(client->routes(), &RouteApiClient::routesReceived, this, &MainWindow::handleRoutes);
     // connect(client->routes(), &RouteApiClient::routeReceived, this, &MainWindow::handleRoute);
@@ -151,17 +162,30 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(client->routes(), &RouteApiClient::routeDeleted, this, &MainWindow::handleRouteDelete);
     connect(client->routes(), &RouteApiClient::requestError, this, &MainWindow::handleRouteError);
 
+    connect(client->tickets(), &TicketApiClient::ticketsReceived, this, &MainWindow::handleTickets);
+    connect(client->tickets(), &TicketApiClient::ticketCreated, this, &MainWindow::handleTicketCreate);
+    connect(client->tickets(), &TicketApiClient::requestError, this, &MainWindow::handleTicketError);
+
     connect(client->auths(), &AuthApiClient::userRegistred, this, &MainWindow::handleRegister);
     connect(client->auths(), &AuthApiClient::userLogedIn, this, &MainWindow::handleLogin);
+    connect(client->auths(), &AuthApiClient::getUser, this, &MainWindow::handleUser);
     connect(client->auths(), &AuthApiClient::requestError, this, &MainWindow::handleAuthError);
+    connect(client->auths(), &AuthApiClient::registerError, this, &MainWindow::handleRegisterError);
+    connect(client->auths(), &AuthApiClient::loginError, this, &MainWindow::handleLoginError);
+    connect(client->auths(), &AuthApiClient::getUserError, this, &MainWindow::handleGetUserError);
 
     connect(this, &MainWindow::stopsInPathsUpdated, this, &MainWindow::handleStopsInPathUpdate);
 
     client->auths()->setBaseUrl("http://localhost:8002");
 
-    client->stops()->getAllStops();
-    client->paths()->getAllPaths();
-    client->routes()->getAllRoutes();
+    updateServerData();
+
+    currentUser.checkCookieFile();
+    if (currentUser.isAuthorized()) {
+        qDebug() << "Устанавливаем куки";
+        client->setAccessToken(currentUser.getCookie());
+        client->auths()->get_user();
+    }
 }
 
 MainWindow::~MainWindow() {
@@ -192,12 +216,7 @@ void MainWindow::handleStopCreate(const BusStop &stop) {
 }
 
 void MainWindow::handleStops(const QList<BusStop> &stops) {
-    QLayoutItem* item;
-    while ((item = ui->stopsListLayout->takeAt(0)) != nullptr) {
-        delete item->widget();
-        delete item;
-    }
-    schedule.clear();
+    clearLayout(ui->stopsListLayout);
     
     for (const BusStop &stop : stops) {
         StopWidget *stopWidget = new StopWidget(stop);
@@ -239,11 +258,7 @@ void MainWindow::on_findPath_textChanged() {
 }
 
 void MainWindow::handlePaths(const QList<Path> &paths) {
-    QLayoutItem* item;
-    while ((item = ui->pathsListLayout->takeAt(0)) != nullptr) {
-        delete item->widget();
-        delete item;
-    }
+    clearLayout(ui->pathsListLayout);
     
     for (const Path &path : paths) {
         PathWidget *pathWidget = new PathWidget(path);
@@ -295,11 +310,7 @@ void MainWindow::onPathEdit(Path &path) {
 }
 
 void MainWindow::handleStopsInPathUpdate() {
-    QLayoutItem* item;
-    while ((item = ui->editStopsListLayout->takeAt(0)) != nullptr) {
-        delete item->widget();
-        delete item;
-    }
+    clearLayout(ui->editStopsListLayout);
 
     for (const BusStop &stop : currentEditingPath.getStops()) {
         StopWidget *stopWidget = new StopWidget(stop);
@@ -398,7 +409,7 @@ void MainWindow::on_addRoute_btn_clicked(){
     ui->addRoute_status->setStyleSheet("color: green;");
     ui->addRoute_status->setText("Маршрут добавлен в расписание");
 
-    schedule.add(Route);
+    schedule.addRoute(route);
     client->routes()->getAllRoutes();
     clearRouteFields();
 }
@@ -414,21 +425,14 @@ void MainWindow::clearRouteFields() {
 }
 
 void MainWindow::handleRoutes(const QList <Route> &routes) {
-    QLayoutItem* item;
-    while ((item = ui->routesListLayout->takeAt(0)) != nullptr) {
-        delete item->widget();
-        delete item;
-    }
-    while ((item = ui->routes_layout->takeAt(0)) != nullptr) {
-        delete item->widget();
-        delete item;
-    }
+    clearLayout(ui->routesListLayout);
+    clearLayout(ui->routes_layout);
 
-    for (const Route &route : schedule.getAllRoutes()) {
+    for (const Route &route : routes) {
         RouteWidget *routeWidget = new RouteWidget(route);
         ui->routesListLayout->insertWidget(0, routeWidget);
         ui->routes_layout->insertWidget(0, routeWidget);
-        connect(routesWidget, &RouteWidget::buyButtonClicked, this, &MainWindow::handleRouteSell);
+        connect(routeWidget, &RouteWidget::buyButtonClicked, this, &MainWindow::handleRouteSell);
     }
 
     int offers = routes.size();
@@ -442,14 +446,8 @@ void MainWindow::handleRoutes(const QList <Route> &routes) {
     schedule.displayAll();
 }
 
-void MainWindow::onRouteSell(const Route &route) {
-    QLayoutItem* item;
-    while ((item = ui->ordersListLayout->takeAt(0)) != nullptr) {
-        delete item->widget();
-        delete item;
-    }
-
-    
+void MainWindow::handleRouteSell(const Route &route) {
+    client->tickets()->createTicket(route.getId());
 }
 
 void MainWindow::handleRouteCreate(const Route &route) {
@@ -478,12 +476,90 @@ void MainWindow::on_findRoute2_btn_clicked() {
     }
 }
 
+// ================= TICKETS ===================
+void MainWindow::handleTickets(const QList <Ticket> &tickets) {
+    clearLayout(ui->ordersListLayout);
+
+    for (const Ticket &ticket : tickets) {
+        OrderWidget *orderWidget = new OrderWidget(ticket);
+        ui->ordersListLayout->insertWidget(0, orderWidget);
+        connect(orderWidget, &OrderWidget::downloadTicketClicked, this, &MainWindow::on_downloadTicket_clicked);
+        connect(orderWidget, &OrderWidget::downloadCheckClicked, this, &MainWindow::on_downloadCheck_clicked);
+    }
+}
+
+void MainWindow::handleTicketCreate(const Ticket &ticket) {
+    client->tickets()->getAllTickets();
+}
+
+void MainWindow::handleTicketError(const QString &error) {
+    qDebug() << error;
+}
+
+void MainWindow::on_downloadTicket_clicked(const Ticket &ticket) {
+    Ticket tempTicket = ticket;
+    tempTicket.setPassengerName(currentUser.getPerson().getLastName()+" "+currentUser.getPerson().getFirstName());
+    QString fileName = QFileDialog::getSaveFileName(
+        this,
+        tr("Save File"),
+        QDir::homePath() + "/ticket-"+QString::number(tempTicket.getId())+".txt",
+        tr("Text Files (*.txt);;All Files (*.*)")
+    );
+
+    if (!fileName.isEmpty()) {
+        QFile file(fileName);
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            QTextStream out(&file);
+            out << tempTicket.toString() << "\n";
+            file.close();
+        }
+    }
+}
+
+void MainWindow::on_downloadCheck_clicked(const Ticket &ticket) {
+    Ticket tempTicket = ticket;
+    tempTicket.setPassengerName(currentUser.getPerson().getLastName()+" "+currentUser.getPerson().getFirstName());
+    QString fileName = QFileDialog::getSaveFileName(
+        this,
+        tr("Save File"),
+        QDir::homePath() + "/check-"+QString::number(tempTicket.getId())+".txt",
+        tr("Text Files (*.txt);;All Files (*.*)")
+    );
+
+    if (!fileName.isEmpty()) {
+        QFile file(fileName);
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            QTextStream out(&file);
+            out << "Operation info from bank for ticket with number " << tempTicket.getId() << "\n";
+            file.close();
+        }
+    }
+}
+
 // ================= AUTH ===================
 void MainWindow::on_login_btn_clicked() {
     QString username = ui->login_username->text();
     QString password = ui->login_password->text();
 
     client->auths()->login(username, password);
+}
+
+void MainWindow::on_logout_btn_clicked() {
+    currentUser.setAuthorized(0);
+    client->clearAccessToken();
+    if (QFile::exists("cookie")) {
+        if (QFile::remove("cookie")) {
+            qDebug() << "Файл куки успешно удалён!";
+        }
+        else {
+            qDebug() << "Не удалось удалить файл куки.";
+        }
+    }
+    else {
+        qDebug() << "Файл куки не найден.";
+    }
+    ui->stackedWidget->setCurrentIndex(LOGIN_PAGE);
+    clearLayout(ui->ordersListLayout);
 }
 
 void MainWindow::on_register_btn_clicked() {
@@ -501,29 +577,91 @@ void MainWindow::on_register_btn_clicked() {
 }
 
 void MainWindow::handleRegister(const QString &message) {
-    qDebug() << "USER REGISTREED :DD" << message;
+    ui->register_status->setStyleSheet("color: green;");
+    ui->register_status->setText("Регистрация прошла успешно\nВойдите в свой аккаунт");
 }
 
-void MainWindow::handleLogin(const QString &cookie) {
-    qDebug() << "USER LOGGED IN :DD " << cookie;
-    client->setAccessToken(cookie);
-
-    QFile file;
-
+void MainWindow::handleLogin(const User &user, const QString &cookie) {
+    QFile file("cookie");
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         return;
     }
-
-    QTextStream out("cookie");
-    out << cookie;
-    
+    QTextStream out(&file);
+    out << cookie.trimmed();
     file.close();
+
+    currentUser = user;
+    currentUser.setAuthorized(true);
+
+    updateUserData(user);
+
+    ui->stackedWidget->setCurrentIndex(PROFILE_PAGE);
+}
+
+void MainWindow::handleUser(const User &user) {
+    updateUserData(user);
+    updateServerData();
+}
+
+void MainWindow::updateUserData(const User &user) {
+    Person person = user.getPerson();
+
+    ui->cabinet_textBtn->setText(user.getUsername());
+    ui->userRole_label->setText(roleMatcher(user.getRole()));
+    ui->profile_username->setText(user.getUsername());
+    ui->profile_lastname->setText(person.getLastName());
+    ui->profile_firstname->setText(person.getFirstName());
+    ui->profile_middlename->setText(person.getMiddleName());
+    ui->profile_email->setText(person.getEmail());
+    ui->profile_phone->setText(person.getPhoneNumber());
+
+    client->tickets()->getAllTickets();
 }
 
 void MainWindow::handleAuthError(const QString &error) {
-    qDebug() << error;
+    qDebug() << "Ошибка при обращении к сервису аутентификации и атворизации " << error;
 }
 
+void MainWindow::handleRegisterError(const QString &error) {
+    ui->register_status->setStyleSheet("color: red;");
+    ui->register_status->setText("Ошибка регистрации\n"+error);
+}
+
+void MainWindow::handleLoginError(const QString &error) {
+    ui->login_status->setStyleSheet("color: red;");
+    ui->login_status->setText("Ошибка входа\n"+error);
+}
+
+void MainWindow::handleGetUserError(const QString &error) {
+    on_logout_btn_clicked();
+}
+
+void MainWindow::updateServerData() {
+    client->stops()->getAllStops();
+    client->paths()->getAllPaths();
+    client->routes()->getAllRoutes();
+    client->tickets()->getAllTickets();
+}
+
+void MainWindow::clearLayout(QLayout *layout){
+    QLayoutItem* item;
+    while ((item = layout->takeAt(0)) != nullptr) {
+        delete item->widget();
+        delete item;
+    }
+}
+
+QString MainWindow::roleMatcher(const QString &role) {
+    if (role == "passenger") {
+        return "пассажир";
+    }
+    else if (role == "dispatcher") {
+        return "диспетчер";
+    }
+    else if (role == "admin") {
+        return "администратор";
+    }
+}
 
 void MainWindow::on_schedule1_menuButton_clicked() {
     

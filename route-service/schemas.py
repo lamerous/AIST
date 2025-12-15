@@ -1,6 +1,8 @@
+# schemas.py
 from pydantic import BaseModel, ConfigDict
 from datetime import date, time
 from typing import Optional, Any, List
+from decimal import Decimal
 
 class StopBase(BaseModel):
     stop_name: str
@@ -49,13 +51,29 @@ class Route(RouteBase):
 class TicketBase(BaseModel):
     ticket_number: str
     purchase_date: date
-    purchase_price: float
+    purchase_price: Decimal
     route_id: int
 
-class TicketCreate(TicketBase):
-    pass
+class TicketCreate(BaseModel):
+    route_id: int
 
 class Ticket(TicketBase):
     id: int
+    user_id: int
+    class Config:
+        orm_mode = True
+
+class TicketResponse(BaseModel):
+    id: int
+    ticket_number: str
+    purchase_date: date
+    purchase_price: Decimal
+    route_id: int
+    user_id: int
+    departure_time: Optional[time] = None
+    arrival_time: Optional[time] = None
+    start_stop: Optional[str] = None
+    end_stop: Optional[str] = None
+    
     class Config:
         orm_mode = True

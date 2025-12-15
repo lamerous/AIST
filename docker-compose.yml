@@ -23,7 +23,7 @@ services:
       - 8001:8000
     environment:
       - JWT_SECRET=${JWT_SECRET}
-      - DATABASE_URL=postgresql://${DB_USER}:${POSTGRES_PASSWORD}@db/route_db
+      - DATABASE_URL=postgresql://${DB_USER}:${POSTGRES_PASSWORD}@db/database
     depends_on:
       db:
         condition: service_healthy
@@ -37,7 +37,7 @@ services:
       - 8002:8000
     environment:
       - JWT_SECRET=${JWT_SECRET}
-      - DATABASE_URL=postgresql://${DB_USER}:${USERDB_PASSWORD}@db/users_db
+      - DATABASE_URL=postgresql://${DB_USER}:${USERDB_PASSWORD}@db/database
     depends_on:
       db:
         condition: service_healthy   

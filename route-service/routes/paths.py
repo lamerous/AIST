@@ -2,11 +2,16 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 import models, schemas
 from database import get_db
+from dependencies import get_current_user, require_dispatcher_role
 
 router = APIRouter()
 
 @router.post("/", response_model=schemas.Path)
-def create_path(path: schemas.PathCreate, db: Session = Depends(get_db)):
+def create_path(
+    path: schemas.PathCreate, 
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(require_dispatcher_role)
+):
     db_path = models.Path(**path.dict())
     db.add(db_path)
     db.commit()
@@ -14,9 +19,12 @@ def create_path(path: schemas.PathCreate, db: Session = Depends(get_db)):
     return db_path
 
 @router.get("/", response_model=list[schemas.Path])
-def read_paths(skip: int = 0, limit: int = 100, search: str = None, db: Session = Depends(get_db)):
-    # paths = db.query(models.Path).offset(skip).limit(limit).all()
-
+def read_paths(
+    skip: int = 0, 
+    limit: int = 100, 
+    search: str = None, 
+    db: Session = Depends(get_db)
+):
     query = db.query(models.Path)
     
     if search:
@@ -25,18 +33,26 @@ def read_paths(skip: int = 0, limit: int = 100, search: str = None, db: Session 
         )
     
     paths = query.offset(skip).limit(limit).all()
-
     return paths
 
 @router.get("/{path_id}", response_model=schemas.Path)
-def read_path(pathNumber: str, db: Session = Depends(get_db)):
-    path = db.query(models.Path).filter(models.Path.route_number == pathNumber).first()
+def read_path(
+    path_id: int,  # Исправлено: было pathNumber
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_user)  # Требуется аутентификация
+):
+    path = db.query(models.Path).filter(models.Path.id == path_id).first()
     if path is None:
         raise HTTPException(status_code=404, detail="Path not found")
     return path
 
 @router.put("/{path_id}", response_model=schemas.Path)
-def update_path(path_id: int, path: schemas.PathCreate, db: Session = Depends(get_db)):
+def update_path(
+    path_id: int, 
+    path: schemas.PathCreate, 
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(require_dispatcher_role)
+):
     db_path = db.query(models.Path).filter(models.Path.id == path_id).first()
     if db_path is None:
         raise HTTPException(status_code=404, detail="Path not found")
@@ -47,7 +63,11 @@ def update_path(path_id: int, path: schemas.PathCreate, db: Session = Depends(ge
     return db_path
 
 @router.delete("/{path_id}")
-def delete_path(path_id: int, db: Session = Depends(get_db)):
+def delete_path(
+    path_id: int, 
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(require_dispatcher_role)
+):
     db_path = db.query(models.Path).filter(models.Path.id == path_id).first()
     if db_path is None:
         raise HTTPException(status_code=404, detail="Path not found")
