@@ -1,5 +1,7 @@
 #include "routewidget.h"
 #include "ui_route_widget.h"
+#include "routestopwidget.h"
+#include "busstop.h"
 
 #include <QLabel>
 #include <QDebug>
@@ -20,6 +22,28 @@ RouteWidget::~RouteWidget() {
 
 void RouteWidget::setupUI() {
     this->setObjectName("roundedWidget");
+    ui->roundedWidget_routeDetail->hide();
+
+    connect(ui->details_btn, &QPushButton::toggled, [this](bool checked) {
+        QPixmap pixmap;
+        if (checked) {
+            pixmap.load(":/icons/icons/arrow-down.png");
+            ui->detail_widget->setStyleSheet(
+                "border-bottom-left-radius: 24px;"
+                "border-bottom-right-radius: 24px;"
+                "background-color: #f2f2f2;"
+            );
+        }
+        else {
+            pixmap.load(":/icons/icons/arrow-up.png");
+            ui->detail_widget->setStyleSheet(
+                "border-bottom-left-radius: 0px;"
+                "border-bottom-right-radius: 0px;"
+                "background-color: #f2f2f2;"
+            );
+        }
+        ui->routeDetail_arrow->setPixmap(pixmap);
+    });
 }
 
 void RouteWidget::updateRouteData(const Route& route) {
@@ -35,6 +59,50 @@ void RouteWidget::updateRouteData(const Route& route) {
     
     ui->routePrice_label->setText(QString::number(route.getPrice()) + " руб.");
     ui->placeCount_label->setText(QString::number(route.getSeats()) + " мест осталось");
+
+    QLocale locale(QLocale::Russian); 
+
+    QDate departureDate = route.getDepartureDate();
+    QTime departureTime = route.getDepartureTime();
+    QDateTime departureDateTime(departureDate, departureTime);
+
+    int travelSeconds = route.getDepartureTime().secsTo(route.getDestinationTime());
+    QDateTime destinationDateTime = departureDateTime.addSecs(travelSeconds);
+    QString departureStr = locale.toString(departureDate, "dd MMM, ddd");
+    QString destinationStr = locale.toString(destinationDateTime, "dd MMM, ddd");
+
+    ui->departureDate->setText(departureStr);
+    ui->destinationDate->setText(destinationStr);
+
+    QVector <BusStop> stops = route.getPath().getStops();
+    int i = 0;
+    for (const BusStop &stop : stops) {
+        QString stopTime = "", stopDate = "";
+
+        if (i == 0) {
+            stopTime = departureTime.toString("hh:mm");
+            stopDate = departureStr;
+        }
+        else if (i == stops.size()-1) {
+            stopTime = destinationDateTime.toString("hh:mm");
+            stopDate = departureStr;
+        }
+
+        RouteStopWidget *stopWidget = new RouteStopWidget(
+            stopTime, 
+            stopDate, 
+            stop.getStopName(),
+            stop.getStopAddress()
+        );
+        ui->stopsLayout->addWidget(stopWidget);
+        i++;
+    }
+
+    ui->routeNumber->setText(QString::number(route.getId()));
+    ui->pathNumber->setText(route.getPathNumber());
+    ui->route->setText(route.getPath().getFirstStop().getStopName() + "—" + route.getPath().getLastStop().getStopName());
+    ui->routeDate->setText(departureDate.toString("dd.MM.yyyy"));
+    ui->routeTime->setText(departureTime.toString("hh:mm"));
 }
 
 Route RouteWidget::getRoute() const {

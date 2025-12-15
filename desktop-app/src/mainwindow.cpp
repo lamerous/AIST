@@ -528,6 +528,8 @@ void MainWindow::handleTicketCreate(const Ticket &ticket) {
     client->tickets()->getAllTickets();
     ui->route_status->setStyleSheet("color: green");
     ui->route_status->setText("Билет " + QString::number(ticket.getId()) + " куплен");
+
+    client->routes()->getAllRoutes();
 }
 
 void MainWindow::handleTicketError(const QString &error) {
@@ -684,7 +686,7 @@ void MainWindow::updateUserData(const User &user) {
 
 
     if (currentUser.isAuthorized()) {
-        ui->cabinet_textBtn->setText(person.getFirstName() + " " + person.getLastName());
+        ui->cabinet_textBtn->setText(person.getLastName() + " " + person.getFirstName());
         ui->userRole_label->setText(roleMatcher(currentUser.getRole()));
         ui->profile_username->setText(user.getUsername());
         ui->profile_lastname->setText(person.getLastName());
@@ -747,7 +749,7 @@ QString MainWindow::roleMatcher(const QString &role) {
 }
 
 void MainWindow::on_schedule1_menuButton_clicked() {
-    
+    client->routes()->getAllRoutes();
 }
 
 

@@ -973,7 +973,6 @@ void AuthApiClient::handleAuthResponse(QNetworkReply *reply) {
         QJsonObject json = parseJsonResponse(reply, success, error);
 
         if (success) {
-            qDebug() << json;
             emit getUser(jsonToUser(json));
         }
         else {

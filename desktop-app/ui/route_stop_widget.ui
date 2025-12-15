@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>RouteStopWidget</class>
+ <widget class="QWidget" name="RouteStopWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>217</width>
+    <width>337</width>
     <height>53</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="maximumSize">
    <size>
-    <width>217</width>
+    <width>16000</width>
     <height>53</height>
    </size>
   </property>
@@ -48,6 +54,12 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="maximumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <family>Inter</family>
@@ -64,6 +76,12 @@
      </item>
      <item>
       <widget class="QLabel" name="departureDate">
+       <property name="maximumSize">
+        <size>
+         <width>80</width>
+         <height>16777215</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <family>Inter</family>
@@ -144,7 +162,7 @@
         <string notr="true">color: #6D6D6D; </string>
        </property>
        <property name="text">
-        <string>15 окт, ср</string>
+        <string>г. Полоцк, ул. Октябрьская 40</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -157,7 +175,7 @@
  </widget>
  <resources>
   <include location="../resources.qrc"/>
-  <include location="../../../../../../resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>

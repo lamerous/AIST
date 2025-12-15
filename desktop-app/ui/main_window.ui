@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1814</width>
-    <height>1104</height>
+    <height>1081</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -161,6 +161,353 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
     <property name="spacing">
      <number>0</number>
     </property>
+    <item row="0" column="0" rowspan="2">
+     <widget class="QWidget" name="menu_layout_1" native="true">
+      <property name="maximumSize">
+       <size>
+        <width>85</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="widget_2" native="true">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <property name="spacing">
+           <number>72</number>
+          </property>
+          <property name="leftMargin">
+           <number>22</number>
+          </property>
+          <property name="topMargin">
+           <number>45</number>
+          </property>
+          <property name="rightMargin">
+           <number>22</number>
+          </property>
+          <property name="bottomMargin">
+           <number>45</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="expand1_menuButton">
+            <property name="minimumSize">
+             <size>
+              <width>40</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>40</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../resources.qrc">
+              <normaloff>:/icons/icons/expand.png</normaloff>:/icons/icons/expand.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>40</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <property name="spacing">
+             <number>48</number>
+            </property>
+            <item>
+             <widget class="QPushButton" name="profile1_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/profile.png</normaloff>:/icons/icons/profile.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="schedule1_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/schedule.png</normaloff>:/icons/icons/schedule.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="cart1_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/cart.png</normaloff>:/icons/icons/cart.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="employees1_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/employees.png</normaloff>:/icons/icons/employees.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="dispatcher1_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/dispatcher.png</normaloff>:/icons/icons/dispatcher.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="analytics1_menuButton">
+              <property name="text">
+               <string>PushButton</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="quit1_menuButton">
+              <property name="minimumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../resources.qrc">
+                <normaloff>:/icons/icons/quit.png</normaloff>:/icons/icons/quit.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
     <item row="0" column="1" rowspan="2">
      <widget class="QWidget" name="menu_layout_2" native="true">
       <property name="maximumSize">
@@ -588,353 +935,6 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
       </layout>
      </widget>
     </item>
-    <item row="0" column="0" rowspan="2">
-     <widget class="QWidget" name="menu_layout_1" native="true">
-      <property name="maximumSize">
-       <size>
-        <width>85</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <property name="spacing">
-        <number>0</number>
-       </property>
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QWidget" name="widget_2" native="true">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <property name="spacing">
-           <number>72</number>
-          </property>
-          <property name="leftMargin">
-           <number>22</number>
-          </property>
-          <property name="topMargin">
-           <number>45</number>
-          </property>
-          <property name="rightMargin">
-           <number>22</number>
-          </property>
-          <property name="bottomMargin">
-           <number>45</number>
-          </property>
-          <item>
-           <widget class="QPushButton" name="expand1_menuButton">
-            <property name="minimumSize">
-             <size>
-              <width>40</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>40</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="../resources.qrc">
-              <normaloff>:/icons/icons/expand.png</normaloff>:/icons/icons/expand.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>40</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <property name="autoExclusive">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout">
-            <property name="spacing">
-             <number>48</number>
-            </property>
-            <item>
-             <widget class="QPushButton" name="profile1_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/profile.png</normaloff>:/icons/icons/profile.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="schedule1_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/schedule.png</normaloff>:/icons/icons/schedule.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="cart1_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/cart.png</normaloff>:/icons/icons/cart.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="employees1_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/employees.png</normaloff>:/icons/icons/employees.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="dispatcher1_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/dispatcher.png</normaloff>:/icons/icons/dispatcher.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="analytics1_menuButton">
-              <property name="text">
-               <string>PushButton</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="quit1_menuButton">
-              <property name="minimumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../resources.qrc">
-                <normaloff>:/icons/icons/quit.png</normaloff>:/icons/icons/quit.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
     <item row="0" column="2">
      <widget class="QWidget" name="main_layout" native="true">
       <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -1057,7 +1057,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>4</number>
          </property>
          <widget class="QWidget" name="main_page">
           <layout class="QVBoxLayout" name="verticalLayout_73">
@@ -4602,7 +4602,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                 <x>0</x>
                 <y>0</y>
                 <width>1425</width>
-                <height>1004</height>
+                <height>981</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_63">
@@ -4617,6 +4617,9 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                </property>
                <property name="rightMargin">
                 <number>72</number>
+               </property>
+               <property name="bottomMargin">
+                <number>24</number>
                </property>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_33">
@@ -5055,6 +5058,22 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                  <property name="rightMargin">
                   <number>360</number>
                  </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <spacer name="verticalSpacer_9">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
                 </layout>
                </item>
                <item>
@@ -5109,8 +5128,8 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>836</width>
-                <height>193</height>
+                <width>1425</width>
+                <height>981</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_85">
@@ -7331,8 +7350,8 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>1266</width>
-                <height>762</height>
+                <width>1425</width>
+                <height>981</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_53">
@@ -8207,6 +8226,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
            </property>
            <item>
             <widget class="QScrollArea" name="scrollArea_4">
+             <property name="verticalScrollBarPolicy">
+              <enum>Qt::ScrollBarAlwaysOn</enum>
+             </property>
+             <property name="horizontalScrollBarPolicy">
+              <enum>Qt::ScrollBarAlwaysOff</enum>
+             </property>
              <property name="widgetResizable">
               <bool>true</bool>
              </property>
@@ -8215,7 +8240,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>1266</width>
+                <width>1425</width>
                 <height>1032</height>
                </rect>
               </property>
@@ -9328,8 +9353,8 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>1214</width>
-                <height>705</height>
+                <width>1439</width>
+                <height>981</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_47">
@@ -9949,8 +9974,8 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>1266</width>
-                <height>710</height>
+                <width>1439</width>
+                <height>981</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_54">
@@ -10560,7 +10585,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                 <x>0</x>
                 <y>0</y>
                 <width>1439</width>
-                <height>1004</height>
+                <height>981</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_55">
@@ -11087,12 +11112,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>474</x>
-     <y>129</y>
+     <x>1311</x>
+     <y>524</y>
     </hint>
     <hint type="destinationlabel">
-     <x>704</x>
-     <y>169</y>
+     <x>1715</x>
+     <y>533</y>
     </hint>
    </hints>
   </connection>
@@ -11103,8 +11128,8 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>291</x>
-     <y>798</y>
+     <x>337</x>
+     <y>710</y>
     </hint>
     <hint type="destinationlabel">
      <x>269</x>
@@ -11120,7 +11145,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <hints>
     <hint type="sourcelabel">
      <x>62</x>
-     <y>796</y>
+     <y>708</y>
     </hint>
     <hint type="destinationlabel">
      <x>108</x>
@@ -11199,12 +11224,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>474</x>
-     <y>129</y>
+     <x>854</x>
+     <y>524</y>
     </hint>
     <hint type="destinationlabel">
-     <x>474</x>
-     <y>129</y>
+     <x>1311</x>
+     <y>524</y>
     </hint>
    </hints>
   </connection>
@@ -11375,12 +11400,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>43</x>
-     <y>612</y>
+     <x>62</x>
+     <y>549</y>
     </hint>
     <hint type="destinationlabel">
-     <x>152</x>
-     <y>611</y>
+     <x>260</x>
+     <y>551</y>
     </hint>
    </hints>
   </connection>
@@ -11391,12 +11416,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setChecked(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>124</x>
-     <y>630</y>
+     <x>232</x>
+     <y>551</y>
     </hint>
     <hint type="destinationlabel">
-     <x>38</x>
-     <y>628</y>
+     <x>61</x>
+     <y>549</y>
     </hint>
    </hints>
   </connection>
@@ -11407,12 +11432,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>542</x>
-     <y>331</y>
+     <x>625</x>
+     <y>474</y>
     </hint>
     <hint type="destinationlabel">
-     <x>542</x>
-     <y>331</y>
+     <x>909</x>
+     <y>474</y>
     </hint>
    </hints>
   </connection>
@@ -11423,12 +11448,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>542</x>
-     <y>331</y>
+     <x>909</x>
+     <y>474</y>
     </hint>
     <hint type="destinationlabel">
-     <x>692</x>
-     <y>368</y>
+     <x>750</x>
+     <y>569</y>
     </hint>
    </hints>
   </connection>
@@ -11439,12 +11464,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>692</x>
-     <y>368</y>
+     <x>750</x>
+     <y>569</y>
     </hint>
     <hint type="destinationlabel">
-     <x>542</x>
-     <y>331</y>
+     <x>625</x>
+     <y>474</y>
     </hint>
    </hints>
   </connection>
@@ -11455,12 +11480,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>542</x>
-     <y>368</y>
+     <x>600</x>
+     <y>833</y>
     </hint>
     <hint type="destinationlabel">
-     <x>542</x>
-     <y>331</y>
+     <x>625</x>
+     <y>474</y>
     </hint>
    </hints>
   </connection>
@@ -11471,12 +11496,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>642</x>
-     <y>368</y>
+     <x>982</x>
+     <y>481</y>
     </hint>
     <hint type="destinationlabel">
-     <x>542</x>
-     <y>331</y>
+     <x>625</x>
+     <y>474</y>
     </hint>
    </hints>
   </connection>
@@ -11487,12 +11512,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>542</x>
-     <y>331</y>
+     <x>625</x>
+     <y>474</y>
     </hint>
     <hint type="destinationlabel">
-     <x>642</x>
-     <y>368</y>
+     <x>982</x>
+     <y>481</y>
     </hint>
    </hints>
   </connection>
@@ -11503,12 +11528,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>542</x>
-     <y>331</y>
+     <x>625</x>
+     <y>474</y>
     </hint>
     <hint type="destinationlabel">
-     <x>542</x>
-     <y>331</y>
+     <x>625</x>
+     <y>562</y>
     </hint>
    </hints>
   </connection>
@@ -11519,12 +11544,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>542</x>
-     <y>331</y>
+     <x>625</x>
+     <y>650</y>
     </hint>
     <hint type="destinationlabel">
-     <x>542</x>
-     <y>331</y>
+     <x>625</x>
+     <y>738</y>
     </hint>
    </hints>
   </connection>
@@ -11535,12 +11560,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>542</x>
-     <y>331</y>
+     <x>625</x>
+     <y>738</y>
     </hint>
     <hint type="destinationlabel">
-     <x>542</x>
-     <y>331</y>
+     <x>909</x>
+     <y>474</y>
     </hint>
    </hints>
   </connection>
@@ -11551,12 +11576,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>542</x>
-     <y>331</y>
+     <x>909</x>
+     <y>474</y>
     </hint>
     <hint type="destinationlabel">
-     <x>542</x>
-     <y>331</y>
+     <x>909</x>
+     <y>562</y>
     </hint>
    </hints>
   </connection>
@@ -11567,12 +11592,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>542</x>
-     <y>331</y>
+     <x>909</x>
+     <y>562</y>
     </hint>
     <hint type="destinationlabel">
-     <x>542</x>
-     <y>331</y>
+     <x>909</x>
+     <y>650</y>
     </hint>
    </hints>
   </connection>
@@ -11583,12 +11608,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>542</x>
-     <y>331</y>
+     <x>909</x>
+     <y>650</y>
     </hint>
     <hint type="destinationlabel">
-     <x>542</x>
-     <y>368</y>
+     <x>600</x>
+     <y>833</y>
     </hint>
    </hints>
   </connection>
@@ -11599,12 +11624,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>542</x>
-     <y>331</y>
+     <x>625</x>
+     <y>562</y>
     </hint>
     <hint type="destinationlabel">
-     <x>542</x>
-     <y>331</y>
+     <x>625</x>
+     <y>650</y>
     </hint>
    </hints>
   </connection>
@@ -11615,12 +11640,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>542</x>
-     <y>331</y>
+     <x>625</x>
+     <y>476</y>
     </hint>
     <hint type="destinationlabel">
-     <x>692</x>
-     <y>368</y>
+     <x>1050</x>
+     <y>483</y>
     </hint>
    </hints>
   </connection>
@@ -11631,12 +11656,12 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
    <slot>setFocus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>692</x>
-     <y>368</y>
+     <x>1050</x>
+     <y>483</y>
     </hint>
     <hint type="destinationlabel">
-     <x>542</x>
-     <y>331</y>
+     <x>625</x>
+     <y>476</y>
     </hint>
    </hints>
   </connection>

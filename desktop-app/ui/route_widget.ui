@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1165</width>
-    <height>383</height>
+    <width>1162</width>
+    <height>454</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -19,7 +19,7 @@
   <property name="minimumSize">
    <size>
     <width>0</width>
-    <height>330</height>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -32,7 +32,11 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget[objectName^=&quot;roundedWidget&quot;] {
+   <string notr="true">#RouteWidget {
+	background-color: #f2f2f2;
+}
+
+QWidget[objectName^=&quot;roundedWidget&quot;] {
 	background-color: #ffffff; 
 	border-radius: 24px;
 }
@@ -49,6 +53,9 @@ QPushButton {
   <layout class="QVBoxLayout" name="verticalLayout_9">
    <property name="spacing">
     <number>0</number>
+   </property>
+   <property name="sizeConstraint">
+    <enum>QLayout::SetMinimumSize</enum>
    </property>
    <property name="leftMargin">
     <number>0</number>
@@ -67,7 +74,7 @@ QPushButton {
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>210</height>
+       <height>0</height>
       </size>
      </property>
      <property name="maximumSize">
@@ -79,6 +86,9 @@ QPushButton {
      <layout class="QVBoxLayout" name="verticalLayout_6">
       <property name="spacing">
        <number>0</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMinimumSize</enum>
       </property>
       <property name="leftMargin">
        <number>0</number>
@@ -96,6 +106,9 @@ QPushButton {
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="spacing">
+           <number>12</number>
+          </property>
           <property name="leftMargin">
            <number>36</number>
           </property>
@@ -260,7 +273,7 @@ QPushButton {
              </layout>
             </item>
             <item>
-             <widget class="QLabel" name="travelTime_2">
+             <widget class="QLabel" name="travelTime">
               <property name="font">
                <font>
                 <family>Inter</family>
@@ -461,7 +474,7 @@ QPushButton {
        </layout>
       </item>
       <item>
-       <widget class="QWidget" name="widget" native="true">
+       <widget class="QWidget" name="detail_widget" native="true">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -475,13 +488,13 @@ QPushButton {
          </size>
         </property>
         <property name="cursor">
-         <cursorShape>UpArrowCursor</cursorShape>
+         <cursorShape>ArrowCursor</cursorShape>
         </property>
         <property name="autoFillBackground">
          <bool>false</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgba(109, 109, 109, 0.09);
+         <string notr="true">background-color: #f2f2f2;
 border-bottom-left-radius: 24px;
 border-bottom-right-radius: 24px;</string>
         </property>
@@ -502,12 +515,15 @@ border-bottom-right-radius: 24px;</string>
           <number>0</number>
          </property>
          <item>
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="details_btn">
            <property name="font">
             <font>
              <family>Inter-Regular</family>
              <pointsize>-1</pointsize>
             </font>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="styleSheet">
             <string notr="true">background-color: transparent;
@@ -517,6 +533,12 @@ font-size: 12;</string>
            </property>
            <property name="text">
             <string>Детали рейса</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -555,7 +577,7 @@ font-size: 12;</string>
    <item>
     <widget class="QWidget" name="roundedWidget_routeDetail" native="true">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -573,6 +595,12 @@ border-top-right-radius: 0;
        <number>36</number>
       </property>
       <property name="topMargin">
+       <number>36</number>
+      </property>
+      <property name="rightMargin">
+       <number>72</number>
+      </property>
+      <property name="bottomMargin">
        <number>36</number>
       </property>
       <item>
@@ -672,6 +700,32 @@ color: #010E59;
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="pathNumber">
+            <property name="font">
+             <font>
+              <family>Inter</family>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>327б</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_7">
+            <property name="font">
+             <font>
+              <family>Inter</family>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>: </string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="route">
             <property name="font">
              <font>
@@ -744,7 +798,7 @@ color: #010E59;
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="departureTime_2">
+           <widget class="QLabel" name="routeTime">
             <property name="font">
              <font>
               <family>Inter</family>
@@ -774,7 +828,14 @@ color: #010E59;
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="stopsLayout"/>
+       <layout class="QVBoxLayout" name="stopsLayout">
+        <property name="topMargin">
+         <number>16</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+       </layout>
       </item>
       <item>
        <spacer name="verticalSpacer_2">
@@ -797,5 +858,22 @@ color: #010E59;
  <resources>
   <include location="../resources.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>details_btn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>roundedWidget_routeDetail</receiver>
+   <slot>setHidden(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>110</x>
+     <y>185</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>115</x>
+     <y>230</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
