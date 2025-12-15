@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file>icons/geo2.png</file>
     <file>icons/trash.png</file>
     <file>icons/search.png</file>
     <file>icons/edit.png</file>

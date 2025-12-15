@@ -174,13 +174,20 @@ RouteApiClient::RouteApiClient(QObject *parent)
             this, &RouteApiClient::handleRoutesResponse);
 }
 
-void RouteApiClient::getAllRoutes(int skip, int limit, QString search) {
+void RouteApiClient::getAllRoutes(int skip, int limit, const QString &search,
+                                const QString &start_stop, const QString &end_stop) {
     QUrl url(baseUrl + "/api/routes/");
     QUrlQuery query;
     query.addQueryItem("skip", QString::number(skip));
     query.addQueryItem("limit", QString::number(limit));
     if (!search.isEmpty()) {
         query.addQueryItem("search", search);
+    }
+    if (!start_stop.isEmpty()) {
+        query.addQueryItem("start_stop", start_stop);
+    }
+    if (!end_stop.isEmpty()) {
+        query.addQueryItem("end_stop", end_stop);
     }
     url.setQuery(query);
     
@@ -885,9 +892,7 @@ User AuthApiClient::jsonToUser(const QJsonObject& json) {
     if (userObj.contains("id")) {
         user.setUserId(userObj["id"].toInt());
     }
-    
-    user.setRole("passenger"); 
-    
+        
     return user;
 }
 

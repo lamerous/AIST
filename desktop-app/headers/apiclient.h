@@ -58,7 +58,8 @@ class RouteApiClient : public BaseApiClient {
 public:
     explicit RouteApiClient(QObject *parent = nullptr);
     
-    void getAllRoutes(int skip = 0, int limit = 100, const QString search = "");
+    void getAllRoutes(int skip = 0, int limit = 100, const QString &search = "",
+                    const QString &start_stop = "", const QString &end_stop = "");
     void getRoute(int routeId);
     void createRoute(const Route &route);
     void updateRoute(int routeId, const Route &route);

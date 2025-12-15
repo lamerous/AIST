@@ -47,8 +47,7 @@ signals:
 
 private slots:
     void on_schedule1_menuButton_clicked();
-    void on_findRoute2_btn_clicked();
-    void on_swapPlaces_btn_clicked();
+    void swapPlaces_btn_clicked();
 
     void on_findStop_textChanged();
     void on_findPath_textChanged();
@@ -87,6 +86,7 @@ private slots:
     void handleRouteDelete(int routeId);
     void handleRouteError(const QString &error);
 
+    void findRoutes();
     void handleRouteSell(const Route &route);
     
     void handleTickets(const QList <Ticket> &tickets);
@@ -129,6 +129,7 @@ private:
     QButtonGroup *swapPlaces_buttons;
     QButtonGroup *loginMenu_buttons;
     QButtonGroup *registerMenu_buttons;
+    QButtonGroup *findRoute_buttons;
 };
 
 #endif

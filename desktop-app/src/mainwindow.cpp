@@ -4,6 +4,8 @@
 #include <QButtonGroup>
 #include <QFileDialog>
 
+#include "jwtdecoder.h"
+
 #include "mainwindow.h"
 #include "ui_main_window.h"
 
@@ -17,6 +19,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->menu_layout_2->hide();
 
+    ui->dispatcher1_menuButton->hide();
+    ui->dispatcher2_menuButton->hide();
+    ui->employees1_menuButton->hide();
+    ui->employees2_menuButton->hide();
+    ui->analytics1_menuButton->hide();
+    ui->analytics2_menuButton->hide();
+
     ui->stackedWidget->setCurrentIndex(0);
     ui->route_label->setText("");
 
@@ -26,9 +35,8 @@ MainWindow::MainWindow(QWidget *parent) :
     swapPlaces_buttons = new QButtonGroup(this);
     loginMenu_buttons = new QButtonGroup(this);
     registerMenu_buttons = new QButtonGroup(this);
+    findRoute_buttons = new QButtonGroup(this);
 
-    client = new ApiClient(this);
-    
     dispatcherMenu_buttons_routes->addButton(ui->addRoute_textBtn);
     dispatcherMenu_buttons_routes->addButton(ui->addRoute2_textBtn);
     dispatcherMenu_buttons_routes->addButton(ui->addRoute3_textBtn);
@@ -53,8 +61,13 @@ MainWindow::MainWindow(QWidget *parent) :
     registerMenu_buttons->addButton(ui->register_textBtn);
     registerMenu_buttons->addButton(ui->register2_textBtn);
 
+    findRoute_buttons->addButton(ui->findRoute_btn);
+    findRoute_buttons->addButton(ui->findRoute2_btn);
+
     connect(ui->logo_textBtn, &QPushButton::pressed, [this]() {
         ui->stackedWidget->setCurrentIndex(HOME_PAGE);
+        ui->tripDeparture2->setText("");
+        ui->tripDestination2->setText("");
     });
     connect(ui->profile1_menuButton, &QPushButton::toggled, [this](bool checked) {
         if (checked){
@@ -76,6 +89,8 @@ MainWindow::MainWindow(QWidget *parent) :
     });
     connect(ui->schedule1_menuButton, &QPushButton::toggled, [this](bool checked) {
         if (checked) ui->stackedWidget->setCurrentIndex(SCHEDULE_PAGE);
+        ui->tripDeparture->setText("");
+        ui->tripDestination->setText("");
     });
     connect(ui->cart1_menuButton, &QPushButton::toggled, [this](bool checked) {
         if (checked) ui->stackedWidget->setCurrentIndex(ORDERS1_PAGE);
@@ -112,9 +127,9 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->stackedWidget->setCurrentIndex(REGISTER_PAGE);
     });
 
-    connect(swapPlaces_buttons, &QButtonGroup::idClicked, [this] {
-        MainWindow::on_swapPlaces_btn_clicked();
-    });
+    connect(swapPlaces_buttons, &QButtonGroup::idClicked, this, &MainWindow::swapPlaces_btn_clicked);
+
+    connect(findRoute_buttons, &QButtonGroup::idClicked, this, &MainWindow::findRoutes);
 
     connect(ui->stackedWidget, &QStackedWidget::currentChanged, this, [this](int index){
         if (index == LOGIN_PAGE) {
@@ -122,6 +137,9 @@ MainWindow::MainWindow(QWidget *parent) :
         }
         else if (index == REGISTER_PAGE) {
             ui->register_status->setText("");
+        }
+        else if (index == SCHEDULE_PAGE) {
+            ui->route_status->setText("");
         }
         else if (index == ADD_ROUTE_PAGE) {
             ui->addRoute_status->setText("");
@@ -140,6 +158,8 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     });
 
+    client = new ApiClient(this);
+    
     // connect(client->routes(), &RouteApiClient::routesReceived, this, &MainWindow::handleRoutes);
     // connect(client->routes(), &RouteApiClient::routeReceived, this, &MainWindow::handleRoute);
     // connect(client->routes(), &RouteApiClient::routeCreated, this, &MainWindow::handleRouteCreate);
@@ -180,6 +200,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     updateServerData();
 
+    currentUser.setRole("passenger");
     currentUser.checkCookieFile();
     if (currentUser.isAuthorized()) {
         qDebug() << "Устанавливаем куки";
@@ -466,14 +487,29 @@ void MainWindow::handleRouteError(const QString &error) {
     ui->addRoute_status->setText("Ошибка отправки запроса\n"+error);
 }
 
-void MainWindow::on_findRoute2_btn_clicked() {
+void MainWindow::findRoutes() {
     ui->route_label->setText("");
-    QString tripDeparture2 = ui->tripDeparture2->text();
-    QString tripDestination2 = ui->tripDestination2->text();
+    ui->route_status->setText("");
+
+    QString tripDeparture;
+    QString tripDestination;
+
+    if (ui->tripDeparture->text() != "" && ui->tripDestination->text() != "") {
+        tripDeparture = ui->tripDeparture->text();
+        tripDestination = ui->tripDestination->text();
+    }
 
     if (ui->tripDeparture2->text() != "" && ui->tripDestination2->text() != "") {
-        ui->route_label->setText(tripDeparture2 + "—" + tripDestination2);
+        tripDeparture = ui->tripDeparture2->text();
+        tripDestination = ui->tripDestination2->text();
     }
+
+    ui->route_label->setText(tripDeparture + "—" + tripDestination);
+    ui->tripDeparture2->setText(tripDeparture);
+    ui->tripDestination2->setText(tripDestination);
+    client->routes()->getAllRoutes(0, 100, "", tripDeparture, tripDestination);
+
+    ui->stackedWidget->setCurrentIndex(SCHEDULE_PAGE);
 }
 
 // ================= TICKETS ===================
@@ -490,6 +526,8 @@ void MainWindow::handleTickets(const QList <Ticket> &tickets) {
 
 void MainWindow::handleTicketCreate(const Ticket &ticket) {
     client->tickets()->getAllTickets();
+    ui->route_status->setStyleSheet("color: green");
+    ui->route_status->setText("Билет " + QString::number(ticket.getId()) + " куплен");
 }
 
 void MainWindow::handleTicketError(const QString &error) {
@@ -547,6 +585,7 @@ void MainWindow::on_login_btn_clicked() {
 void MainWindow::on_logout_btn_clicked() {
     currentUser.setAuthorized(0);
     client->clearAccessToken();
+
     if (QFile::exists("cookie")) {
         if (QFile::remove("cookie")) {
             qDebug() << "Файл куки успешно удалён!";
@@ -558,8 +597,13 @@ void MainWindow::on_logout_btn_clicked() {
     else {
         qDebug() << "Файл куки не найден.";
     }
-    ui->stackedWidget->setCurrentIndex(LOGIN_PAGE);
+
+    ui->cabinet_textBtn->setText("Войти");
+    updateUserData(currentUser);
+
     clearLayout(ui->ordersListLayout);
+
+    ui->stackedWidget->setCurrentIndex(LOGIN_PAGE);
 }
 
 void MainWindow::on_register_btn_clicked() {
@@ -582,6 +626,7 @@ void MainWindow::handleRegister(const QString &message) {
 }
 
 void MainWindow::handleLogin(const User &user, const QString &cookie) {
+    client->setAccessToken(cookie);
     QFile file("cookie");
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         return;
@@ -606,14 +651,49 @@ void MainWindow::handleUser(const User &user) {
 void MainWindow::updateUserData(const User &user) {
     Person person = user.getPerson();
 
-    ui->cabinet_textBtn->setText(user.getUsername());
-    ui->userRole_label->setText(roleMatcher(user.getRole()));
-    ui->profile_username->setText(user.getUsername());
-    ui->profile_lastname->setText(person.getLastName());
-    ui->profile_firstname->setText(person.getFirstName());
-    ui->profile_middlename->setText(person.getMiddleName());
-    ui->profile_email->setText(person.getEmail());
-    ui->profile_phone->setText(person.getPhoneNumber());
+    QString cookie = client->getAccessToken();
+    QJsonObject json = JWTDecoder::decodePayload(cookie);
+
+    if (json.contains("role")){
+        currentUser.setRole(json["role"].toString());
+    }
+    else {
+        currentUser.setRole("passenger");
+    }
+
+    if (currentUser.getRole() == "dispatcher") {
+        ui->dispatcher1_menuButton->show();
+        ui->dispatcher2_menuButton->show();
+    }
+    else if (currentUser.getRole() == "admin") {
+        ui->dispatcher1_menuButton->show();
+        ui->dispatcher2_menuButton->show();
+        ui->employees1_menuButton->show();
+        ui->employees2_menuButton->show();
+        ui->analytics1_menuButton->show();
+        ui->analytics2_menuButton->show();
+    }
+    else {
+        ui->dispatcher1_menuButton->hide();
+        ui->dispatcher2_menuButton->hide();
+        ui->employees1_menuButton->hide();
+        ui->employees2_menuButton->hide();
+        ui->analytics1_menuButton->hide();
+        ui->analytics2_menuButton->hide();
+    }
+
+
+    if (currentUser.isAuthorized()) {
+        ui->cabinet_textBtn->setText(person.getFirstName() + " " + person.getLastName());
+        ui->userRole_label->setText(roleMatcher(currentUser.getRole()));
+        ui->profile_username->setText(user.getUsername());
+        ui->profile_lastname->setText(person.getLastName());
+        ui->profile_firstname->setText(person.getFirstName());
+        ui->profile_middlename->setText(person.getMiddleName());
+        ui->profile_email->setText(person.getEmail());
+        ui->profile_phone->setText(person.getPhoneNumber());
+        ui->profile_birthdate->setText(person.getBirthDate().toString("dd.MM.yyyy"));
+    }
 
     client->tickets()->getAllTickets();
 }
@@ -661,6 +741,9 @@ QString MainWindow::roleMatcher(const QString &role) {
     else if (role == "admin") {
         return "администратор";
     }
+    else {
+        return "пассажир";
+    }
 }
 
 void MainWindow::on_schedule1_menuButton_clicked() {
@@ -668,8 +751,12 @@ void MainWindow::on_schedule1_menuButton_clicked() {
 }
 
 
-void MainWindow::on_swapPlaces_btn_clicked() {
-    QString temp = ui->tripDeparture2->text();
+void MainWindow::swapPlaces_btn_clicked() {
+    QString temp = ui->tripDeparture->text();
+    ui->tripDeparture->setText(ui->tripDestination->text());
+    ui->tripDestination->setText(temp);
+
+    temp = ui->tripDeparture2->text();
     ui->tripDeparture2->setText(ui->tripDestination2->text());
     ui->tripDestination2->setText(temp);
 }
