@@ -35,5 +35,5 @@ void RouteStopWidget::updateStopData(
     ui->departureTime->setText(stopTime);
     ui->departureDate->setText(stopDate);
     ui->departurePlace->setText(stopName);
-    ui->address->setText(stopAddress);
+    // ui->address->setText(stopAddress);
 }

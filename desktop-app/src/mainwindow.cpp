@@ -468,7 +468,13 @@ void MainWindow::handleRoutes(const QList <Route> &routes) {
 }
 
 void MainWindow::handleRouteSell(const Route &route) {
-    client->tickets()->createTicket(route.getId());
+    if (currentUser.isAuthorized()) {
+        client->tickets()->createTicket(route.getId());
+    }
+    else {
+        ui->route_status->setStyleSheet("color: red;");
+        ui->route_status->setText("Сперва войдите в аккаунт");
+    }
 }
 
 void MainWindow::handleRouteCreate(const Route &route) {

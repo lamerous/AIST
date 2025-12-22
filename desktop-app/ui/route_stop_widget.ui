@@ -150,25 +150,6 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QLabel" name="address">
-       <property name="font">
-        <font>
-         <family>Inter</family>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: #6D6D6D; </string>
-       </property>
-       <property name="text">
-        <string>г. Полоцк, ул. Октябрьская 40</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
   </layout>

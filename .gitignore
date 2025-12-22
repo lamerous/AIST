@@ -61,3 +61,5 @@ Makefile*
 *.make
 
 *.d
+*.docx
+*.pdf

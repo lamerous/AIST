@@ -1,294 +1,693 @@
 @startuml
+' Title: Генерация из header-файлов системы управления автобусными перевозками
 
-class Person {
-  # QString firstName
-  # QString lastName
-  # QString middleName
-  # QDate birthDate
-  # QString phoneNumber
-  # QString email
-  --
-  + Person(firstName, lastName, middleName, birthDate, phoneNumber, email)
-  + getFirstName() const: QString
-  + getLastName() const: QString
-  + getMiddleName() const: QString
-  + getFullName() const: QString
-  + getBirthDate() const: QDate
-  + getPhoneNumber() const: QString
-  + getEmail() const: QString
-  + setFirstName(firstName: QString): void
-  + setLastName(lastName: QString): void
-  + setMiddleName(middleName: QString): void
-  + setBirthDate(birthDate: QDate): void
-  + setPhoneNumber(phoneNumber: QString): void
-  + setEmail(email: QString): void
-  + {abstract} getRole() const: QString
-  + {abstract} displayInfo() const: void
-  + {abstract} toString() const: QString
-  + getAge() const: int
-  + isValid() const: bool
+' Цвета и стили
+skinparam class {
+    BackgroundColor White
+    BorderColor Black
+    ArrowColor #444444
+    AttributeFontColor #006600
+    MethodFontColor #0000CC
+}
+skinparam package {
+    BackgroundColor #F0F0F0
+    BorderColor #888888
+}
+skinparam note {
+    BackgroundColor #FFFFCC
+    BorderColor #FFAA00
 }
 
-class Passenger {
-  - QString passportNumber
-  - QList<Ticket> tickets
-  --
-  + Passenger(firstName, lastName, middleName, birthDate, phoneNumber, email, passportNumber)
-  + getPassportNumber() const: QString
-  + getTickets() const: QList<Ticket>
-  + setPassportNumber(passportNumber: QString): void
-  + addTicket(ticket: Ticket): void
-  + removeTicket(ticketNumber: QString): bool
-  + findTicket(ticketNumber: QString) const: Ticket
-  + getTicketsCount() const: int
-  + getTotalSpent() const: double
-  + getRole() const: QString
-  + displayInfo() const: void
-  + toString() const: QString
+' Пространства имен
+package "GUI Widgets" {
+    class MainWindow {
+        - Ui::MainWindow *ui
+        - QVector<RouteWidget*> routeWidgets
+        - Schedule schedule
+        - Path currentEditingPath
+        - User currentUser
+        - ApiClient* client
+        - QButtonGroup *dispatcherMenu_buttons_routes
+        - QButtonGroup *dispatcherMenu_buttons_paths
+        - QButtonGroup *dispatcherMenu_buttons_stops
+        - QButtonGroup *swapPlaces_buttons
+        - QButtonGroup *loginMenu_buttons
+        - QButtonGroup *registerMenu_buttons
+        - QButtonGroup *findRoute_buttons
+        + explicit MainWindow(QWidget *parent = nullptr)
+        + ~MainWindow()
+        # void keyPressEvent(QKeyEvent *event)
+
+        - void on_schedule1_menuButton_clicked()
+        - void swapPlaces_btn_clicked()
+        - void on_findStop_textChanged()
+        - void on_findPath_textChanged()
+        - void on_addStop_btn_clicked()
+        - void on_addPath_btn_clicked()
+        - void on_addRoute_btn_clicked()
+        - void on_login_btn_clicked()
+        - void on_register_btn_clicked()
+        - void on_addStopToPath_btn_clicked()
+        - void on_unfilledPushButton_editPath_apply_clicked()
+        - void on_unfilledPushButton_editPath_back_clicked()
+        - void on_logout_btn_clicked()
+        - void on_downloadTicket_clicked(const Ticket &ticket)
+        - void on_downloadCheck_clicked(const Ticket &ticket)
+        - void handleStops(const QList<BusStop> &stops)
+        - void handleStopCreate(const BusStop &stop)
+        - void handleStopDelete(int stopid)
+        - void handleStopError(const QString &error)
+        - void handlePaths(const QList<Path> &paths)
+        - void handlePath(const Path &path)
+        - void handlePathCreate(const Path &path)
+        - void handlePathUpdate(const Path &path)
+        - void handlePathDelete(int stopId)
+        - void handlePathError(const QString &error)
+        - void handleStopsInPathUpdate()
+        - void handleRoutes(const QList<Route> &routes)
+        - void handleRouteCreate(const Route &route)
+        - void handleRouteDelete(int routeId)
+        - void handleRouteError(const QString &error)
+        - void findRoutes()
+        - void handleRouteSell(const Route &route)
+        - void handleTickets(const QList<Ticket> &tickets)
+        - void handleTicketCreate(const Ticket &ticket)
+        - void handleTicketError(const QString &error)
+        - void handleRegister(const QString &message)
+        - void handleLogin(const User &user, const QString &cookie)
+        - void handleUser(const User &user)
+        - void handleAuthError(const QString &error)
+        - void handleRegisterError(const QString &error)
+        - void handleLoginError(const QString &error)
+        - void handleGetUserError(const QString &error)
+        - void onStopDelete(const BusStop& stop)
+        - void onPathDelete(const Path& path)
+        - void onPathEdit(Path& path)
+        - void updateServerData()
+        - void stopsInPathsUpdated()
+        - void updateUserData(const User &user)
+        - void clearLayout(QLayout *layout)
+        - QString roleMatcher(const QString &role)
+        - void clearRouteFields()
+        - void switchPage(int pageIndex)
+    }
+    
+    class RouteWidget {
+        - Ui::RouteWidget* ui
+        - Route currentRoute
+        + explicit RouteWidget(const Route& route, QWidget* parent = nullptr)
+        + ~RouteWidget()
+        + void updateRouteData(const Route& route)
+        + Route getRoute() const
+        - void buyButtonClicked(const Route& route)
+        - void widgetClicked(const Route& route)
+        - void setupUI() 
+        - void calculateTravelTime()
+        - QString formatTravelTime() const
+    }
+    
+    class StopWidget {
+        - Ui::StopWidget* ui
+        - BusStop currentStop
+        + explicit StopWidget(const BusStop& busstop, QWidget* parent = nullptr)
+        + ~StopWidget()
+        + void updateStopData(const BusStop& busstop)
+        + BusStop getStop() const
+        - void delButtonClicked(const BusStop& busStop)
+        - void setupUI()
+    }
+    
+    class PathWidget {
+        - Ui::PathWidget* ui
+        - Path currentPath
+        + explicit PathWidget(const Path& path, QWidget* parent = nullptr)
+        + ~PathWidget()
+        + void updatePathData(const Path& path)
+        + Path getPath() const
+        - void editButtonClicked(Path& path)
+        - void delButtonClicked(const Path& path)
+        - void setupUI()
+    }
+    
+    class OrderWidget {
+        - Ui::OrderWidget* ui
+        - Ticket currentTicket
+        + explicit OrderWidget(QWidget* parent = nullptr)
+        + explicit OrderWidget(const Ticket& ticket, QWidget* parent = nullptr)
+        + ~OrderWidget()
+        + void updateOrderData(const Ticket& ticket)
+        + void updateOrderData(int orderNumber, 
+                               const QDate& orderDate,
+                               const QTime& departureTime,
+                               const QString& departurePlace,
+                               const QTime& arrivalTime,
+                               const QString& arrivalPlace)
+        + Ticket getTicket() const
+        + int getOrderNumber() const
+        + QDate getOrderDate() const
+        + QTime getDepartureTime() const
+        + QString getDeparturePlace() const
+        + QTime getArrivalTime() const
+        + QString getArrivalPlace() const
+        - void downloadTicketClicked(const Ticket& ticket)
+        - void downloadCheckClicked(const Ticket& ticket)
+        - void widgetClicked(const Ticket& ticket)
+        - void setupUI()
+        - void updateUIFromTicket()
+    }
+    
+    class RouteStopWidget {
+        - Ui::RouteStopWidget* ui
+        + explicit RouteStopWidget(const QString& stopTime, 
+                                  const QString& stopDate, 
+                                  const QString& stopName, 
+                                  const QString& stopAddress, 
+                                  QWidget* parent = nullptr)
+        + ~RouteStopWidget()
+        + void updateStopData(const QString& stopTime, 
+                              const QString& stopDate, 
+                              const QString& stopName, 
+                              const QString& stopAddress)
+        - void setupUI()
+    }
 }
 
-class Dispatcher {
-  - QString employeeId
-  - QString department
-  - QList<Route> managedRoutes
-  --
-  + Dispatcher(firstName, lastName, middleName, birthDate, phoneNumber, email, employeeId, department)
-  + getEmployeeId() const: QString
-  + getDepartment() const: QString
-  + getManagedRoutes() const: QList<Route>
-  + setEmployeeId(employeeId: QString): void
-  + setDepartment(department: QString): void
-  + addRoute(route: Route): void
-  + removeRoute(routeNumber: QString): bool
-  + findRoute(routeNumber: QString) const: Route
-  + updateRouteSeats(routeNumber: QString, seats: int): void
-  + getRoutesCount() const: int
-  + getRole() const: QString
-  + displayInfo() const: void
-  + toString() const: QString
+package "Domain Model" {
+    abstract class Person {
+        # QString firstName
+        # QString lastName
+        # QString middleName
+        # QDate birthDate
+        # QString phoneNumber
+        # QString email
+        + Person()
+        + Person(const QString& firstName, const QString& lastName, const QString& middleName,
+                const QDate& birthDate, const QString& phoneNumber, const QString& email)
+        + virtual ~Person()
+        + QString getFirstName() const
+        + QString getLastName() const
+        + QString getMiddleName() const
+        + QString getFullName() const
+        + QDate getBirthDate() const
+        + QString getPhoneNumber() const
+        + QString getEmail() const
+        + void setFirstName(const QString& firstName)
+        + void setLastName(const QString& lastName)
+        + void setMiddleName(const QString& middleName)
+        + void setBirthDate(const QDate& birthDate)
+        + void setPhoneNumber(const QString& phoneNumber)
+        + void setEmail(const QString& email)
+        + virtual QString getRole() const
+        + virtual void displayInfo() const
+        + virtual QString toString() const
+        + int getAge() const
+        + bool isValid() const
+    }
+    
+    class Passenger {
+        - QString passportNumber
+        - QList<Ticket> tickets
+        + Passenger(const QString& firstName, const QString& lastName, const QString& middleName,
+                   const QDate& birthDate, const QString& phoneNumber, const QString& email,
+                   const QString& passportNumber)
+        + QString getPassportNumber() const
+        + QList<Ticket> getTickets() const
+        + void setPassportNumber(const QString& passportNumber)
+        + void addTicket(const Ticket& ticket)
+        + bool removeTicket(const QString& ticketNumber)
+        + Ticket findTicket(const QString& ticketNumber) const
+        + int getTicketsCount() const
+        + double getTotalSpent() const
+        + QString getRole() const override
+        + void displayInfo() const override
+        + QString toString() const override
+    }
+    
+    class Dispatcher {
+        - QString employeeId
+        - QString department
+        - QList<Route> managedRoutes
+        + Dispatcher(const QString& firstName, const QString& lastName, const QString& middleName,
+                    const QDate& birthDate, const QString& phoneNumber, const QString& email,
+                    const QString& employeeId, const QString& department)
+        + QString getEmployeeId() const
+        + QString getDepartment() const
+        + QList<Route> getManagedRoutes() const
+        + void setEmployeeId(const QString& employeeId)
+        + void setDepartment(const QString& department)
+        + void addRoute(const Route& route)
+        + bool removeRoute(const QString& routeNumber)
+        + Route findRoute(const QString& routeNumber) const
+        + void updateRouteSeats(const QString& routeNumber, int seats)
+        + int getRoutesCount() const
+        + QString getRole() const override
+        + void displayInfo() const override
+        + QString toString() const override
+    }
+    
+    class Cashier {
+        - QString employeeId
+        - int workstationNumber
+        - double totalSales
+        - QList<Ticket> soldTickets
+        + Cashier(const QString& firstName, const QString& lastName, const QString& middleName,
+                 const QDate& birthDate, const QString& phoneNumber, const QString& email,
+                 const QString& employeeId, int workstationNumber)
+        + QString getEmployeeId() const
+        + int getWorkstationNumber() const
+        + double getTotalSales() const
+        + QList<Ticket> getSoldTickets() const
+        + void setEmployeeId(const QString& employeeId)
+        + void setWorkstationNumber(int workstationNumber)
+        + Ticket sellTicket(const Route& route, const QString& passengerName, 
+                           const QString& seatNumber, int actualPrice)
+        + bool refundTicket(const QString& ticketNumber)
+        + int getSoldTicketsCount() const
+        + double getAverageTicketPrice() const
+        + QString getRole() const override
+        + void displayInfo() const override
+        + QString toString() const override
+    }
+    
+    class Admin {
+        - QString adminId
+        - QString accessLevel
+        - QList<Passenger> allPassengers
+        - QList<Dispatcher> allDispatchers
+        - QList<Cashier> allCashiers
+        + Admin(const QString& firstName, const QString& lastName, const QString& middleName,
+               const QDate& birthDate, const QString& phoneNumber, const QString& email,
+               const QString& adminId, const QString& accessLevel)
+        + QString getAdminId() const
+        + QString getAccessLevel() const
+        + void setAdminId(const QString& adminId)
+        + void setAccessLevel(const QString& accessLevel)
+        + void addPassenger(const Passenger& passenger)
+        + bool removePassenger(const QString& passportNumber)
+        + void addDispatcher(const Dispatcher& dispatcher)
+        + bool removeDispatcher(const QString& employeeId)
+        + void addCashier(const Cashier& cashier)
+        + bool removeCashier(const QString& employeeId)
+        + int getTotalUsersCount() const
+        + void generateReport() const
+        + QString getRole() const override
+        + void displayInfo() const override
+        + QString toString() const override
+    }
+    
+    class User {
+        - Person person
+        - QString username
+        - QString role
+        - QString cookie
+        - int userId
+        - bool authorized
+        + User()
+        + User(const Person& person, const QString& username, const QString& role, int id)
+        + User(const QString& firstName, const QString& lastName, const QString& middleName,
+              const QDate& birthDate, const QString& phoneNumber, const QString& email,
+              const QString& username, const QString& role, int id)
+        + ~User()
+        + Person getPerson() const
+        + QString getUsername() const
+        + int getUserId() const
+        + bool isAuthorized() const
+        + QString getRole() const
+        + QString getCookie() const
+        + void setUserId(int id)
+        + void setPerson(const Person& person)
+        + void setUsername(const QString& username)
+        + void setAuthorized(bool authorized)
+        + void setRole(const QString& role)
+        + void checkCookieFile()
+        + bool cookieFileExists()
+        + QString toString() const
+        + void displayInfo() const
+    }
+    
+    class Schedule {
+        - QList<Route> routes
+        + Schedule()
+        + Schedule(const QList<Route>& initialRoutes)
+        + void addRoute(const Route& route)
+        + bool removeRoute(const QString& routeNumber)
+        + QList<Route> findRoutesByNumber(const QString& routeNumber) const
+        + QList<Route> findRoutesByDeparture(const QString& departurePlace) const
+        + QList<Route> findRoutesByDestination(const QString& destinationPlace) const
+        + QList<Route> findRoutesByDirection(const QString& departurePlace, const QString& destinationPlace) const
+        + QList<Route> getAllRoutes() const
+        + void clear()
+        + bool isEmpty() const
+        + int count() const
+        + bool saveToFile(const QString& filename) const
+        + bool loadFromFile(const QString& filename)
+        + void displayAll() const
+        + QString toString() const
+    }
+    
+    class Route {
+        - int routeId
+        - QString pathNumber
+        - QString platformNumber
+        - QDate departureDate
+        - QTime departureTime
+        - QTime destinationTime
+        - int routePrice
+        - int routeSeats
+        - Path path
+        + Route()
+        + Route(const QString& number, const QString& platform, 
+                const QDate& date, const QTime& depTime, const QTime& destTime, 
+                const int price, const int seats)
+        + Route(const QString& number, const QString& platform, 
+                const QDate& date, const QTime& depTime, const QTime& destTime, 
+                const int price, const int seats, const Path& path)
+        + QString getPathNumber() const
+        + QString getPlatformNumber() const
+        + BusStop getDeparturePlace() const
+        + BusStop getDestinationPlace() const
+        + QDate getDepartureDate() const
+        + QTime getDepartureTime() const
+        + QTime getDestinationTime() const
+        + int getPrice() const
+        + int getSeats() const
+        + Path getPath() const
+        + int getId() const
+        + bool hasPath() const
+        + void setPathNumber(const QString& pathNumber)
+        + void setPlatformNumber(const QString& platform)
+        + void setDepartureDate(const QDate& date)
+        + void setDepartureTime(const QTime& time)
+        + void setDestinationTime(const QTime& time)
+        + void setPrice(const int price)
+        + void setSeats(const int seats)
+        + void setPath(const Path& path)
+        + void setId(int id)
+        + void displayInfo() const
+        + QString toString() const
+    }
+    
+    class Path {
+        - static int counter
+        - int pathId
+        - QString pathNumber
+        - QVector<BusStop> pathStops
+        + Path()
+        + Path(const QString pathNumber)
+        + Path(int pathid, const QString pathNumber)
+        + Path(const QString pathNumber, const QVector<BusStop>& stops)
+        + Path(int pathId, const QString pathNumber, const QVector<BusStop> &stops)
+        + void addStop(const BusStop& stop)
+        + void removeStop(int index)
+        + void removeStopById(int stopId)
+        + void clearStops()
+        + void setNumber(const QString nubmer)
+        + int getPathId() const
+        + QString getNumber() const
+        + QVector<BusStop> getStops() const
+        + BusStop getFirstStop() const
+        + BusStop getLastStop() const
+        + int getStopCount() const
+    }
+    
+    class BusStop {
+        - static int counter
+        - int stopId
+        - QString stopName
+        - QString stopAddress
+        + BusStop()
+        + BusStop(const QString& name, const QString& address)
+        + BusStop(const int id, const QString& name, const QString& address)
+        + int getStopId() const
+        + QString getStopName() const
+        + QString getStopAddress() const
+        + void setStopName(QString stopName)
+        + void setStopAdress(QString stopAddress)
+    }
+    
+    class Ticket {
+        - int id = 0
+        - int userId = 0
+        - Route route
+        - QString passengerName
+        - QString ticketNumber
+        - QString seatNumber
+        - QDate purchaseDate
+        - float actualPrice
+        - QTime departureTime
+        - QTime arrivalTime
+        - QString startStop
+        - QString endStop
+        + Ticket()
+        + Ticket(const Route& route, const QString& passengerName, const QString& ticketNumber, 
+                const QString& seatNumber, const QDate& purchaseDate, float actualPrice)
+        + int getId() const
+        + int getUserId() const
+        + Route getRoute() const
+        + QString getPassengerName() const
+        + QString getTicketNumber() const
+        + QString getSeatNumber() const
+        + QDate getPurchaseDate() const
+        + float getActualPrice() const
+        + QTime getDepartureTime() const
+        + QTime getArrivalTime() const
+        + QString getStartStop() const
+        + QString getEndStop() const
+        + void setId(int id)
+        + void setUserId(int userId)
+        + void setRoute(const Route& route)
+        + void setPassengerName(const QString& name)
+        + void setTicketNumber(const QString& number)
+        + void setSeatNumber(const QString& seat)
+        + void setPurchaseDate(const QDate& date)
+        + void setActualPrice(float price)
+        + void setDepartureTime(const QTime& time)
+        + void setArrivalTime(const QTime& time)
+        + void setStartStop(const QString& stop)
+        + void setEndStop(const QString& stop)
+        + void displayInfo() const
+        + QString toString() const
+        + bool isValid() const
+        + static Ticket fromJson(const QJsonObject& json)
+    }
 }
 
-class Cashier {
-  - QString employeeId
-  - int workstationNumber
-  - double totalSales
-  - QList<Ticket> soldTickets
-  --
-  + Cashier(firstName, lastName, middleName, birthDate, phoneNumber, email, employeeId, workstationNumber)
-  + getEmployeeId() const: QString
-  + getWorkstationNumber() const: int
-  + getTotalSales() const: double
-  + getSoldTickets() const: QList<Ticket>
-  + setEmployeeId(employeeId: QString): void
-  + setWorkstationNumber(workstationNumber: int): void
-  + sellTicket(route: Route, passengerName: QString, seatNumber: QString, actualPrice: int): Ticket
-  + refundTicket(ticketNumber: QString): bool
-  + getSoldTicketsCount() const: int
-  + getAverageTicketPrice() const: double
-  + getRole() const: QString
-  + displayInfo() const: void
-  + toString() const: QString
-}
-
-class Admin {
-  - QString adminId
-  - QString accessLevel
-  - QList<Passenger> allPassengers
-  - QList<Dispatcher> allDispatchers
-  - QList<Cashier> allCashiers
-  --
-  + Admin(firstName, lastName, middleName, birthDate, phoneNumber, email, adminId, accessLevel)
-  + getAdminId() const: QString
-  + getAccessLevel() const: QString
-  + setAdminId(adminId: QString): void
-  + setAccessLevel(accessLevel: QString): void
-  + addPassenger(passenger: Passenger): void
-  + removePassenger(passportNumber: QString): bool
-  + addDispatcher(dispatcher: Dispatcher): void
-  + removeDispatcher(employeeId: QString): bool
-  + addCashier(cashier: Cashier): void
-  + removeCashier(employeeId: QString): bool
-  + getTotalUsersCount() const: int
-  + generateReport() const: void
-  + getRole() const: QString
-  + displayInfo() const: void
-  + toString() const: QString
-}
-
-class BusStop {
-  - static int counter
-  - int stopId
-  - QString stopName
-  - QString stopAddress
-  --
-  + BusStop()
-  + BusStop(name: QString, address: QString)
-  + BusStop(id: int, name: QString, address: QString)
-  + getStopId() const: int
-  + getStopName() const: QString
-  + getStopAddress() const: QString
-  + setStopName(stopName: QString): void
-  + setStopAdress(stopAddress: QString): void
-}
-
-class Path {
-  - QVector<BusStop> stops
-  --
-  + Path()
-  + Path(stops: QVector<BusStop>)
-  + addStop(stop: BusStop): void
-  + removeStop(index: int): void
-  + clearStops(): void
-  + getStops() const: QVector<BusStop>
-  + getFirstStop() const: BusStop
-  + getLastStop() const: BusStop
-  + getStopCount() const: int
-}
-
-class Route {
-  - QString routeNumber
-  - QString platformNumber
-  - QDate departureDate
-  - QTime departureTime
-  - QTime destinationTime
-  - int routePrice
-  - int routeSeats
-  - Path path
-  --
-  + Route()
-  + Route(number: QString, platform: QString, date: QDate, depTime: QTime, destTime: QTime, price: int, seats: int, path: Path)
-  + getRouteNumber() const: QString
-  + getPlatformNumber() const: QString
-  + getDeparturePlace() const: QString
-  + getDestinationPlace() const: QString
-  + getDepartureDate() const: QDate
-  + getDepartureTime() const: QTime
-  + getDestinationTime() const: QTime
-  + getPrice() const: int
-  + getSeats() const: int
-  + getPath() const: Path
-  + setRouteNumber(number: QString): void
-  + setPlatformNumber(platform: QString): void
-  + setDepartureDate(date: QDate): void
-  + setDepartureTime(time: QTime): void
-  + setDestinationTime(time: QTime): void
-  + setPrice(price: int): void
-  + setSeats(seats: int): void
-  + setPath(path: Path): void
-  + displayInfo() const: void
-  + toString() const: QString
-}
-
-class Ticket {
-  - Route route
-  - QString passengerName
-  - QString ticketNumber
-  - QString seatNumber
-  - QDate purchaseDate
-  --
-  + Ticket()
-  + Ticket(route: Route, passengerName: QString, ticketNumber: QString, seatNumber: QString, purchaseDate: QDate)
-  + getRoute() const: Route
-  + getPassengerName() const: QString
-  + getTicketNumber() const: QString
-  + getSeatNumber() const: QString
-  + getPurchaseDate() const: QDate
-  + setRoute(route: Route): void
-  + setPassengerName(name: QString): void
-  + setTicketNumber(number: QString): void
-  + setSeatNumber(seat: QString): void
-  + setPurchaseDate(date: QDate): void
-  + displayInfo() const: void
-  + toString() const: QString
-  + isValid() const: bool
-}
-
-class Schedule {
-  - QList<Route> routes
-  --
-  + Schedule()
-  + Schedule(initialRoutes: QList<Route>)
-  + addRoute(route: Route): void
-  + removeRoute(routeNumber: QString): bool
-  + findRoutesByNumber(routeNumber: QString) const: QList<Route>
-  + findRoutesByDeparture(departurePlace: QString) const: QList<Route>
-  + findRoutesByDestination(destinationPlace: QString) const: QList<Route>
-  + findRoutesByDirection(departurePlace: QString, destinationPlace: QString) const: QList<Route>
-  + getAllRoutes() const: QList<Route>
-  + clear(): void
-  + isEmpty() const: bool
-  + count() const: int
-  + saveToFile(filename: QString) const: bool
-  + loadFromFile(filename: QString) const: bool
-  + displayAll() const: void
-  + toString() const: QString
-}
-
-class ApiClient {
-  - QNetworkAccessManager *networkManager
-  - QString baseUrl
-  --
-  + ApiClient(parent: QObject* = nullptr)
-  + ~ApiClient()
-  + addRoute(route: Route): void
-  + getRoutes(): void
-  + setBaseUrl(url: QString): void
-  # routesReceived(routes: QList<Route>)
-  # routeAdded(success: bool)
-  # errorOccurred(errorMessage: QString)
-  - onReplyFinished(reply: QNetworkReply*): void
-  - jsonToRoute(json: QJsonObject): Route
-  - routeToJson(route: Route): QJsonObject
-}
-
-class BusStopApiClient {
-  - QNetworkAccessManager *networkManager
-  - QString baseUrl
-  --
-  + BusStopApiClient(parent: QObject* = nullptr)
-  + ~BusStopApiClient()
-  + addBusStop(busStop: BusStop): void
-  + getBusStops(): void
-  + getBusStopById(id: int): void
-  + findBusStopsByName(name: QString): void
-  + findBusStopsByAddress(address: QString): void
-  + updateBusStop(id: int, busStop: BusStop): void
-  + deleteBusStop(id: int): void
-  + setBaseUrl(url: QString): void
-  # busStopsReceived(busStops: QList<BusStop>)
-  # busStopReceived(busStop: BusStop)
-  # busStopAdded(success: bool)
-  # busStopUpdated(success: bool)
-  # busStopDeleted(success: bool)
-  # errorOccurred(errorMessage: QString)
-  - onReplyFinished(reply: QNetworkReply*): void
-  - jsonToBusStop(json: QJsonObject): BusStop
-  - busStopToJson(busStop: BusStop): QJsonObject
-  - getOperationType(reply: QNetworkReply*): QString
+package "API Layer" {
+    abstract class BaseApiClient {
+        # QNetworkAccessManager *networkManager
+        # QString baseUrl
+        # QString accessToken
+        + explicit BaseApiClient(QObject *parent = nullptr)
+        + virtual ~BaseApiClient()
+        + void setBaseUrl(const QString &url)
+        + QString getBaseUrl() const
+        + void setAccessToken(const QString &token)
+        + QString getAccessToken() const
+        + void clearAccessToken()
+        + bool hasAccessToken() const
+        # QNetworkReply* sendRequest(const QString &endpoint, 
+                                   const QString &method, 
+                                   const QJsonObject &data = QJsonObject())
+        # QJsonObject parseJsonResponse(QNetworkReply *reply, bool &success, QString &error)
+        # QJsonArray parseJsonArrayResponse(QNetworkReply *reply, bool &success, QString &error)
+        # QNetworkRequest createAuthorizedRequest(const QUrl &url)
+        - void requestError(const QString &errorMessage)
+        - void tokenExpired()
+    }
+    
+    class RouteApiClient {
+        + explicit RouteApiClient(QObject *parent = nullptr)
+        + void getAllRoutes(int skip = 0, int limit = 100, const QString &search = "",
+                           const QString &start_stop = "", const QString &end_stop = "")
+        + void getRoute(int routeId)
+        + void createRoute(const Route &route)
+        + void updateRoute(int routeId, const Route &route)
+        + void deleteRoute(int routeId)
+        - void routesReceived(const QList<Route> &routes)
+        - void routeReceived(const Route &route)
+        - void routeCreated(const Route &route)
+        - void routeUpdated(const Route &route)
+        - void routeDeleted(int routeId)
+        # Route jsonToRoute(const QJsonObject &json)
+        # QJsonObject routeToJson(const Route &route)
+    }
+    
+    class StopApiClient {
+        + explicit StopApiClient(QObject *parent = nullptr)
+        + void getAllStops(int skip = 0, int limit = 100, const QString search = "")
+        + void getStop(int stopId)
+        + void createStop(const BusStop &stop)
+        + void updateStop(int stopId, const BusStop &stop)
+        + void deleteStop(int stopId)
+        - void stopsReceived(const QList<BusStop> &stops)
+        - void stopReceived(const BusStop &stop)
+        - void stopCreated(const BusStop &stop)
+        - void stopUpdated(const BusStop &stop)
+        - void stopDeleted(int stopId)
+        # BusStop jsonToStop(const QJsonObject &json)
+        # QJsonObject stopToJson(const BusStop &stop)
+    }
+    
+    class PathApiClient {
+        + explicit PathApiClient(QObject *parent = nullptr)
+        + void getAllPaths(int skip = 0, int limit = 100, const QString search = "")
+        + void getPath(const QString pathNumber)
+        + void createPath(const Path &path)
+        + void updatePath(int pathId, const Path &path)
+        + void deletePath(int pathId)
+        - void pathsReceived(const QList<Path> &paths)
+        - void pathReceived(const Path &path)
+        - void pathCreated(const Path &path)
+        - void pathUpdated(const Path &path)
+        - void pathDeleted(int pathId)
+        # Path jsonToPath(const QJsonObject &json)
+        # QJsonObject pathToJson(const Path &path)
+    }
+    
+    class TicketApiClient {
+        + explicit TicketApiClient(QObject *parent = nullptr)
+        + void getAllTickets(int skip = 0, int limit = 100)
+        + void getTicket(int ticketId)
+        + void createTicket(int routeId)
+        + void updateTicket(int ticketId, const Ticket &ticket)
+        + void deleteTicket(int ticketId)
+        - void ticketsReceived(const QList<Ticket> &tickets)
+        - void ticketReceived(const Ticket &ticket)
+        - void ticketCreated(const Ticket &ticket)
+        - void ticketUpdated(const Ticket &ticket)
+        - void ticketDeleted(int ticketId)
+        # Ticket jsonToTicket(const QJsonObject &json)
+        # QJsonObject ticketToJson(const Ticket &ticket)
+    }
+    
+    class AuthApiClient {
+        + explicit AuthApiClient(QObject *parent = nullptr)
+        + void regist(const QString &username, const QString &last_name, const QString &first_name,
+                     const QString &middle_name, const QString &phone_number, const QString &email,
+                     const QDate &birth_date, const QString &password)
+        + void login(const QString &username, const QString &password)
+        + void get_user()
+        + void change_password(const QString &current_password, const QString &new_password)
+        - void userRegistred(const QString &message)
+        - void userLogedIn(const User &user, const QString &cookie)
+        - void getUser(const User &user)
+        - void registerError(const QString &error)
+        - void loginError(const QString &error)
+        - void getUserError(const QString &error)
+        # User jsonToUser(const QJsonObject &json)
+        # QJsonObject userToJson(const User &user)
+    }
+    
+    class ApiClient {
+        - RouteApiClient *routeClient
+        - StopApiClient *stopClient
+        - PathApiClient *pathClient
+        - TicketApiClient *ticketClient
+        - AuthApiClient *authClient
+        + explicit ApiClient(QObject *parent = nullptr)
+        + RouteApiClient* routes() const
+        + StopApiClient* stops() const
+        + PathApiClient* paths() const
+        + TicketApiClient* tickets() const
+        + AuthApiClient* auths() const
+        + void setBaseUrl(const QString &url)
+        + void setAccessToken(const QString &token)
+        + QString getAccessToken() const
+        + void clearAccessToken()
+    }
+    
+    class JWTDecoder {
+        + JWTDecoder() = default
+        + static QJsonObject decode(const QString &token)
+        + static QJsonObject decodeHeader(const QString &token)
+        + static QJsonObject decodePayload(const QString &token)
+        - static QByteArray base64UrlDecode(const QString &data)
+        - static QJsonObject parseJsonFromBase64(const QString &base64Str)
+    }
 }
 
 ' Наследование
-Person <|-- Passenger
-Person <|-- Dispatcher
-Person <|-- Cashier
-Person <|-- Admin
+Passenger --|> Person
+Dispatcher --|> Person
+Cashier --|> Person
+Admin --|> Person
 
-' Композиция и агрегация
-Path *-- BusStop
-Route *-- Path
-Ticket *-- Route
+RouteApiClient --|> BaseApiClient
+StopApiClient --|> BaseApiClient
+PathApiClient --|> BaseApiClient
+TicketApiClient --|> BaseApiClient
+AuthApiClient --|> BaseApiClient
 
-' Ассоциации
-Passenger "1" *-- "0..*" Ticket
-Dispatcher "1" *-- "0..*" Route
-Cashier "1" *-- "0..*" Ticket
-Admin "1" *-- "0..*" Passenger
-Admin "1" *-- "0..*" Dispatcher
-Admin "1" *-- "0..*" Cashier
-Schedule "1" *-- "0..*" Route
+' Композиция/Агрегация/Ассоциация
+MainWindow "1" *-- "1" Schedule : содержит
+MainWindow "1" *-- "1" Path : редактируемый
+MainWindow "1" *-- "1" User : текущий
+MainWindow "1" *-- "1" ApiClient : клиент
+MainWindow "1" o-- "*" RouteWidget : виджеты маршрутов
+
+Schedule "1" *-- "*" Route : расписание
+Route "1" *-- "1" Path : путь
+Path "1" *-- "*" BusStop : остановки
+Ticket "1" *-- "1" Route : маршрут
+User "1" *-- "1" Person : личные данные
+
+Passenger "1" *-- "*" Ticket : билеты
+Dispatcher "1" *-- "*" Route : управляемые маршруты
+Cashier "1" *-- "*" Ticket : проданные билеты
+Admin "1" *-- "*" Passenger : пассажиры
+Admin "1" *-- "*" Dispatcher : диспетчеры
+Admin "1" *-- "*" Cashier : кассиры
+
+OrderWidget "1" *-- "1" Ticket : билет
+PathWidget "1" *-- "1" Path : путь
+RouteWidget "1" *-- "1" Route : маршрут
+StopWidget "1" *-- "1" BusStop : остановка
+
+ApiClient "1" *-- "1" RouteApiClient : маршруты
+ApiClient "1" *-- "1" StopApiClient : остановки
+ApiClient "1" *-- "1" PathApiClient : пути
+ApiClient "1" *-- "1" TicketApiClient : билеты
+ApiClient "1" *-- "1" AuthApiClient : аутентификация
 
 ' Зависимости
-ApiClient ..> Route
-BusStopApiClient ..> BusStop
+MainWindow ..> RouteWidget : создает/управляет
+MainWindow ..> StopWidget : создает/управляет
+MainWindow ..> PathWidget : создает/управляет
+MainWindow ..> OrderWidget : создает/управляет
+MainWindow ..> RouteStopWidget : создает/управляет
+
+BaseApiClient ..> QNetworkAccessManager : использует
+BaseApiClient ..> QNetworkReply : обрабатывает
+BaseApiClient ..> QJsonObject : парсит
+BaseApiClient ..> QJsonArray : парсит
+
+JWTDecoder ..> QJsonObject : парсит
+JWTDecoder ..> QByteArray : декодирует
+
+Ticket ..> QJsonObject : fromJson()
+RouteApiClient ..> Route : преобразует
+StopApiClient ..> BusStop : преобразует
+PathApiClient ..> Path : преобразует
+TicketApiClient ..> Ticket : преобразует
+AuthApiClient ..> User : преобразует
+
+' Примечания
+note right of MainWindow
+  Основное окно приложения,
+  управляет всеми виджетами
+  и взаимодействует с API
+end note
+
+note right of Person
+  Базовый класс для всех
+  персонажей системы
+end note
+
+note right of ApiClient
+  Фасад для всех
+  API-клиентов,
+  централизованное управление
+  доступом к серверу
+end note
 
 @enduml

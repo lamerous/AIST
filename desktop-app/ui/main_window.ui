@@ -1057,7 +1057,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>4</number>
+          <number>7</number>
          </property>
          <widget class="QWidget" name="main_page">
           <layout class="QVBoxLayout" name="verticalLayout_73">
@@ -7354,7 +7354,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                 <height>981</height>
                </rect>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_53">
+              <layout class="QVBoxLayout" name="verticalLayout_23">
                <property name="spacing">
                 <number>32</number>
                </property>
@@ -7362,7 +7362,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                 <number>68</number>
                </property>
                <property name="topMargin">
-                <number>38</number>
+                <number>48</number>
                </property>
                <property name="rightMargin">
                 <number>548</number>
@@ -7531,7 +7531,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                              </widget>
                             </item>
                             <item>
-                             <widget class="QLineEdit" name="addRoute_number_2">
+                             <widget class="QLineEdit" name="addWorker_lastName">
                               <property name="minimumSize">
                                <size>
                                 <width>0</width>
@@ -7635,7 +7635,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                              </widget>
                             </item>
                             <item>
-                             <widget class="QLineEdit" name="addRoute_platform_2">
+                             <widget class="QLineEdit" name="addWorker_firstName">
                               <property name="minimumSize">
                                <size>
                                 <width>0</width>
@@ -7787,7 +7787,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                              </widget>
                             </item>
                             <item>
-                             <widget class="QLineEdit" name="addRoute_departureDate_2">
+                             <widget class="QLineEdit" name="addWorker_middleName">
                               <property name="minimumSize">
                                <size>
                                 <width>0</width>
@@ -7891,7 +7891,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                              </widget>
                             </item>
                             <item>
-                             <widget class="QComboBox" name="comboBox">
+                             <widget class="QComboBox" name="editWorker_position">
                               <property name="minimumSize">
                                <size>
                                 <width>0</width>
@@ -7953,7 +7953,7 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                        </widget>
                       </item>
                       <item>
-                       <widget class="QLabel" name="addUser_status">
+                       <widget class="QLabel" name="addWorker_status">
                         <property name="font">
                          <font>
                           <family>Inter</family>
@@ -7984,6 +7984,77 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
                      </layout>
                     </item>
                    </layout>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QWidget" name="roundedWidget_31" native="true">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>50</height>
+                  </size>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_50">
+                  <property name="spacing">
+                   <number>6</number>
+                  </property>
+                  <property name="leftMargin">
+                   <number>54</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>9</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>56</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>9</number>
+                  </property>
+                  <item>
+                   <widget class="QLabel" name="label_42">
+                    <property name="maximumSize">
+                     <size>
+                      <width>24</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="pixmap">
+                     <pixmap resource="../resources.qrc">:/icons/icons/search.png</pixmap>
+                    </property>
+                    <property name="scaledContents">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="findWorker">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>26</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Inter</family>
+                      <pointsize>16</pointsize>
+                     </font>
+                    </property>
+                    <property name="inputMask">
+                     <string/>
+                    </property>
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="placeholderText">
+                     <string>Найти сотрудника</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -8131,43 +8202,655 @@ QPushButton[objectName$=&quot;_textBtn&quot;]{
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="addEmployee_page">
-          <widget class="QWidget" name="layoutWidget">
-           <property name="geometry">
-            <rect>
-             <x>60</x>
-             <y>40</y>
-             <width>613</width>
-             <height>116</height>
-            </rect>
+         <widget class="QWidget" name="editEmployee_page">
+          <layout class="QVBoxLayout" name="verticalLayout_22">
+           <property name="spacing">
+            <number>32</number>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_108">
-            <item>
-             <widget class="QLabel" name="label_95">
-              <property name="font">
-               <font>
-                <pointsize>36</pointsize>
-               </font>
+           <property name="leftMargin">
+            <number>68</number>
+           </property>
+           <property name="topMargin">
+            <number>38</number>
+           </property>
+           <property name="rightMargin">
+            <number>548</number>
+           </property>
+           <property name="bottomMargin">
+            <number>68</number>
+           </property>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_49">
+             <item>
+              <widget class="QLabel" name="label_51">
+               <property name="font">
+                <font>
+                 <family>Inter</family>
+                 <pointsize>28</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: #010E59;</string>
+               </property>
+               <property name="text">
+                <string>Персонал</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_30">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QWidget" name="roundedWidget_30" native="true">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_64">
+              <property name="spacing">
+               <number>32</number>
               </property>
-              <property name="text">
-               <string>Редактирование работника</string>
+              <property name="leftMargin">
+               <number>56</number>
               </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_96">
-              <property name="font">
-               <font>
-                <pointsize>36</pointsize>
-               </font>
+              <property name="topMargin">
+               <number>40</number>
               </property>
-              <property name="text">
-               <string>UI ещё не готов</string>
+              <property name="rightMargin">
+               <number>56</number>
               </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
+              <property name="bottomMargin">
+               <number>20</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_126">
+                <property name="font">
+                 <font>
+                  <family>Inter</family>
+                  <pointsize>24</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: #010E59;</string>
+                </property>
+                <property name="text">
+                 <string>Изменение информации о сотруднике</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_34">
+                <property name="spacing">
+                 <number>32</number>
+                </property>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_191">
+                  <property name="spacing">
+                   <number>20</number>
+                  </property>
+                  <item>
+                   <widget class="QWidget" name="borderWidget_38" native="true">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>68</height>
+                     </size>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_192">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <widget class="QWidget" name="widget_44" native="true">
+                       <property name="minimumSize">
+                        <size>
+                         <width>250</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>IBeamCursor</cursorShape>
+                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_193">
+                        <property name="spacing">
+                         <number>10</number>
+                        </property>
+                        <property name="leftMargin">
+                         <number>25</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>20</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>15</number>
+                        </property>
+                        <item>
+                         <widget class="QLabel" name="label_129">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>24</height>
+                           </size>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <family>Inter</family>
+                            <pointsize>12</pointsize>
+                           </font>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">color: #6D6D6D;</string>
+                          </property>
+                          <property name="text">
+                           <string>Фамилия</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLineEdit" name="editWorker_lastName">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>26</height>
+                           </size>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <family>Inter</family>
+                            <pointsize>16</pointsize>
+                           </font>
+                          </property>
+                          <property name="inputMask">
+                           <string/>
+                          </property>
+                          <property name="text">
+                           <string/>
+                          </property>
+                          <property name="placeholderText">
+                           <string>Фамилия</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QWidget" name="borderWidget_39" native="true">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>68</height>
+                     </size>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_194">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <widget class="QWidget" name="widget_45" native="true">
+                       <property name="minimumSize">
+                        <size>
+                         <width>250</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>IBeamCursor</cursorShape>
+                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_195">
+                        <property name="spacing">
+                         <number>10</number>
+                        </property>
+                        <property name="leftMargin">
+                         <number>25</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>20</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>15</number>
+                        </property>
+                        <item>
+                         <widget class="QLabel" name="label_130">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>24</height>
+                           </size>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <family>Inter</family>
+                            <pointsize>12</pointsize>
+                           </font>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">color: #6D6D6D;</string>
+                          </property>
+                          <property name="text">
+                           <string>Имя</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLineEdit" name="editWorker_firstName">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>26</height>
+                           </size>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <family>Inter</family>
+                            <pointsize>16</pointsize>
+                           </font>
+                          </property>
+                          <property name="inputMask">
+                           <string/>
+                          </property>
+                          <property name="text">
+                           <string/>
+                          </property>
+                          <property name="placeholderText">
+                           <string>Имя</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="addRoute_btn_3">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>67</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>67</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>67</height>
+                     </size>
+                    </property>
+                    <property name="cursor">
+                     <cursorShape>PointingHandCursor</cursorShape>
+                    </property>
+                    <property name="text">
+                     <string>Изменить</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="verticalSpacer_35">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_196">
+                  <property name="spacing">
+                   <number>20</number>
+                  </property>
+                  <item>
+                   <widget class="QWidget" name="borderWidget_40" native="true">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>68</height>
+                     </size>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_197">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <widget class="QWidget" name="widget_46" native="true">
+                       <property name="minimumSize">
+                        <size>
+                         <width>250</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>IBeamCursor</cursorShape>
+                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_198">
+                        <property name="spacing">
+                         <number>10</number>
+                        </property>
+                        <property name="leftMargin">
+                         <number>25</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>20</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>15</number>
+                        </property>
+                        <item>
+                         <widget class="QLabel" name="label_135">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>24</height>
+                           </size>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <family>Inter</family>
+                            <pointsize>12</pointsize>
+                           </font>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">color: #6D6D6D;</string>
+                          </property>
+                          <property name="text">
+                           <string>Отчество</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLineEdit" name="editWorker_middleName">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>26</height>
+                           </size>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <family>Inter</family>
+                            <pointsize>16</pointsize>
+                           </font>
+                          </property>
+                          <property name="inputMask">
+                           <string/>
+                          </property>
+                          <property name="text">
+                           <string/>
+                          </property>
+                          <property name="placeholderText">
+                           <string>Отчество</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QWidget" name="borderWidget_41" native="true">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>68</height>
+                     </size>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_199">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <widget class="QWidget" name="widget_47" native="true">
+                       <property name="minimumSize">
+                        <size>
+                         <width>250</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>IBeamCursor</cursorShape>
+                       </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_200">
+                        <property name="spacing">
+                         <number>10</number>
+                        </property>
+                        <property name="leftMargin">
+                         <number>25</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>5</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>20</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>15</number>
+                        </property>
+                        <item>
+                         <widget class="QLabel" name="label_136">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>24</height>
+                           </size>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <family>Inter</family>
+                            <pointsize>12</pointsize>
+                           </font>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">color: #6D6D6D;</string>
+                          </property>
+                          <property name="text">
+                           <string>Должность</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QComboBox" name="editWorker_postion">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>26</height>
+                           </size>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <family>Inter</family>
+                            <pointsize>16</pointsize>
+                           </font>
+                          </property>
+                          <property name="cursor">
+                           <cursorShape>ArrowCursor</cursorShape>
+                          </property>
+                          <property name="contextMenuPolicy">
+                           <enum>Qt::NoContextMenu</enum>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true"/>
+                          </property>
+                          <property name="currentText">
+                           <string/>
+                          </property>
+                          <property name="placeholderText">
+                           <string>Должность</string>
+                          </property>
+                          <item>
+                           <property name="text">
+                            <string>Работник</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>Водитель</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>Кассир</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>Диспетчер</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>Директор</string>
+                           </property>
+                          </item>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="editWorker_status">
+                    <property name="font">
+                     <font>
+                      <family>Inter</family>
+                      <pointsize>12</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>TextLabel</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="verticalSpacer_36">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_24">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
          </widget>
          <widget class="QWidget" name="cashier_page">
           <widget class="QLabel" name="label_97">
